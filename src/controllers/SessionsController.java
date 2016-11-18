@@ -44,13 +44,20 @@ public class SessionsController {
                 // Use session model to validate login credentials
                 User user = sessionsModel.validateLogin(username, password);
 
-                // Return user info to view
-                view.displayUserInformation(user);
+                // LOGIN SUCCESS
+                if (user != null) {
+                    view.cleanUp();
+                    sessionsModel.dbDisconnect();
+
+                    // INSTANTIATE NEW CONTROLLER HERE
+                } else {
+                    // Return user info to view
+                    view.displayUserInformation(user);
+                }
 
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-
         }
     }
 }

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import javax.swing.*;
 
 public class sessionsView extends JFrame {
-    private Button loginBtn;   // Declare a Button component
+    private Button loginBtn;
     public TextField usernameField;
     public TextField passwordField;
 
@@ -62,5 +62,9 @@ public class sessionsView extends JFrame {
 
         usernameField.setText(user.getUsername());
         passwordField.setText(user.getPassword());
+    }
+
+    public void cleanUp() {
+        this.setVisible(false);
     }
 }
