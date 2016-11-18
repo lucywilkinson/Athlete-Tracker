@@ -1,7 +1,7 @@
 package controllers;
 
-import models.SessionsModel;
-import views.sessionsView;
+import models.UserModel;
+import views.ProfileView;
 import common.User;
 
 import java.awt.event.ActionEvent;
