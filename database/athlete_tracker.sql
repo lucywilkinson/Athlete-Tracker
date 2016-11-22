@@ -28,6 +28,7 @@ CREATE TABLE users (
   last_name    VARCHAR(50) NOT NULL,
   username     VARCHAR(25) NOT NULL,
   password     VARCHAR(50) NOT NULL,
+  active       BOOLEAN     DEFAULT true,
   user_type    ENUM('admin', 'athlete', 'worker'),
   PRIMARY KEY (user_id),
   UNIQUE  KEY (username)
