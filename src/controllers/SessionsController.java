@@ -1,6 +1,7 @@
 package controllers;
 
 import models.SessionsModel;
+import views.myProfileView;
 import views.sessionsView;
 import common.User;
 
@@ -19,6 +20,7 @@ import java.util.Set;
 public class SessionsController {
     SessionsModel sessionsModel = new SessionsModel();
     sessionsView view;
+    User user;
 
     public SessionsController() throws SQLException, IOException, ClassNotFoundException {
         loginAction loginAction = new loginAction();
@@ -32,20 +34,26 @@ public class SessionsController {
     private class loginAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("-------------------");
-            System.out.println("    Controller"     );
-            System.out.println("-------------------");
 
             // Get text from view
             String username = view.usernameField.getText();
-            String password = view.passwordField.getText();
+            String password = String.valueOf(view.passwordField.getPassword());
 
             try {
                 // Use session model to validate login credentials
-                User user = sessionsModel.validateLogin(username, password);
+                user = sessionsModel.validateLogin(username, password);
 
-                // Return user info to view
-                view.displayUserInformation(user);
+                if(user != null) {
+                    // launch myProfile
+                    MyProfileController MyProfileController = new MyProfileController(user);
+                    view.close();
+                } else {
+                    // Return user info to view
+                    // view.displayUserInformation(user);
+
+                    // display error message in notification
+                    view.setNotification("Login failed. Please try again.");
+                }
 
             } catch (SQLException e1) {
                 e1.printStackTrace();
