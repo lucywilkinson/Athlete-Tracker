@@ -57,11 +57,13 @@
         <children>
           <component id="1e01c" class="javax.swing.JLabel" binding="notification">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="25"/>
+              </grid>
             </constraints>
             <properties>
               <horizontalAlignment value="0"/>
-              <text value="testing"/>
+              <text value=""/>
               <verticalAlignment value="1"/>
             </properties>
           </component>

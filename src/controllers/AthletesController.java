@@ -1,51 +1,33 @@
 package controllers;
 
 import common.User;
+import views.athletesView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-import models.myProfileModel;
-import views.myProfileView;
-
 /**
- * Created by alex on 11/26/16.
+ * Created by alex on 11/27/16.
  */
-public class MyProfileController {
-    myProfileView view;
-    myProfileModel model;
+public class AthletesController {
+    athletesView view;
     User _user;
     HashMap actionListeners = new HashMap<String, ActionListener>();
 
-    public MyProfileController(User user) {
+    public AthletesController(User user) {
         this._user = user;
 
-        // attach action listeners
-        actionListeners.put("editProfileAction", new editProfileAction());
-        actionListeners.put("saveProfileAction", new saveProfileAction());
+        // attach event listeners
         this.attachNavMenuListeners();
 
-        view = new myProfileView(actionListeners, _user);
+        view = new athletesView(actionListeners);
     }
 
     private void attachNavMenuListeners() {
         actionListeners.put("clickAthletesButton", new clickAthletesButton());
         actionListeners.put("clickMyProfileButton", new clickMyProfileButton());
-    }
-
-    private class editProfileAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.startEditProfile();
-        }
-    }
-
-    private class saveProfileAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.saveEditProfile();
-        }
     }
 
     private class clickAthletesButton implements ActionListener {

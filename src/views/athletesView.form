@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="views.athletesView">
+  <grid id="27dc6" binding="mainWindow" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="589" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <toolbar id="609aa" binding="navMenu">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="20"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="facd9" class="javax.swing.JButton" binding="adminsButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Admins"/>
+            </properties>
+          </component>
+          <component id="e1121" class="javax.swing.JButton" binding="athletesButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Athletes"/>
+            </properties>
+          </component>
+          <component id="d073a" class="javax.swing.JButton" binding="warehouseWorkersButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Warehouse Workers"/>
+            </properties>
+          </component>
+          <component id="773e7" class="javax.swing.JButton" binding="shipmentsButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Shipments"/>
+            </properties>
+          </component>
+          <component id="ed3bc" class="javax.swing.JButton" binding="productsButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Products"/>
+            </properties>
+          </component>
+          <component id="d7177" class="javax.swing.JButton" binding="myProfileButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="My Profile"/>
+            </properties>
+          </component>
+        </children>
+      </toolbar>
+      <grid id="a3a62" binding="headerPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="30" bottom="30" right="30"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="16967" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Athletes"/>
+            </properties>
+          </component>
+          <component id="130c0" class="javax.swing.JButton" binding="newAthleteButton">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="New Athlete"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="33746" binding="actionPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="30" bottom="30" right="30"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="1847c" binding="filterPanel" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="47" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Filter By Status"/>
+                </properties>
+              </component>
+              <component id="c1b54" class="javax.swing.JCheckBox" binding="activeCheckbox">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <selected value="true"/>
+                  <text value="Active"/>
+                </properties>
+              </component>
+              <component id="21b47" class="javax.swing.JCheckBox" binding="inactiveCheckbox">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <selected value="true"/>
+                  <text value="Inactive"/>
+                </properties>
+              </component>
+              <component id="8b930" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Filter By Date"/>
+                </properties>
+              </component>
+              <component id="bba1c" class="javax.swing.JFormattedTextField" binding="afterDateTextField">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="1/1/2000"/>
+                </properties>
+              </component>
+              <component id="200e5" class="javax.swing.JFormattedTextField" binding="beforeDateTextField">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="1/1/2017"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="3b235" class="javax.swing.JTable" binding="athletesTable">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <autoCreateRowSorter value="true"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

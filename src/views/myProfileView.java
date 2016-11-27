@@ -2,7 +2,6 @@ package views;
 
 import common.User;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
@@ -10,30 +9,42 @@ import java.util.HashMap;
  * Created by alex on 11/18/16.
  */
 public class myProfileView extends basicView {
-    private JPanel mainWindow;
+    protected JPanel mainWindow;
 
     // nav menu
-    private JPanel navMenu = new navMenuView();
+    private JToolBar navToolbar;
+    private JButton adminsButton;
+    private JButton athletesButton;
+    private JButton warehouseWorkersButton;
+    private JButton shipmentsButton;
+    private JButton productsButton;
+    private JButton myProfileButton;
+    private JPanel navPanel;
 
     // side menu
-    private JPanel sideMenu;
-    private JButton viewMyShipments;
-    private JButton editMyProfileButton;
-    private JButton saveButton;
+    protected JPanel sideMenu;
+    protected JButton viewMyShipments;
+    protected JButton editMyProfileButton;
+    protected JButton saveButton;
 
     // My Profile form
-    private JPanel viewWindow;
-    private JPanel myProfileRow;
-    private JCheckBox enabledCheckBox;
-    private JPanel id_row;
-    private JTextField idText;
-    private JPanel name_row;
-    private JTextField nameText;
-    private JPanel email_row;
-    private JTextField emailText;
-    private JPanel user_type_row;
-    private JComboBox accountTypeComboBox;
-    private JPanel enabled_row;
+    protected JPanel viewWindow;
+    protected JPanel myProfileRow;
+    protected JCheckBox enabledCheckBox;
+    protected JPanel id_row;
+    protected JTextField idText;
+    protected JPanel name_row;
+    protected JTextField nameText;
+    protected JPanel email_row;
+    protected JTextField emailText;
+    protected JPanel user_type_row;
+    protected JComboBox accountTypeComboBox;
+    protected JPanel enabled_row;
+
+
+    public myProfileView() {
+        super();
+    }
 
     public myProfileView(HashMap<String, ActionListener> actionListeners, User user) {
         this.setContentPane(mainWindow);
@@ -45,11 +56,22 @@ public class myProfileView extends basicView {
 
         // attach action listeners
         editMyProfileButton.addActionListener(actionListeners.get("editProfileAction"));
+        saveButton.addActionListener(actionListeners.get("saveProfileAction"));
+
+        this.attachNavMenuActionListeners(actionListeners);
 
         this.setTitle("Athlete Tracker - My Profile");
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
+    }
+
+    public void close() {
+        this.setVisible(false);
+    }
+
+    public void attachNavMenuActionListeners(HashMap<String, ActionListener> actionListeners) {
+        athletesButton.addActionListener(actionListeners.get("clickAthletesButton"));
     }
 
     public void showMessage(String message) {
@@ -60,11 +82,11 @@ public class myProfileView extends basicView {
         nameText.setText(name);
     }
 
-    private void setIdText(String id) {
+    protected void setIdText(String id) {
         idText.setText(id);
     }
 
-    private void setUserType(String userType) {
+    protected void setUserType(String userType) {
         accountTypeComboBox.setSelectedItem(userType);
     }
 
@@ -83,6 +105,18 @@ public class myProfileView extends basicView {
     }
 
     public void saveEditProfile() {
+        editMyProfileButton.setEnabled(true);
+        saveButton.setEnabled(false);
 
+        // update model
+
+        // make fields uneditable
+        nameText.setEnabled(false);
+        nameText.setEditable(false);
+        emailText.setEnabled(false);
+        emailText.setEditable(false);
+        accountTypeComboBox.setEnabled(false);
+        accountTypeComboBox.setEditable(false);
+        enabledCheckBox.setEnabled(false);
     }
 }
