@@ -18,6 +18,7 @@ public class UserModel extends Model {
      * @return true if edit successful. False if edit unsuccessful
      */
     public boolean editUser(Map<String, String> edits) {
+
         return true;
     }
 
