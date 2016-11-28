@@ -49,7 +49,7 @@ public class SessionsController {
                     view.cleanUp();
                     sessionsModel.dbDisconnect();
 
-                    // INSTANTIATE NEW CONTROLLER HERE
+                // INSTANTIATE NEW CONTROLLER HERE
                 } else {
                     // Return user info to view
                     view.displayUserInformation(user);
