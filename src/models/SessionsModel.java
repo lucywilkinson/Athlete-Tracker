@@ -25,9 +25,6 @@ public class SessionsModel extends Model {
      * @throws SQLException
      */
     public User validateLogin(String username, String password) throws SQLException {
-        System.out.println("-------------------");
-        System.out.println("       Model"       );
-        System.out.println("-------------------");
 
         String query = "SELECT * FROM users WHERE username = ? AND password = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
