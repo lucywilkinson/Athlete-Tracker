@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="views.basicView">
+  <grid id="27dc6" binding="mainWindow" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="589" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <toolbar id="b9d10" binding="navMenu">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="20"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="724c5" class="javax.swing.JButton" binding="adminsButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Admins"/>
+            </properties>
+          </component>
+          <component id="d4ba9" class="javax.swing.JButton" binding="athletesButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Athletes"/>
+            </properties>
+          </component>
+          <component id="c0090" class="javax.swing.JButton" binding="warehouseWorkersButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Warehouse Workers"/>
+            </properties>
+          </component>
+          <component id="f5296" class="javax.swing.JButton" binding="shipmentsButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Shipments"/>
+            </properties>
+          </component>
+          <component id="fdccb" class="javax.swing.JButton" binding="productsButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Products"/>
+            </properties>
+          </component>
+          <component id="ee298" class="javax.swing.JButton" binding="myProfileButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="My Profile"/>
+            </properties>
+          </component>
+        </children>
+      </toolbar>
+    </children>
+  </grid>
+</form>

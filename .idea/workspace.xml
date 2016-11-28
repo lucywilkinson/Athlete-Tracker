@@ -2,10 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f83e8096-7652-422e-bfa4-1cb8dc1bf11c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Athlete-Tracker.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Athlete-Tracker.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Athlete-Tracker/models/config.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controllers/AdminsController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controllers/AthletesController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controllers/BasicController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/controllers/MyProfileController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/config.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/adminsView.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/adminsView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/athletesView.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/athletesView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/basicView.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/basicView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/myProfileView.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/myProfileView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/navMenuView.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/navMenuView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/sessionsView.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Athlete-Tracker.iml" afterPath="$PROJECT_DIR$/Athlete-Tracker.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Driver.java" afterPath="$PROJECT_DIR$/src/Driver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controllers/SessionsController.java" afterPath="$PROJECT_DIR$/src/controllers/SessionsController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Model.java" afterPath="$PROJECT_DIR$/src/models/Model.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/SessionsModel.java" afterPath="$PROJECT_DIR$/src/models/SessionsModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/sessionsView.java" afterPath="$PROJECT_DIR$/src/views/sessionsView.java" />
     </list>
     <ignored path="Athlete-Tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,12 +70,13 @@
       <file leaf-file-name="sessionsView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/sessionsView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="32" column="4" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="34" selection-end-column="5" />
+            <state relative-caret-position="315">
+              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="false" />
-                <element signature="e#2249#2250#0" expanded="false" />
-                <element signature="e#2287#2288#0" expanded="false" />
+                <element signature="e#1088#1089#0" expanded="false" />
+                <element signature="e#1126#1127#0" expanded="false" />
+                <marker date="1480372308000" expanded="true" signature="1052:1060" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -63,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/src/Driver.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -71,11 +94,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProfileController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProfileController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controllers/ProfileController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
               <caret line="3" column="12" lean-forward="false" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -130,8 +163,8 @@
         <option value="$PROJECT_DIR$/src/controllers/BasicController.java" />
         <option value="$PROJECT_DIR$/src/views/myProfileView.java" />
         <option value="$PROJECT_DIR$/src/models/Model.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/models/SessionsModel.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -518,12 +551,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.222103" sideWeight="0.495116" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.222103" sideWeight="0.495116" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -701,7 +734,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/myProfileModel.java" />
-    <entry file="file://$PROJECT_DIR$/.gitignore" />
     <entry file="file://$PROJECT_DIR$/src/models/Model.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -726,12 +758,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/sessionsView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="32" column="4" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="34" selection-end-column="5" />
+        <state relative-caret-position="315">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
-            <element signature="e#2249#2250#0" expanded="false" />
-            <element signature="e#2287#2288#0" expanded="false" />
+            <element signature="e#1088#1089#0" expanded="false" />
+            <element signature="e#1126#1127#0" expanded="false" />
+            <marker date="1480372308000" expanded="true" signature="1052:1060" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -739,7 +772,7 @@
     <entry file="file://$PROJECT_DIR$/src/Driver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -750,6 +783,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="12" lean-forward="false" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
