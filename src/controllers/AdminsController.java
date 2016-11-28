@@ -1,7 +1,7 @@
 package controllers;
 
 import common.User;
-import views.athletesView;
+import views.adminsView;
 
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -9,14 +9,15 @@ import java.util.HashMap;
 /**
  * Created by alex on 11/27/16.
  */
-public class AthletesController extends BasicController {
-    athletesView view;
+public class AdminsController extends BasicController {
+    adminsView view;
     User _user;
     HashMap actionListeners = new HashMap<String, ActionListener>();
 
-    public AthletesController(User user) {
+    public AdminsController(User user) {
         super(user);
 
-        view = new athletesView(actionListeners);
+        this.view = new adminsView(actionListeners);
     }
+
 }

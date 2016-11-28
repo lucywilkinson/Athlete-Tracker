@@ -16,7 +16,6 @@ public class navMenuView extends JPanel{
     private JToolBar navToolbar;
 
     public navMenuView() {
-
         setVisible(true);
     }
 }

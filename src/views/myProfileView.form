@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="views.myProfileView">
-  <grid id="27dc6" binding="mainWindow" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainWindow" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="951" height="442"/>
+      <xy x="20" y="20" width="500" height="442"/>
     </constraints>
     <properties>
       <enabled value="true"/>
@@ -13,7 +13,7 @@
       <grid id="d1fe0" binding="viewWindow" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="25" bottom="50" right="0"/>
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="true">
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="true">
             <preferred-size width="561" height="203"/>
           </grid>
         </constraints>
@@ -218,7 +218,7 @@
       <grid id="ce4fe" binding="sideMenu" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="true"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="true"/>
         </constraints>
         <properties/>
         <border type="none"/>
@@ -250,63 +250,6 @@
               <text value="Save"/>
             </properties>
           </component>
-        </children>
-      </grid>
-      <grid id="25477" binding="navPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-        <border type="none"/>
-        <children>
-          <toolbar id="eac5f" binding="navToolbar">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="741" height="20"/>
-              </grid>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <component id="a4583" class="javax.swing.JButton" binding="adminsButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <text value="Admins"/>
-                </properties>
-              </component>
-              <component id="30a88" class="javax.swing.JButton" binding="athletesButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <text value="Athletes"/>
-                </properties>
-              </component>
-              <component id="219b4" class="javax.swing.JButton" binding="warehouseWorkersButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <text value="Warehouse Workers"/>
-                </properties>
-              </component>
-              <component id="70917" class="javax.swing.JButton" binding="shipmentsButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <text value="Shipments"/>
-                </properties>
-              </component>
-              <component id="a8561" class="javax.swing.JButton" binding="productsButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <text value="Products"/>
-                </properties>
-              </component>
-              <component id="5c05b" class="javax.swing.JButton" binding="myProfileButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <text value="My Profile"/>
-                </properties>
-              </component>
-            </children>
-          </toolbar>
         </children>
       </grid>
     </children>

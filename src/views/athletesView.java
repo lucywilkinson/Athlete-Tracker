@@ -8,15 +8,8 @@ import java.util.HashMap;
  * Created by alex on 11/27/16.
  */
 public class athletesView extends basicView {
-    private JPanel mainWindow;
-    private JButton adminsButton;
-    private JButton athletesButton;
-    private JButton warehouseWorkersButton;
-    private JButton shipmentsButton;
-    private JButton productsButton;
-    private JButton myProfileButton;
-    private JToolBar navMenu;
-    private JButton newAthleteButton;
+    protected JPanel mainWindow;
+
     private JPanel headerPanel;
     private JPanel actionPanel;
     private JPanel filterPanel;
@@ -25,6 +18,7 @@ public class athletesView extends basicView {
     private JFormattedTextField afterDateTextField;
     private JFormattedTextField beforeDateTextField;
     private JTable athletesTable;
+    private JButton newAthleteButton;
 
     private String[] columnNames = {
             "ID",
@@ -53,25 +47,12 @@ public class athletesView extends basicView {
     };
 
     public athletesView(HashMap<String, ActionListener> actionListeners) {
-        this.setContentPane(mainWindow);
+        super();
 
         // not currently working?
         athletesTable = new JTable(data, columnNames);
 
-        this.attachNavMenuActionListeners(actionListeners);
-
         this.setTitle("Athlete Tracker - Athletes");
-        this.setVisible(true);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
-    }
-
-    public void close() {
-        this.setVisible(false);
-    }
-
-    public void attachNavMenuActionListeners(HashMap<String, ActionListener> actionListeners) {
-        athletesButton.addActionListener(actionListeners.get("clickAthletesButton"));
-        myProfileButton.addActionListener(actionListeners.get("clickMyProfileButton"));
     }
 }
