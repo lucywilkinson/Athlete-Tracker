@@ -1,8 +1,5 @@
 package views;
 
-import common.User;
-
-import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 import javax.swing.*;

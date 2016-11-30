@@ -9,6 +9,10 @@ import java.util.HashMap;
  */
 public class card extends JPanel {
 
+    public card() {
+
+    }
+
     public card(HashMap<String, ActionListener> actionListeners) {
         this.add(new navBar(actionListeners));
     }
