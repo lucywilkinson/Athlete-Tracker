@@ -41,7 +41,7 @@ public class myProfileView extends basicView {
         this.setTitle("Athlete Tracker - My Profile");
 
         // TODO: if left out, only displays menu. If on, doesn't display menu. Should probably use CardLayout.
-        this.setContentPane(mainWindow);
+//        this.setContentPane(mainWindow);
     }
 
     public void showMessage(String message) {
