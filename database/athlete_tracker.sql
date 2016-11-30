@@ -15,10 +15,11 @@ DROP TABLE IF EXISTS products,
 set default_storage_engine = InnoDB;
 
 CREATE TABLE products (
-  product_id         INT         NOT NULL AUTO_INCREMENT,
-  product_name       VARCHAR(50) NOT NULL,
-  product_cost       FLOAT       NOT NULL,
-  product_quantity   INT         NOT NULL,
+  product_id         INT           NOT NULL AUTO_INCREMENT,
+  product_name       VARCHAR(50)   NOT NULL,
+  product_cost       DECIMAL(10,2) NOT NULL,
+  product_quantity   INT           NOT NULL,
+  product_active     BOOLEAN       NOT NULL DEFAULT true,
   PRIMARY KEY (product_id)
 );
 
