@@ -1,7 +1,6 @@
 package controllers;
 
 import models.UserModel;
-import views.ProfileView;
 import common.User;
 
 import java.awt.event.ActionEvent;

@@ -1,0 +1,6 @@
+
+out/*
+src/models/config.properties
+.idea/workspace.xml
+
+.idea/misc.xml

@@ -25,7 +25,6 @@ public class Model {
      * @throws IOException
      */
     private Properties getProperties() throws IOException {
-
         Properties properties = new Properties();
 
         InputStream in = getClass().getResourceAsStream("config.properties");

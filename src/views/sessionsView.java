@@ -1,12 +1,16 @@
 package views;
 
+<<<<<<< HEAD
 import common.User;
 
 import java.awt.*;
+=======
+>>>>>>> master
 import java.awt.event.*;
 import java.util.HashMap;
 import javax.swing.*;
 
+<<<<<<< HEAD
 public class sessionsView extends JFrame {
     private Button loginBtn;
     public TextField usernameField;
@@ -62,6 +66,37 @@ public class sessionsView extends JFrame {
 
         usernameField.setText(user.getUsername());
         passwordField.setText(user.getPassword());
+=======
+public class sessionsView extends basicView {
+    public JButton loginBtn;   // Declare a Button component
+    public JTextField usernameField;
+    public JPasswordField passwordField;
+    private JPanel mainWindow;
+    private JPanel loginRow;
+    private JPanel information;
+    public JLabel notification;
+
+    private JPanel navMenu = new views.navMenuView();
+
+    // Constructor to setup GUI components and event handlers
+    public sessionsView (HashMap<String, ActionListener> actionListeners) {
+        this.setContentPane(mainWindow);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        loginBtn.addActionListener(actionListeners.get("loginAction"));
+
+        this.setTitle("Login Example");
+        this.pack();
+        this.setVisible(true);
+    }
+
+    public void close() {
+        this.setVisible(false);
+    }
+
+    public void setNotification(String message) {
+        notification.setText(message);
+>>>>>>> master
     }
 
     public void cleanUp() {
