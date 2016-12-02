@@ -1,6 +1,7 @@
 package views;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
@@ -9,11 +10,18 @@ import java.util.HashMap;
  */
 public class card extends JPanel {
 
+    GridBagConstraints constraints = new GridBagConstraints();
+
     public card() {
 
     }
 
     public card(HashMap<String, ActionListener> actionListeners) {
-        this.add(new navBar(actionListeners));
+        this.setLayout(new GridBagLayout());
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.PAGE_START;
+        this.add(new navBar(actionListeners), constraints);
     }
 }
