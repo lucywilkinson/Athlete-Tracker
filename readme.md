@@ -28,7 +28,9 @@ and view shipment and product information.
 To Run:
 Connect to database -
 1) Install and add the JDBC driver to the class path
+
 2) Create and populate the DB (Creation script in database folder)
+
 3) edit config.properties file in /Athlete-Tracker/src/models/config.properties if needed
 
 Run Driver.java
