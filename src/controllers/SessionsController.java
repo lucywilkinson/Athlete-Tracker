@@ -1,7 +1,8 @@
 package controllers;
 
 import models.SessionsModel;
-import views.sessionsView;
+import views.masterView;
+import views.sessionsCard;
 import common.User;
 
 import java.awt.event.ActionEvent;
@@ -10,21 +11,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-/**
- * Created by mattu on 11/14/16.
- */
 public class SessionsController extends BasicController {
     SessionsModel sessionsModel = new SessionsModel();
-    sessionsView view;
+    sessionsCard sessionsCard;
+
     User _user;
     HashMap actionListeners = new HashMap<String, ActionListener>();
 
     public SessionsController() throws SQLException, IOException, ClassNotFoundException {
-        loginAction loginAction = new loginAction();
-
         actionListeners.put("loginAction", new loginAction());
-
-        view = new sessionsView(actionListeners);
+        sessionsCard = new sessionsCard(actionListeners);
+        masterView.addCard("Sessions", sessionsCard);
     }
 
     private class loginAction implements ActionListener {
@@ -32,8 +29,8 @@ public class SessionsController extends BasicController {
         public void actionPerformed(ActionEvent e) {
 
             // Get text from view
-            String username = view.usernameField.getText();
-            String password = String.valueOf(view.passwordField.getPassword());
+            String username = sessionsCard.usernameField.getText();
+            String password = String.valueOf(sessionsCard.passwordField.getPassword());
 
             try {
                 // Use session model to validate login credentials
@@ -42,13 +39,15 @@ public class SessionsController extends BasicController {
                 if(_user != null) {
                     // launch myProfile
                     MyProfileController MyProfileController = new MyProfileController(_user);
-                    view.close();
                 } else {
-                    // display error message in notification
-                    view.setNotification("Login failed. Please try again.");
+                    System.out.println("LOGIN FAILED");
                 }
 
             } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }

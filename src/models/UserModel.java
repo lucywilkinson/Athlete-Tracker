@@ -1,16 +1,16 @@
 package models;
 
+import common.User;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.String.*;
 
-/**
- * Created by mattu on 11/18/16.
- */
 public class UserModel extends Model {
 
     public UserModel() throws SQLException, IOException, ClassNotFoundException {
@@ -39,20 +39,40 @@ public class UserModel extends Model {
      * @param edits: Map of user field name to user field value.
      * @throws SQLException
      */
-    public void editUser(Map<String, String> edits) throws SQLException {
+    public void editUser(HashMap<String, String> edits) throws SQLException {
 
-        String query = "UPDATE users SET first_name=?, last_name=?, username=?, password=?, active=?, user_type=? WHERE user_id = ?";
+        String query = "UPDATE users SET first_name=?, last_name=?, email=?, active=?, user_type=? WHERE user_id = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
 
-        preparedStatement.setString(1, edits.get("first_name"));
-        preparedStatement.setString(2, edits.get("last_name" ));
-        preparedStatement.setString(3, edits.get("username"  ));
-        preparedStatement.setString(4, edits.get("password"  ));
-        preparedStatement.setString(5, edits.get("active"    ));
-        preparedStatement.setString(6, edits.get("user_type" ));
-        preparedStatement.setString(7, edits.get("user_id"   ));
+        preparedStatement.setString(1, edits.get("firstName"));
+        preparedStatement.setString(2, edits.get("lastName"));
+        preparedStatement.setString(3, edits.get("email"));
+        preparedStatement.setBoolean(4, Boolean.parseBoolean(edits.get("accountEnabled")));
+        preparedStatement.setString(5, edits.get("accountType"));
+        preparedStatement.setString(6, edits.get("id"));
 
-        preparedStatement.executeQuery();
+        preparedStatement.executeUpdate();
+    }
+
+    public User getUserData(int userID) throws SQLException {
+        String query = "SELECT * FROM users WHERE user_id = ?";
+
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setString(1, valueOf(userID));
+
+        ResultSet res = preparedStatement.executeQuery();
+
+        if (res.next()) {
+            int id           = res.getInt(1);
+            String firstName = res.getString(2);
+            String lastName  = res.getString(3);
+            String email     = res.getString(6);
+            String userType  = res.getString(8);
+
+            return new User(id, firstName, lastName, userType, email);
+        }
+
+        throw new SQLException();
     }
 
     /**

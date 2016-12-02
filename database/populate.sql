@@ -18,38 +18,42 @@ ALTER TABLE shipments        AUTO_INCREMENT = 1;
 ALTER TABLE users            AUTO_INCREMENT = 1;
 
 /* CREATE USERS */
-INSERT INTO users (first_name, last_name, username, password, user_type)
+INSERT INTO users (first_name, last_name, username, email, password, user_type)
 VALUES (
   "Matt",
   "Uhlar",
   "Clacious",
+  "Clacious@colorado.edu",
   "Clacious-1",
   "Athlete"
 );
 
-INSERT INTO users (first_name, last_name, username, password, user_type)
+INSERT INTO users (first_name, last_name, username, email, password, user_type)
 VALUES (
   "Alex",
   "Goodwin",
   "Dragon",
+  "Dragon@colorado.edu",
   "Dragon-1",
   "Admin"
 );
 
-INSERT INTO users (first_name, last_name, username, password, user_type)
+INSERT INTO users (first_name, last_name, username, email, password, user_type)
 VALUES (
   "Lucy",
   "Wilkinson",
   "Bird",
+  "Bird@colorado.edu",
   "Bird-1",
   "Athlete"
 );
 
-INSERT INTO users (first_name, last_name, username, password, user_type)
+INSERT INTO users (first_name, last_name, username, email, password, user_type)
 VALUES (
   "Dymtro",
   "Ryzhkov",
   "Fish",
+  "Fish@colorado.edu",
   "Fish-1",
   "Worker"
 );

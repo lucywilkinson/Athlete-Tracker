@@ -33,7 +33,8 @@ public class myProfileCard extends card {
     public JButton editProfileButton = new JButton("Edit Profile");
     public JButton saveProfileButton = new JButton("Save");
 
-    public myProfileCard(HashMap<String, ActionListener> actionListeners) {
+
+    public myProfileCard(User user, HashMap<String, ActionListener> actionListeners) {
         super(actionListeners); // adds nav bar
 
         constraints.weighty = 1;
@@ -95,6 +96,9 @@ public class myProfileCard extends card {
         this.leftPanel.add(this.accountTypeLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.accountTypeField, constraints);
+        this.accountTypeField.addItem("admin");
+        this.accountTypeField.addItem("athlete");
+        this.accountTypeField.addItem("worker");
 
         // Account Status
         constraints.gridy = 6;
@@ -114,6 +118,6 @@ public class myProfileCard extends card {
         this.rightPanel.add(this.editProfileButton, constraints);
         constraints.gridx = 1;
         this.rightPanel.add(this.saveProfileButton, constraints);
-
+        this.saveProfileButton.addActionListener(actionListeners.get("editProfileAction"));
     }
 }

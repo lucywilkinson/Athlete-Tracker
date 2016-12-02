@@ -38,9 +38,10 @@ public class SessionsModel extends Model {
             int userID       = res.getInt(1);
             String firstName = res.getString(2);
             String lastName  = res.getString(3);
-            String userType  = res.getString(6);
+            String email     = res.getString(6);
+            String userType  = res.getString(8);
 
-            return new User(userID, firstName, lastName, username, userType, password);
+            return new User(userID, firstName, lastName, username, userType, password, email);
         }
 
         /* Invalid username || password */

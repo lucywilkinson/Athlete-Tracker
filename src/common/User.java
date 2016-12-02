@@ -1,26 +1,50 @@
 package common;
 
-/**
- * Created by mattu on 11/14/16.
- */
 public class User {
-
     private int userId;
     private String firstName;
     private String lastName;
     private String username;
     private String userType;
     private String password;
+    private String email;
 
-    public User(int userId, String firstName, String lastName, String username, String userType, String password) {
-        this.userId = userId;
+    /**
+     * User Object User to create and add a new user to the DB
+     * @param userId: UUID
+     * @param firstName: users first name
+     * @param lastName: users last name
+     * @param username: unique username
+     * @param userType: Athelete, Admin, Worker
+     * @param password: user password
+     * @param email: user email
+     */
+    public User(int userId, String firstName, String lastName, String username, String userType, String password, String email) {
+        this.userId    = userId;
         this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.userType = userType;
-        this.password = password;
+        this.lastName  = lastName;
+        this.username  = username;
+        this.userType  = userType;
+        this.password  = password;
+        this.email     = email;
     }
 
+    /**
+     * Existing user object. Used to pass user data through the application. Username and password not needed after login.
+     * @param userId: UUID
+     * @param firstName: users first name
+     * @param lastName: users last name
+     * @param userType: Athelete, Admin, Worker
+     */
+    public User(int userId, String firstName, String lastName, String userType, String email) {
+        this.userId    = userId;
+        this.firstName = firstName;
+        this.lastName  = lastName;
+        this.userType  = userType;
+        this.email     = email;
+    }
+
+    // Getters
     public int getUserId() {
         return this.userId;
     }
@@ -39,4 +63,5 @@ public class User {
     public String getPassword() {
         return this.password;
     }
+    public String getEmail() { return this.email; }
 }

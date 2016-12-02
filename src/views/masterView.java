@@ -5,9 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-/**
- * Created by alex on 11/29/16.
- */
 public class masterView {
     JFrame frame = new JFrame("Athlete Tracker");
     CardLayout layout = new CardLayout();
@@ -15,14 +12,10 @@ public class masterView {
     Integer preferredHeight = 800;
     Container content;
 
-    public masterView(HashMap<String, ActionListener> actionListeners) {
+    public masterView() {
         this.content = this.frame.getContentPane();
 
         content.setLayout(layout);
-
-        this.addCard("Athletes", new athletesCard(actionListeners));
-
-        this.showCard("Athletes");
 
         this.content.setPreferredSize(new Dimension(this.preferredWidth, this.preferredHeight));
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -2,9 +2,12 @@ package controllers;
 
 import common.User;
 import views.basicView;
+import views.masterView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
@@ -12,6 +15,7 @@ import java.util.HashMap;
  */
 public abstract class BasicController {
     basicView view;
+    masterView masterView = new masterView();
     User _user;
     HashMap actionListeners = new HashMap<String, ActionListener>();
 
@@ -41,7 +45,15 @@ public abstract class BasicController {
     private class clickMyProfileButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            MyProfileController MyProfileController = new MyProfileController(_user);
+            try {
+                MyProfileController MyProfileController = new MyProfileController(_user);
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
             view.close();
         }
     }

@@ -5,9 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-/**
- * Created by alex on 11/29/16.
- */
 public class card extends JPanel {
 
     GridBagConstraints constraints = new GridBagConstraints();
