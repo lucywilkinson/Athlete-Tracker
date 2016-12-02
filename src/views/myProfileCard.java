@@ -19,8 +19,10 @@ public class myProfileCard extends card {
 
     public JLabel idLabel = new JLabel("ID");
     public JTextField idField = new JTextField("", 5);
-    public JLabel nameLabel = new JLabel("Name");
-    public JTextField nameField = new JTextField("", 10);
+    public JLabel firstNameLabel = new JLabel("First Name");
+    public JTextField firstNameField = new JTextField("", 10);
+    public JLabel lastNameLabel = new JLabel("Last Name");
+    public JTextField lastNameField = new JTextField("", 10);
     public JLabel emailLabel = new JLabel("Email");
     public JTextField emailField = new JTextField("", 10);
     public JLabel accountTypeLabel = new JLabel("Account Type");
@@ -34,6 +36,9 @@ public class myProfileCard extends card {
     public myProfileCard(HashMap<String, ActionListener> actionListeners) {
         super(actionListeners); // adds nav bar
 
+        constraints.weighty = 1;
+        constraints.weightx = 1;
+
         // Left Panel
         constraints.gridy = 2;
         constraints.gridx = 0;
@@ -46,6 +51,7 @@ public class myProfileCard extends card {
         constraints.gridx = 1;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.LINE_START;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
         this.add(this.rightPanel, constraints);
 
         // Title
@@ -53,11 +59,13 @@ public class myProfileCard extends card {
         constraints.gridx = 0;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.CENTER;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
         this.leftPanel.add(this.titleLabel, constraints);
 
         // ID
         constraints.gridy = 1;
         constraints.gridx = 0;
+        constraints.gridwidth = 1;
         this.leftPanel.add(this.idLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.idField, constraints);
@@ -65,33 +73,39 @@ public class myProfileCard extends card {
         // Name
         constraints.gridy = 2;
         constraints.gridx = 0;
-        this.leftPanel.add(this.nameLabel, constraints);
+        this.leftPanel.add(this.firstNameLabel, constraints);
         constraints.gridx = 1;
-        this.leftPanel.add(this.nameField, constraints);
+        this.leftPanel.add(this.firstNameField, constraints);
+        constraints.gridy = 3;
+        constraints.gridx = 0;
+        this.leftPanel.add(this.lastNameLabel, constraints);
+        constraints.gridx = 1;
+        this.leftPanel.add(this.lastNameField, constraints);
 
         // Email
-        constraints.gridy = 3;
+        constraints.gridy = 4;
         constraints.gridx = 0;
         this.leftPanel.add(this.emailLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.emailField, constraints);
 
         // Account Type
-        constraints.gridy = 4;
+        constraints.gridy = 5;
         constraints.gridx = 0;
         this.leftPanel.add(this.accountTypeLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.accountTypeField, constraints);
 
         // Account Status
-        constraints.gridy = 5;
+        constraints.gridy = 6;
         constraints.gridx = 0;
         this.leftPanel.add(this.accountStatusLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.accountStatusField, constraints);
 
         // Edit/Save Profile Buttons
-        constraints.anchor = GridBagConstraints.WEST;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        constraints.fill= GridBagConstraints.BOTH;
         constraints.gridy = 0;
         constraints.gridx = 0;
         this.rightPanel.add(this.viewMyShipmentsButton, constraints);
