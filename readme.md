@@ -1,7 +1,7 @@
-Athlete Tracker
-CSCI 4448
+#Athlete Tracker
+#CSCI 4448
 
-Matt Uhlar, Alex Goodwin, Lucy Wilkinson, Dmytro Ryzhkov
+#Matt Uhlar, Alex Goodwin, Lucy Wilkinson, Dmytro Ryzhkov
 
 This is the group project for CSCI 4448
 
