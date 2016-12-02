@@ -33,6 +33,8 @@ public class TestController extends BasicController {
         view.addCard("Shipments", new shipmentsCard(actionListeners));
         view.addCard("Products", new productsCard(actionListeners));
         view.addCard("My Profile", new myProfileCard(actionListeners));
+
+        view.showCard("My Profile");
     }
 
     private class navigateToAdmins implements ActionListener {
