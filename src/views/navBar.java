@@ -26,7 +26,8 @@ public class navBar extends JPanel {
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridy = 0;
-        constraints.weighty = 0;
+        constraints.weighty = 1;
+        constraints.weightx = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
 
         constraints.gridx = 0;

@@ -33,11 +33,20 @@ public class myProfileCard extends card {
     public JButton editProfileButton = new JButton("Edit Profile");
     public JButton saveProfileButton = new JButton("Save");
 
-    public myProfileCard(HashMap<String, ActionListener> actionListeners) {
+    String[] accountTypes = {
+            "admin",
+            "athletes",
+            "worker"
+    };
+
+    public myProfileCard(User user, HashMap<String, ActionListener> actionListeners) {
         super(actionListeners); // adds nav bar
 
-        constraints.weighty = 1;
-        constraints.weightx = 1;
+        /*
+            GridBagLayout Docs:
+            https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html
+            https://docs.oracle.com/javase/8/docs/api/java/awt/GridBagConstraints.html
+         */
 
         // Left Panel
         constraints.gridy = 2;
@@ -95,6 +104,9 @@ public class myProfileCard extends card {
         this.leftPanel.add(this.accountTypeLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.accountTypeField, constraints);
+        for(int i = 0; i < accountTypes.length; i++ ) {
+            this.accountTypeField.addItem(accountTypes[i]);
+        }
 
         // Account Status
         constraints.gridy = 6;
@@ -114,6 +126,11 @@ public class myProfileCard extends card {
         this.rightPanel.add(this.editProfileButton, constraints);
         constraints.gridx = 1;
         this.rightPanel.add(this.saveProfileButton, constraints);
+
+        this.populate(user);
+    }
+
+    public void populate(User user) {
 
     }
 }
