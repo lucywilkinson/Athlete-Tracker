@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class masterView {
-    JFrame frame = new JFrame("Athlete Tracker");
+    static JFrame frame = new JFrame("Athlete Tracker");
     CardLayout layout = new CardLayout();
     Integer preferredWidth = 800;
     Integer preferredHeight = 800;
@@ -24,6 +24,7 @@ public class masterView {
     }
 
     public void addCard(String name, JPanel panel) {
+        this.frame.getContentPane().removeAll();
         this.content.add(name, panel);
     }
 
