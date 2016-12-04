@@ -121,4 +121,13 @@ public class myProfileCard extends card {
         this.rightPanel.add(this.saveProfileButton, constraints);
         this.saveProfileButton.addActionListener(actionListeners.get("editProfileAction"));
     }
+
+    public void populate(User user) {
+        idField.setText(Integer.toString(user.getUserId()));
+        firstNameField.setText(user.getFirstName());
+        lastNameField.setText(user.getLastName());
+        emailField.setText(user.getEmail());
+        accountTypeField.setSelectedItem(user.getUserType());
+        accountStatusField.setEnabled(user.getStatus());
+    }
 }
