@@ -52,7 +52,6 @@ public class MyProfileController extends BasicController {
                 // Retrieve updated user from DB
                 User updatedUser = userModel.getUserData(Integer.parseInt(id));
 
-
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
