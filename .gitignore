@@ -1,6 +1,9 @@
 
 out/*
 src/models/config.properties
-.idea/workspace.xml
+
+.idea/Athlete-Tracker.iml
 
 .idea/misc.xml
+
+.idea/workspace.xml
