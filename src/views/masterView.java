@@ -26,9 +26,15 @@ public class masterView {
     public void addCard(String name, JPanel panel) {
         this.frame.getContentPane().removeAll();
         this.content.add(name, panel);
+        this.frame.pack();
+        this.frame.setVisible(true);
+        this.frame.repaint();
     }
 
     public void showCard(String name) {
         this.layout.show(content, name);
+        this.frame.pack();
+        this.frame.setVisible(true);
+        this.frame.repaint();
     }
 }

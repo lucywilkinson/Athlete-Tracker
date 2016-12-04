@@ -14,7 +14,6 @@ import views.masterView;
 
 public class MyProfileController extends BasicController {
     private UserModel userModel = new UserModel();
-    private HashMap actionListeners = new HashMap<String, ActionListener>();
     private myProfileCard myProfileCard;
 
     public MyProfileController(User user) throws SQLException, IOException, ClassNotFoundException {

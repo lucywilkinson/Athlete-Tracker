@@ -29,9 +29,17 @@ public abstract class BasicController {
     }
 
     private void attachNavMenuListeners() {
-        actionListeners.put("clickAthletesButton", new clickAthletesButton());
-        actionListeners.put("clickAdminsButton", new clickAdminsButton());
-        actionListeners.put("clickMyProfileButton", new clickMyProfileButton());
+        actionListeners.put("navigateToAthletes", new clickAthletesButton());
+        actionListeners.put("navigateToAdmins", new clickAdminsButton());
+        actionListeners.put("navigateToMyProfile", new clickMyProfileButton());
+    }
+
+    private class clickAthletesButton implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AthletesController AthletesController = new AthletesController(_user);
+            view.close();
+        }
     }
 
     private class clickAthletesButton implements ActionListener {

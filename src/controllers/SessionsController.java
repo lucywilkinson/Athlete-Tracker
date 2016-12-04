@@ -16,10 +16,11 @@ public class SessionsController extends BasicController {
     sessionsCard sessionsCard;
 
     User _user;
-    HashMap actionListeners = new HashMap<String, ActionListener>();
 
     public SessionsController() throws SQLException, IOException, ClassNotFoundException {
+        super();
         actionListeners.put("loginAction", new loginAction());
+
         sessionsCard = new sessionsCard(actionListeners);
         masterView.addCard("Sessions", sessionsCard);
     }
