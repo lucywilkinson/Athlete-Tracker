@@ -75,6 +75,7 @@ CREATE TABLE shipments (
   shipment_worker      INT  NOT NULL,
   shipment_reciever    INT  NOT NULL,
   shipment_address     INT  NOT NULL,
+  shipment_quantity    INT  NOT NULL,
   shipment_fulfilled   BOOL NOT NULL DEFAULT FALSE,
   FOREIGN KEY (shipment_creator)  REFERENCES users (user_id) ON DELETE CASCADE,
   FOREIGN KEY (shipment_worker)   REFERENCES users (user_id) ON DELETE CASCADE,
