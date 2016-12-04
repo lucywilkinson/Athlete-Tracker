@@ -40,7 +40,7 @@ public class athletesCard extends card {
     JLabel titleLabel = new JLabel("Athletes");
     JButton newAthleteButton = new JButton("New Athlete");
     JButton saveChangesButton = new JButton("Save Changes");
-    JTable dataTable = new JTable(data, columnNames);
+    JTable dataTable = new JTable();
     JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     GridBagConstraints constraints = new GridBagConstraints();
@@ -139,7 +139,7 @@ public class athletesCard extends card {
         rightPanel.add(editDataPanel, constraints);
     }
 
-    void populate(DefaultTableModel data) {
+    public void populate(DefaultTableModel data) {
         dataTable = new JTable(data);
     }
 }
