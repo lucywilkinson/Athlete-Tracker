@@ -170,23 +170,25 @@ VALUES (
 );
 
 /* CREATE SHIPMENTS */
-INSERT INTO shipments (shipment_product, shipment_creator, shipment_worker, shipment_reciever, shipment_address)
+INSERT INTO shipments (shipment_product, shipment_creator, shipment_worker, shipment_reciever, shipment_quantity, shipment_address)
 VALUES (
   (SELECT product_id FROM products WHERE product_name = "Jersey"),
   (SELECT user_id FROM users WHERE username = "Dragon" AND user_type = "Admin"),
   (SELECT user_id FROM users WHERE username = "Fish" AND user_type = "Worker"),
   (SELECT user_id FROM users WHERE username = "Clacious" AND user_type = "Athlete"),
+  10,
   (Select address_id FROM users_addresses WHERE user_id = (
     SELECT user_id FROM users WHERE username = "Clacious" AND user_type = "Athlete"
   ))
 );
 
-INSERT INTO shipments (shipment_product, shipment_creator, shipment_worker, shipment_reciever, shipment_address)
+INSERT INTO shipments (shipment_product, shipment_creator, shipment_worker, shipment_reciever, shipment_quantity, shipment_address)
 VALUES (
   (SELECT product_id FROM products WHERE product_name = "Sticker"),
   (SELECT user_id FROM users WHERE username = "Dragon" AND user_type = "Admin"),
   (SELECT user_id FROM users WHERE username = "Fish" AND user_type = "Worker"),
   (SELECT user_id FROM users WHERE username = "Bird" AND user_type = "Athlete"),
+  150,
   (Select address_id FROM users_addresses WHERE user_id = (
     SELECT user_id FROM users WHERE username = "Bird" AND user_type = "Athlete"
   ))
