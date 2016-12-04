@@ -41,18 +41,18 @@ public class myProfileCard extends card {
         constraints.weightx = 1;
 
         // Left Panel
-        constraints.gridy = 2;
         constraints.gridx = 0;
+        constraints.weightx = 0.75;
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.anchor = GridBagConstraints.LINE_START;
+        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.insets = new Insets(0, 20, 20, 20);
         this.add(this.leftPanel, constraints);
 
         // Right Panel
-        constraints.gridy = 2;
         constraints.gridx = 1;
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.anchor = GridBagConstraints.LINE_START;
+        constraints.weightx = 0.25;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
+        constraints.insets = new Insets(0, 20, 20, 20);
         this.add(this.rightPanel, constraints);
 
         // Title
@@ -61,6 +61,7 @@ public class myProfileCard extends card {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
+        constraints.insets = new Insets(0, 0, 0, 0);
         this.leftPanel.add(this.titleLabel, constraints);
 
         // ID
@@ -119,5 +120,14 @@ public class myProfileCard extends card {
         constraints.gridx = 1;
         this.rightPanel.add(this.saveProfileButton, constraints);
         this.saveProfileButton.addActionListener(actionListeners.get("editProfileAction"));
+    }
+
+    public void populate(User user) {
+        idField.setText(Integer.toString(user.getUserId()));
+        firstNameField.setText(user.getFirstName());
+        lastNameField.setText(user.getLastName());
+        emailField.setText(user.getEmail());
+        accountTypeField.setSelectedItem(user.getUserType());
+        accountStatusField.setEnabled(user.getStatus());
     }
 }

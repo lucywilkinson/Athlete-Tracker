@@ -10,8 +10,8 @@ import java.util.HashMap;
 public class sessionsCard extends card {
     JLabel titleLabel = new JLabel("Log In");
     public JButton loginBtn = new JButton("Submit");
-    public JTextField usernameField = new JTextField("Username");
-    public JPasswordField passwordField = new JPasswordField("Password");
+    public JTextField usernameField = new JTextField("Dragon");
+    public JPasswordField passwordField = new JPasswordField("Dragon-1");
 
     public sessionsCard(HashMap<String, ActionListener> actionListeners) {
         this.add(this.titleLabel);

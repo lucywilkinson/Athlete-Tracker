@@ -2,54 +2,144 @@ package views;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import common.Product;
-import models.ProductModel;
 
 /**
  * Created by alex on 11/29/16.
  */
 public class productsCard extends card {
+    JPanel leftPanel = new JPanel(new GridBagLayout());
+    JPanel statusFilterPanel = new JPanel(new GridBagLayout());
+    JLabel statusFilterHeader = new JLabel("Filter By Status");
+    JCheckBox activeCheckbox = new JCheckBox("Active", true);
+    JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
+    JPanel dateFilterPanel = new JPanel(new GridBagLayout());
+    JLabel dateFilterHeader = new JLabel("Filter By Date");
+    JTextField dateStartField = new JTextField("12/1/2012");
+    JTextField dateEndField = new JTextField("12/31/2016");
 
+    // dummy data
+    String[] columnNames = {"First Name",
+            "Last Name",
+            "Sport",
+            "# of Years",
+            "Vegetarian"};
 
+    Object[][] data = {
+            {"Kathy", "Smith", "Snowboarding", new Integer(5), new Boolean(false)},
+            {"John", "Doe", "Rowing", new Integer(3), new Boolean(true)},
+            {"Sue", "Black", "Knitting", new Integer(2), new Boolean(false)},
+            {"Jane", "White", "Speed reading", new Integer(20), new Boolean(true)},
+            {"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}
+    };
+
+    JPanel rightPanel = new JPanel(new GridBagLayout());
+    JPanel headerPanel = new JPanel(new GridBagLayout());
     JLabel titleLabel = new JLabel("Products");
-    JPanel panel1 = new JPanel();
+    JButton newAthleteButton = new JButton("New Product");
+    JButton saveChangesButton = new JButton("Save Changes");
+    JTable dataTable = new JTable(data, columnNames);
+    JPanel editDataPanel = new JPanel(new GridBagLayout());
 
-    //TEST FOR JTABLE
-    //NEED TO POPULATE WITH DATABASE INSTEAD
-    String[] columnNames = {"Id", "Name", "Value", "Quantity"};
-
-    Object[][] data = {{new Integer(1), "Sticker", new Float(.50), new Integer(10000) },
-            {new Integer(2), "Poster", new Float(5.00), new Integer(100)},
-            {new Integer(3), "Jersey", new Float(50.00), new Integer(750)}};
-    
-    JTable table = new JTable(data, columnNames);
-    JScrollPane scrollPane = new JScrollPane(table);
-
+    GridBagConstraints constraints = new GridBagConstraints();
     public productsCard(HashMap<String, ActionListener> actionListeners) {
         super(actionListeners); // adds nav bar
 
-        this.add(this.titleLabel);
-        this.add(scrollPane);
+        constraints.weighty = 1;
+        constraints.weightx = 1;
 
+        constraints.fill = GridBagConstraints.BOTH;
 
+        this.buildLeftPanel();
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.weightx = 0.25;
+        constraints.insets = new Insets(20, 20, 20, 20);
+        this.add(leftPanel, constraints);
+
+        this.buildRightPanel();
+
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        constraints.weightx = 0.75;
+        constraints.insets = new Insets(20, 20, 20, 20);
+        this.add(rightPanel, constraints);
     }
 
-    public void populateProductsTable(ArrayList<Product> products){
+    void buildLeftPanel() {
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.ipadx = 0;
 
+        statusFilterPanel.add(statusFilterHeader, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy++;
+        statusFilterPanel.add(activeCheckbox, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy++;
+        constraints.insets = new Insets(0, 0, 10, 0);
+        statusFilterPanel.add(inactiveCheckbox, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy++;
+        constraints.insets = new Insets(0, 0, 0, 0);
+        leftPanel.add(statusFilterPanel, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy++;
+        dateFilterPanel.add(dateFilterHeader, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy++;
+        dateFilterPanel.add(dateStartField, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy++;
+        dateFilterPanel.add(dateEndField, constraints);
+
+        leftPanel.add(dateFilterPanel, constraints);
     }
 
+    void buildRightPanel() {
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(0, 0, 0, 0);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
 
+        constraints.weightx = 0.8;
+        headerPanel.add(titleLabel, constraints);
 
+        constraints.gridx++;
+        constraints.weightx = 0.2;
+        constraints.anchor = GridBagConstraints.NORTH;
+        headerPanel.add(newAthleteButton, constraints);
 
+        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        rightPanel.add(headerPanel, constraints);
 
+        constraints.gridy++;
+        rightPanel.add(dataTable, constraints);
 
+        constraints.gridy++;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.anchor = GridBagConstraints.NORTHEAST;
+        constraints.insets = new Insets(10, 0, 10, 0);
+        rightPanel.add(saveChangesButton, constraints);
 
+        constraints.gridy++;
+        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        rightPanel.add(editDataPanel, constraints);
+    }
 
+    public void populate(DefaultTableModel data) {
+        dataTable = new JTable(data);
+    }
 
 }

@@ -20,6 +20,7 @@ public class card extends JPanel {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.PAGE_START;
         constraints.gridwidth =  GridBagConstraints.REMAINDER;
+        constraints.insets = new Insets(0, 0, 0, 0);
         this.add(new navBar(actionListeners), constraints);
     }
 }
