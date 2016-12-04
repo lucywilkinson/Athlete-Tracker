@@ -9,7 +9,7 @@ public class masterView {
     static JFrame frame = new JFrame("Athlete Tracker");
     CardLayout layout = new CardLayout();
     Integer preferredWidth = 800;
-    Integer preferredHeight = 800;
+    Integer preferredHeight = 400;
     Container content;
 
     public masterView() {
