@@ -20,27 +20,12 @@ public class athletesCard extends card {
     JTextField dateStartField = new JTextField("12/1/2012");
     JTextField dateEndField = new JTextField("12/31/2016");
 
-    // dummy data
-    String[] columnNames = {"First Name",
-            "Last Name",
-            "Sport",
-            "# of Years",
-            "Vegetarian"};
-
-    Object[][] data = {
-            {"Kathy", "Smith", "Snowboarding", new Integer(5), new Boolean(false)},
-            {"John", "Doe", "Rowing", new Integer(3), new Boolean(true)},
-            {"Sue", "Black", "Knitting", new Integer(2), new Boolean(false)},
-            {"Jane", "White", "Speed reading", new Integer(20), new Boolean(true)},
-            {"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}
-    };
-
     JPanel rightPanel = new JPanel(new GridBagLayout());
     JPanel headerPanel = new JPanel(new GridBagLayout());
     JLabel titleLabel = new JLabel("Athletes");
     JButton newAthleteButton = new JButton("New Athlete");
     JButton saveChangesButton = new JButton("Save Changes");
-    JTable dataTable = new JTable(data, columnNames);
+    JTable dataTable = new JTable();
     JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     GridBagConstraints constraints = new GridBagConstraints();
@@ -139,7 +124,7 @@ public class athletesCard extends card {
         rightPanel.add(editDataPanel, constraints);
     }
 
-    void populate(DefaultTableModel data) {
+    public void populate(DefaultTableModel data) {
         dataTable = new JTable(data);
     }
 }
