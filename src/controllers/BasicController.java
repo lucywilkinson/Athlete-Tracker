@@ -24,29 +24,52 @@ public abstract class BasicController {
     }
 
     public BasicController(User user) {
-        this.attachNavMenuListeners();
         this._user = user;
+        this.attachNavMenuListeners();
     }
 
     private void attachNavMenuListeners() {
         actionListeners.put("navigateToAthletes", new clickAthletesButton());
         actionListeners.put("navigateToAdmins", new clickAdminsButton());
         actionListeners.put("navigateToMyProfile", new clickMyProfileButton());
+        actionListeners.put("navigateToProducts", new clickProductsButton());
+        actionListeners.put("navigateToShipments", new clickShipmentsButton());
+        actionListeners.put("navigateToWarehouseWorkers", new clickWarehouseWorkersButton());
     }
 
     private class clickAthletesButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             AthletesController AthletesController = new AthletesController(_user);
-            view.close();
         }
     }
 
-    private class clickAthletesButton implements ActionListener {
+    private class clickShipmentsButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            AthletesController AthletesController = new AthletesController(_user);
-            view.close();
+            ShipmentsController ShipmentsController = new ShipmentsController(_user);
+        }
+    }
+
+    private class clickWarehouseWorkersButton implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            WarehouseWorkersController WarehouseWorkersController = new WarehouseWorkersController(_user);
+        }
+    }
+
+    private class clickProductsButton implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                ProductsController ProductsController = new ProductsController(_user);
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
@@ -62,7 +85,6 @@ public abstract class BasicController {
             } catch (ClassNotFoundException e1) {
                 e1.printStackTrace();
             }
-            view.close();
         }
     }
 
@@ -70,7 +92,6 @@ public abstract class BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
             AdminsController AdminsController = new AdminsController(_user);
-            view.close();
         }
     }
 }

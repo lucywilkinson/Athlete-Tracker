@@ -3,6 +3,7 @@ package controllers;
 import models.ProductModel;
 import common.User;
 import common.Product;
+import views.productsCard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,14 +15,12 @@ import java.util.HashMap;
 /**
  * Created by mattu on 11/29/16.
  */
-public class ProductController extends BasicController {
+public class ProductsController extends BasicController {
     ProductModel productModel;
-    HashMap<String, ActionListener> actionListeners;
 
-    public ProductController(User user) throws SQLException, IOException, ClassNotFoundException {
+    public ProductsController(User user) throws SQLException, IOException, ClassNotFoundException {
         super();
 
-        actionListeners = new HashMap<String, ActionListener>();
         productModel = new ProductModel();
 
         actionListeners.put("addProduct",     new addProduct());
@@ -30,6 +29,8 @@ public class ProductController extends BasicController {
 
         ArrayList<Product> products = productModel.getProducts();
 
+        productsCard productsCard= new productsCard(actionListeners);
+        masterView.addCard("Shipments", productsCard);
     }
 
     private class addProduct implements ActionListener{
