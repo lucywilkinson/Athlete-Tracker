@@ -1,6 +1,7 @@
 package views;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -136,5 +137,9 @@ public class athletesCard extends card {
         constraints.gridy++;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         rightPanel.add(editDataPanel, constraints);
+    }
+
+    void populate(DefaultTableModel data) {
+        dataTable = new JTable(data);
     }
 }
