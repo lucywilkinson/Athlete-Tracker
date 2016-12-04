@@ -8,7 +8,6 @@ import views.athletesCard;
  */
 public class AthletesController extends BasicController {
     athletesCard view;
-    User _user;
 
     public AthletesController(User user) {
         super(user);

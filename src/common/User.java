@@ -8,6 +8,7 @@ public class User {
     private String userType;
     private String password;
     private String email;
+    private Boolean active = true;
 
     /**
      * User Object User to create and add a new user to the DB
@@ -64,4 +65,5 @@ public class User {
         return this.password;
     }
     public String getEmail() { return this.email; }
+    public Boolean getStatus() { return this.active; }
 }
