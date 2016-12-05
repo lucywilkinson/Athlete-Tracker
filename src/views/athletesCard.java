@@ -126,5 +126,9 @@ public class athletesCard extends card {
 
     public void populate(DefaultTableModel data) {
         dataTable = new JTable(data);
+        rightPanel.remove(dataTable);
+        rightPanel.add(dataTable, constraints);
+        rightPanel.repaint();
+        rightPanel.revalidate();
     }
 }
