@@ -4,22 +4,13 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by alex on 11/29/16.
  */
 public class shipmentsCard extends card {
-    JPanel leftPanel = new JPanel(new GridBagLayout());
-    JPanel statusFilterPanel = new JPanel(new GridBagLayout());
-    JLabel statusFilterHeader = new JLabel("Filter By Status");
-    JCheckBox activeCheckbox = new JCheckBox("Active", true);
-    JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
-    JPanel dateFilterPanel = new JPanel(new GridBagLayout());
-    JLabel dateFilterHeader = new JLabel("Filter By Date");
-    JTextField dateStartField = new JTextField("12/1/2012");
-    JTextField dateEndField = new JTextField("12/31/2016");
-
     // dummy data
     String[] columnNames = {"First Name",
             "Last Name",
@@ -35,13 +26,39 @@ public class shipmentsCard extends card {
             {"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}
     };
 
+    // left panel elements
+    JPanel leftPanel = new JPanel(new GridBagLayout());
+    JPanel statusFilterPanel = new JPanel(new GridBagLayout());
+    JLabel statusFilterHeader = new JLabel("Filter By Status");
+    JCheckBox activeCheckbox = new JCheckBox("Active", true);
+    JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
+    JPanel dateFilterPanel = new JPanel(new GridBagLayout());
+    JLabel dateFilterHeader = new JLabel("Filter By Date");
+    JTextField dateStartField = new JTextField("12/1/2012");
+    JTextField dateEndField = new JTextField("12/31/2016");
+
+    // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
     JPanel headerPanel = new JPanel(new GridBagLayout());
     JLabel titleLabel = new JLabel("Shipments");
-    JButton newAthleteButton = new JButton("New Shipment");
+    JButton newShipmentButton = new JButton("New Shipment");
     JButton saveChangesButton = new JButton("Save Changes");
     JTable dataTable = new JTable(data, columnNames);
     JPanel editDataPanel = new JPanel(new GridBagLayout());
+
+    // new shipment elements
+    JFrame newShipmentFrame = new JFrame("Create New Shipment");
+    Dimension newShipmentFrameDimensions = new Dimension(400, 400);
+    JPanel newShipmentPanel = new JPanel(new GridBagLayout());
+    JLabel newShipmentWorkerLabel = new JLabel("Worker:", SwingConstants.RIGHT);
+    JComboBox newShipmentWorkerField = new JComboBox();
+    JLabel newShipmentAthleteLabel = new JLabel("Athlete:", SwingConstants.RIGHT);
+    JComboBox newShipmentAthleteField = new JComboBox();
+    JLabel newShipmentProductLabel = new JLabel("Product:", SwingConstants.RIGHT);
+    JComboBox newShipmentProductField = new JComboBox();
+    JLabel newShipmentQuantityLabel = new JLabel("Quantity:", SwingConstants.RIGHT);
+    JTextField newShipmentQuantityField = new JTextField("0", 20);
+    JButton newShipmentSaveButton = new JButton("Save");
 
     GridBagConstraints constraints = new GridBagConstraints();
 
@@ -68,6 +85,9 @@ public class shipmentsCard extends card {
         constraints.weightx = 0.75;
         constraints.insets = new Insets(20, 20, 20, 20);
         this.add(rightPanel, constraints);
+
+        // add action listeners
+        newShipmentButton.addActionListener(actionListeners.get("addShipment"));
     }
 
     void buildLeftPanel() {
@@ -120,7 +140,7 @@ public class shipmentsCard extends card {
         constraints.gridx++;
         constraints.weightx = 0.2;
         constraints.anchor = GridBagConstraints.NORTH;
-        headerPanel.add(newAthleteButton, constraints);
+        headerPanel.add(newShipmentButton, constraints);
 
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         rightPanel.add(headerPanel, constraints);
@@ -139,7 +159,77 @@ public class shipmentsCard extends card {
         rightPanel.add(editDataPanel, constraints);
     }
 
-    void populate(DefaultTableModel data) {
+    public void populate(DefaultTableModel data) {
         dataTable = new JTable(data);
+    }
+
+    public void populateWorkers(ArrayList data) {
+        for(int i = 0; i < data.size(); i++) {
+            newShipmentWorkerField.addItem(data.get(i));
+        }
+    }
+
+    public void populateAthletes(ArrayList data) {
+        for(int i = 0; i < data.size(); i++) {
+            newShipmentAthleteField.addItem(data.get(i));
+        }
+    }
+
+    public void populateProducts(ArrayList data) {
+        for(int i = 0; i < data.size(); i++) {
+            newShipmentProductField.addItem(data.get(i));
+        }
+    }
+
+    public void launchNewShipment() {
+        newShipmentFrame .setPreferredSize(this.newShipmentFrameDimensions);
+        this.buildNewShipmentFrame();
+        newShipmentFrame .pack();
+        newShipmentFrame .setVisible(true);
+    }
+
+    void buildNewShipmentFrame() {
+        constraints.weightx = 0.5;
+        constraints.insets = new Insets(5,5,5,5);
+        constraints.gridy = 0;
+        constraints.gridx = 0;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        newShipmentPanel.add(newShipmentWorkerLabel, constraints);
+
+        constraints.gridx = 1;
+        newShipmentPanel.add(newShipmentWorkerField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        newShipmentPanel.add(newShipmentAthleteLabel, constraints);
+
+        constraints.gridx = 1;
+        newShipmentPanel.add(newShipmentAthleteField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        newShipmentPanel.add(newShipmentProductLabel, constraints);
+
+        constraints.gridx = 1;
+        newShipmentPanel.add(newShipmentProductField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        newShipmentPanel.add(newShipmentQuantityLabel, constraints);
+
+        constraints.gridx = 1;
+        newShipmentPanel.add(newShipmentQuantityField, constraints);
+
+        constraints.gridy++;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 1;
+        newShipmentPanel.add(newShipmentSaveButton, constraints);
+
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(10,10,10,10);
+        newShipmentFrame.add(this.newShipmentPanel);
     }
 }

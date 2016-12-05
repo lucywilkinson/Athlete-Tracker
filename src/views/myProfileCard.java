@@ -33,7 +33,6 @@ public class myProfileCard extends card {
     public JButton editProfileButton = new JButton("Edit Profile");
     public JButton saveProfileButton = new JButton("Save");
 
-
     public myProfileCard(User user, HashMap<String, ActionListener> actionListeners) {
         super(actionListeners); // adds nav bar
 
@@ -97,9 +96,9 @@ public class myProfileCard extends card {
         this.leftPanel.add(this.accountTypeLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.accountTypeField, constraints);
-        this.accountTypeField.addItem("admin");
-        this.accountTypeField.addItem("athlete");
-        this.accountTypeField.addItem("worker");
+        for(int i = 0; i < accountTypes.length; i++) {
+            this.accountTypeField.addItem(accountTypes[i]);
+        }
 
         // Account Status
         constraints.gridy = 6;

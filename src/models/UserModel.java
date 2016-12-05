@@ -2,12 +2,15 @@ package models;
 
 import common.User;
 
+import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import static java.lang.String.*;
 

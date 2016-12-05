@@ -9,6 +9,12 @@ public class card extends JPanel {
 
     GridBagConstraints constraints = new GridBagConstraints();
 
+    String[] accountTypes = {
+            "admin",
+            "athlete",
+            "worker"
+    };
+
     public card() {
 
     }
