@@ -34,13 +34,17 @@ public class athletesCard extends card {
     JFrame newUserFrame = new JFrame("Create New Athlete");
     Dimension newUserFrameDimensions = new Dimension(400, 400);
     JPanel newUserPanel = new JPanel(new GridBagLayout());
-    JLabel newUserFirstNameLabel = new JLabel("First Name:");
+    JLabel newUserFirstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
     JTextField newUserFirstNameField = new JTextField(20);
-    JLabel newUserLastNameLabel = new JLabel("Last Name:");
+    JLabel newUserLastNameLabel = new JLabel("Last Name:", SwingConstants.RIGHT);
     JTextField newUserLastNameField = new JTextField(20);
-    JLabel newUserEmailLabel = new JLabel("Email:");
+    JLabel newUserEmailLabel = new JLabel("Email:", SwingConstants.RIGHT);
     JTextField newUserEmailField = new JTextField(20);
-    JLabel newUserAccountTypeLabel = new JLabel("Account Type:");
+    JLabel newUserAccountTypeLabel = new JLabel("Account Type:", SwingConstants.RIGHT);
+    JLabel newUserPasswordLabel = new JLabel("Password:", SwingConstants.RIGHT);
+    JPasswordField newUserPasswordField = new JPasswordField();
+    JLabel newUserConfirmPasswordLabel = new JLabel("Confirm Password:", SwingConstants.RIGHT);
+    JPasswordField newUserConfirmPasswordField = new JPasswordField();
     JComboBox newUserAccountTypeField = new JComboBox();
     JButton newUserSaveButton = new JButton("Save");
 
@@ -155,6 +159,7 @@ public class athletesCard extends card {
         constraints.insets = new Insets(5,5,5,5);
         constraints.gridy = 0;
         constraints.gridx = 0;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
         newUserPanel.add(newUserFirstNameLabel, constraints);
 
         constraints.gridx = 1;
@@ -176,6 +181,20 @@ public class athletesCard extends card {
 
         constraints.gridy++;
         constraints.gridx = 0;
+        newUserPanel.add(newUserPasswordLabel, constraints);
+
+        constraints.gridx = 1;
+        newUserPanel.add(newUserPasswordField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        newUserPanel.add(newUserConfirmPasswordLabel, constraints);
+
+        constraints.gridx = 1;
+        newUserPanel.add(newUserConfirmPasswordField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
         newUserPanel.add(newUserAccountTypeLabel, constraints);
 
         constraints.gridx = 1;
@@ -187,12 +206,14 @@ public class athletesCard extends card {
         newUserAccountTypeField.setEnabled(false);
 
         constraints.gridy++;
-        constraints.fill = GridBagConstraints.LINE_END;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 1;
         newUserPanel.add(newUserSaveButton, constraints);
 
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 0;
         constraints.gridy = 0;
+        constraints.insets = new Insets(10,10,10,10);
         newUserFrame.add(this.newUserPanel);
     }
 
