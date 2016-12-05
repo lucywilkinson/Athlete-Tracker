@@ -17,6 +17,7 @@ import java.util.HashMap;
  */
 public class ProductsController extends BasicController {
     ProductModel productModel;
+    productsCard view;
 
     public ProductsController(User user) throws SQLException, IOException, ClassNotFoundException {
         super();
@@ -29,14 +30,14 @@ public class ProductsController extends BasicController {
 
         ArrayList<Product> products = productModel.getProducts();
 
-        productsCard productsCard= new productsCard(actionListeners);
-        masterView.addCard("Shipments", productsCard);
+        view = new productsCard(actionListeners);
+        masterView.addCard("Shipments", view);
     }
 
     private class addProduct implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO
+            view.launchNewProduct();
         }
     }
 
