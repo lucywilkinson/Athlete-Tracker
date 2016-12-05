@@ -49,8 +49,6 @@ public class productsCard extends card {
     JFrame newUserFrame = new JFrame("Create New Product");
     Dimension newUserFrameDimensions = new Dimension(400, 400);
     JPanel newProductPanel = new JPanel(new GridBagLayout());
-
-
     JLabel newProductNameLabel = new JLabel("Name:", SwingConstants.RIGHT);
     JTextField newProductNameField = new JTextField(20);
     JLabel newProductValueLabel = new JLabel("Value:", SwingConstants.RIGHT);
