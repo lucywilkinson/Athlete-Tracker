@@ -26,22 +26,28 @@ public class AthletesController extends BasicController {
 
         DefaultTableModel tableData = userModel.buildTableModel(userModel.returnUsersofType("Athletes"));
 
-        view = new athletesCard(actionListeners);
-        view.populate(tableData);
+        actionListeners.put("newUserAction", new newUserAction());
 
+        view = new athletesCard(actionListeners);
         masterView.addCard("My Profile", view);
+
+        this.fillTableAction();
     }
 
-    private class fillTableAction implements ActionListener {
+    void fillTableAction() {
+        try {
+            ResultSet rs = userModel.returnUsersofType("athlete");
+            view.populate(userModel.buildTableModel(rs));
+        }
+        catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    private class newUserAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                ResultSet rs = userModel.returnUsersofType("athlete");
-                view.populate(userModel.buildTableModel(rs));
-            }
-            catch (SQLException e1) {
-                e1.printStackTrace();
-            }
+            view.launchNewUser();
         }
     }
 }
