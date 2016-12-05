@@ -1,14 +1,15 @@
 package views;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by alex on 11/29/16.
- */
 public class athletesCard extends card {
     // left panel elements
     JPanel leftPanel = new JPanel(new GridBagLayout());
@@ -35,19 +36,19 @@ public class athletesCard extends card {
     Dimension newUserFrameDimensions = new Dimension(400, 400);
     JPanel newUserPanel = new JPanel(new GridBagLayout());
     JLabel newUserUsernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
-    JTextField newUserUsernameField = new JTextField(20);
+    public JTextField newUserUsernameField = new JTextField(20);
     JLabel newUserFirstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
-    JTextField newUserFirstNameField = new JTextField(20);
+    public JTextField newUserFirstNameField = new JTextField(20);
     JLabel newUserLastNameLabel = new JLabel("Last Name:", SwingConstants.RIGHT);
-    JTextField newUserLastNameField = new JTextField(20);
+    public JTextField newUserLastNameField = new JTextField(20);
     JLabel newUserEmailLabel = new JLabel("Email:", SwingConstants.RIGHT);
-    JTextField newUserEmailField = new JTextField(20);
+    public JTextField newUserEmailField = new JTextField(20);
     JLabel newUserAccountTypeLabel = new JLabel("Account Type:", SwingConstants.RIGHT);
     JLabel newUserPasswordLabel = new JLabel("Password:", SwingConstants.RIGHT);
-    JPasswordField newUserPasswordField = new JPasswordField();
+    public JPasswordField newUserPasswordField = new JPasswordField();
     JLabel newUserConfirmPasswordLabel = new JLabel("Confirm Password:", SwingConstants.RIGHT);
-    JPasswordField newUserConfirmPasswordField = new JPasswordField();
-    JComboBox newUserAccountTypeField = new JComboBox();
+    public JPasswordField newUserConfirmPasswordField = new JPasswordField();
+    public JComboBox newUserAccountTypeField = new JComboBox();
     JButton newUserSaveButton = new JButton("Save");
 
     GridBagConstraints constraints = new GridBagConstraints();
@@ -78,6 +79,17 @@ public class athletesCard extends card {
 
         // add action listeners
         newAthleteButton.addActionListener(actionListeners.get("newUserAction"));
+
+        // Add document listeners to each "New User Field".
+        SaveButtonDocumentListener saveButtonEnabler = new SaveButtonDocumentListener();
+        newUserFirstNameField.getDocument().addDocumentListener(saveButtonEnabler);
+        newUserLastNameField.getDocument().addDocumentListener(saveButtonEnabler);
+        newUserEmailField.getDocument().addDocumentListener(saveButtonEnabler);
+        newUserPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
+        newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
+
+        // Save button disabled until all fields are filled
+        newUserSaveButton.setEnabled(false);
     }
 
     void buildLeftPanel() {
@@ -231,5 +243,39 @@ public class athletesCard extends card {
         rightPanel.add(dataTable, constraints);
         rightPanel.repaint();
         rightPanel.revalidate();
+    }
+
+    /**
+     * Checks that all fields are filled before enabling newUserSaveButton.
+     */
+    private void checkFields() {
+        boolean email = !newUserEmailField.getText().trim().isEmpty();
+        boolean firstName = !newUserFirstNameField.getText().trim().isEmpty();
+        boolean lastName  = !newUserLastNameField.getText().trim().isEmpty();
+        boolean password  = (newUserPasswordField.getPassword().length != 0);
+        boolean confirmPassword = (newUserConfirmPasswordField.getPassword().length != 0);
+
+        if (email && firstName && lastName && password && confirmPassword) {
+            newUserSaveButton.setEnabled(true);
+        } else {
+            newUserSaveButton.setEnabled(false);
+        }
+    }
+
+    private class SaveButtonDocumentListener implements DocumentListener {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            checkFields();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            checkFields();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            checkFields();
+        }
     }
 }
