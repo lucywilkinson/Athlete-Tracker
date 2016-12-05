@@ -40,7 +40,15 @@ public abstract class BasicController {
     private class clickAthletesButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            AthletesController AthletesController = new AthletesController(_user);
+            try {
+                AthletesController AthletesController = new AthletesController(_user);
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

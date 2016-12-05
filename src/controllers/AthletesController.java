@@ -24,7 +24,7 @@ public class AthletesController extends BasicController {
     public AthletesController(User user) throws SQLException, IOException, ClassNotFoundException {
         super(user);
 
-        DefaultTableModel tableData = userModel.buildTableModel(userModel.returnUsersofType("Athletes"));
+        DefaultTableModel tableData = userModel.buildTableModel(userModel.returnUsersofType("athlete"));
 
         view = new athletesCard(actionListeners);
         view.populate(tableData);
