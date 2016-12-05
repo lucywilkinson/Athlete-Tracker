@@ -1,37 +1,52 @@
-package models;
+package controllers;
 
+import common.User;
+import models.ShipmentsModel;
+import views.shipmentsCard;
+
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
-public class ShipmentsModel extends Model {
-    public ShipmentsModel() throws SQLException, IOException, ClassNotFoundException {
-        super();
+
+/**
+ * Created by mattu on 11/29/16. Updated by lucywilkinson on 12/5/16.
+ */
+
+public class ShipmentsController extends BasicController {
+
+    ShipmentsModel shipmentsModel = new ShipmentsModel();
+    shipmentsCard view;
+    User _user;
+    HashMap actionListeners = new HashMap<String, ActionListener>();
+
+
+    public ShipmentsController(User user) throws SQLException, IOException, ClassNotFoundException{
+        super(user);
+
+        DefaultTableModel tableData = shipmentsModel.buildTableModel(shipmentsModel.getRawShipmentData());
+
+        view = new shipmentsCard(actionListeners);
+        view.populate(tableData);
+
+        masterView.addCard("My Profile", view);
     }
 
-    public ResultSet getRawShipmentData() throws SQLException {
-        String shipmentFields = "shipments.shipment_creator, " +
-                "shipments.shipment_worker, " +
-                "products.product_name, " +
-                "shipments.shipment_quantity, " +
-                "users.first_name, " +
-                "users.last_name, " +
-                "addresses.address, " +
-                "cities.city_name, " +
-                "cities.state_name, " +
-                "countries.country_name";
-
-        String query = "SELECT " + shipmentFields + " FROM shipments " +
-                "inner join addresses on shipments.shipment_address = addresses.address_id " +
-                "inner join cities on addresses.city_id = cities.city_id " +
-                "inner join countries on countries.country_id = addresses.country_id " +
-                "inner join users on shipments.shipment_reciever = users.user_id " +
-                "inner join products on products.product_id = shipments.shipment_product;";
-
-        PreparedStatement preparedStatement = conn.prepareStatement(query);
-        ResultSet res = preparedStatement.executeQuery();
-
-        return res;
+    private class fillTableAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                ResultSet rs = shipmentsModel.getRawShipmentData();
+                view.populate(shipmentsModel.buildTableModel(rs));
+            }
+            catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
+
 }
