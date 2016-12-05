@@ -1,5 +1,6 @@
 package models;
 
+<<<<<<< 79020f650da14f1b096c769755379a99993f824a
 import common.Product;
 
 import javax.swing.table.DefaultTableModel;
