@@ -34,6 +34,8 @@ public class athletesCard extends card {
     JFrame newUserFrame = new JFrame("Create New Athlete");
     Dimension newUserFrameDimensions = new Dimension(400, 400);
     JPanel newUserPanel = new JPanel(new GridBagLayout());
+    JLabel newUserUsernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
+    JTextField newUserUsernameField = new JTextField(20);
     JLabel newUserFirstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
     JTextField newUserFirstNameField = new JTextField(20);
     JLabel newUserLastNameLabel = new JLabel("Last Name:", SwingConstants.RIGHT);
@@ -160,6 +162,12 @@ public class athletesCard extends card {
         constraints.gridy = 0;
         constraints.gridx = 0;
         constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        newUserPanel.add(newUserUsernameLabel, constraints);
+
+        constraints.gridx = 1;
+        newUserPanel.add(newUserUsernameField, constraints);
+
         newUserPanel.add(newUserFirstNameLabel, constraints);
 
         constraints.gridx = 1;
