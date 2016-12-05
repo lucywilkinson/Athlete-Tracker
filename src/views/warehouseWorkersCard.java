@@ -164,7 +164,7 @@ public class warehouseWorkersCard extends card {
         rightPanel.add(editDataPanel, constraints);
     }
 
-    void populate(DefaultTableModel data) {
+    public void populate(DefaultTableModel data) {
         dataTable = new JTable(data);
     }
 

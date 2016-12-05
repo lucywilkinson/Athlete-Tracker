@@ -15,6 +15,7 @@ import java.util.Vector;
  */
 
 public class ShipmentsModel extends Model {
+
     public ShipmentsModel() throws SQLException, IOException, ClassNotFoundException {
         super();
     }
@@ -68,3 +69,4 @@ public class ShipmentsModel extends Model {
 
     }
 }
+
