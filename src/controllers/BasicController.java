@@ -62,7 +62,15 @@ public abstract class BasicController {
     private class clickWarehouseWorkersButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            WarehouseWorkersController WarehouseWorkersController = new WarehouseWorkersController(_user);
+            try {
+                WarehouseWorkersController WarehouseWorkersController = new WarehouseWorkersController(_user);
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
@@ -99,7 +107,15 @@ public abstract class BasicController {
     private class clickAdminsButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            AdminsController AdminsController = new AdminsController(_user);
+            try {
+                AdminsController AdminsController = new AdminsController(_user);
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 }
