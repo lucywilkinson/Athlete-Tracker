@@ -38,11 +38,11 @@ public class MyProfileController extends BasicController {
 
             User updatedUser = new User(id, firstName, lastName, _user.getUsername(), _user.getPassword(), email, accountType);
 
-
             try {
                 // Update user in DB
                 userModel.editUser(updatedUser);
-                myProfileCard.populate(updatedUser);
+                _user = updatedUser;
+                myProfileCard.populate(_user);
 
             } catch (SQLException e1) {
                 e1.printStackTrace();
