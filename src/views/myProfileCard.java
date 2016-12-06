@@ -17,19 +17,16 @@ public class myProfileCard extends card {
     JPanel rightPanel = new JPanel(new GridBagLayout());
     GridBagConstraints constraints = new GridBagConstraints();
 
-    public JLabel idLabel = new JLabel("ID");
+    JLabel idLabel = new JLabel("ID");
     public JTextField idField = new JTextField("", 5);
-    public JLabel firstNameLabel = new JLabel("First Name");
+    JLabel firstNameLabel = new JLabel("First Name");
     public JTextField firstNameField = new JTextField("", 10);
-    public JLabel lastNameLabel = new JLabel("Last Name");
+    JLabel lastNameLabel = new JLabel("Last Name");
     public JTextField lastNameField = new JTextField("", 10);
-    public JLabel emailLabel = new JLabel("Email");
+    JLabel emailLabel = new JLabel("Email");
     public JTextField emailField = new JTextField("", 10);
-    public JLabel accountTypeLabel = new JLabel("Account Type");
+    JLabel accountTypeLabel = new JLabel("Account Type");
     public JComboBox accountTypeField = new JComboBox();
-    public JLabel accountStatusLabel = new JLabel("Account Status");
-    public JCheckBox accountStatusField = new JCheckBox("Enabled", true);
-    public JButton viewMyShipmentsButton = new JButton("View My Shipments");
     public JButton editProfileButton = new JButton("Edit Profile");
     public JButton saveProfileButton = new JButton("Save");
 
@@ -65,7 +62,7 @@ public class myProfileCard extends card {
         this.leftPanel.add(this.titleLabel, constraints);
 
         // ID
-        constraints.gridy = 1;
+        constraints.gridy++;
         constraints.gridx = 0;
         constraints.gridwidth = 1;
         this.leftPanel.add(this.idLabel, constraints);
@@ -74,26 +71,26 @@ public class myProfileCard extends card {
         this.idField.setEnabled(false);
 
         // Name
-        constraints.gridy = 2;
+        constraints.gridy++;
         constraints.gridx = 0;
         this.leftPanel.add(this.firstNameLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.firstNameField, constraints);
-        constraints.gridy = 3;
+        constraints.gridy++;
         constraints.gridx = 0;
         this.leftPanel.add(this.lastNameLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.lastNameField, constraints);
 
         // Email
-        constraints.gridy = 4;
+        constraints.gridy++;
         constraints.gridx = 0;
         this.leftPanel.add(this.emailLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.emailField, constraints);
 
         // Account Type
-        constraints.gridy = 5;
+        constraints.gridy++;
         constraints.gridx = 0;
         this.leftPanel.add(this.accountTypeLabel, constraints);
         constraints.gridx = 1;
@@ -103,25 +100,21 @@ public class myProfileCard extends card {
         }
         this.accountTypeField.setEnabled(false);
 
-        // Account Status
-        constraints.gridy = 6;
-        constraints.gridx = 0;
-        this.leftPanel.add(this.accountStatusLabel, constraints);
-        constraints.gridx = 1;
-        this.leftPanel.add(this.accountStatusField, constraints);
-
         // Edit/Save Profile Buttons
         constraints.anchor = GridBagConstraints.NORTHWEST;
         constraints.fill= GridBagConstraints.BOTH;
         constraints.gridy = 0;
         constraints.gridx = 0;
-        this.rightPanel.add(this.viewMyShipmentsButton, constraints);
-        constraints.gridy = 1;
-        constraints.gridx = 0;
         this.rightPanel.add(this.editProfileButton, constraints);
         constraints.gridx = 1;
         this.rightPanel.add(this.saveProfileButton, constraints);
-        this.saveProfileButton.addActionListener(actionListeners.get("editProfileAction"));
+
+        // add action listeners
+        editProfileButton.addActionListener(actionListeners.get("editProfileAction"));
+        saveProfileButton.addActionListener(actionListeners.get("saveProfileAction"));
+
+        // editing disabled by default
+        makeEditable(false);
     }
 
     public void populate(User user) {
@@ -130,6 +123,17 @@ public class myProfileCard extends card {
         lastNameField.setText(user.getLastName());
         emailField.setText(user.getEmail());
         accountTypeField.setSelectedItem(user.getUserType());
-        accountStatusField.setEnabled(user.getStatus());
+    }
+
+    public void makeEditable(Boolean editable) {
+        if(editable) {
+            firstNameField.setEnabled(true);
+            lastNameField.setEnabled(true);
+            emailField.setEnabled(true);
+        } else {
+            firstNameField.setEnabled(false);
+            lastNameField.setEnabled(false);
+            emailField.setEnabled(false);
+        }
     }
 }
