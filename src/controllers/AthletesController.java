@@ -24,6 +24,7 @@ public class AthletesController extends BasicController {
         actionListeners.put("newUserAction", new newUserAction());
         actionListeners.put("saveNewUserAction", new saveNewUserAction());
         actionListeners.put("editAthleteAction", new editAthleteAction());
+        actionListeners.put("saveEditsAction", new saveEditsAction());
 
         view = new athletesCard(tableData, actionListeners);
         masterView.addCard("Athletes", view);
@@ -70,6 +71,48 @@ public class AthletesController extends BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.launchEditUser();
+            int row = view.dataTable.getSelectedRow();
+
+            String id        = String.valueOf(view.dataTable.getValueAt(row, 0));
+            String firstName = String.valueOf(view.dataTable.getValueAt(row, 1));
+            String lastName  = String.valueOf(view.dataTable.getValueAt(row, 2));
+            String username  = String.valueOf(view.dataTable.getValueAt(row, 3));
+            String password  = String.valueOf(view.dataTable.getValueAt(row, 4));
+            String email     = String.valueOf(view.dataTable.getValueAt(row, 5));
+
+            view.editUserIdField.setText(id);
+            view.editUserFirstNameField.setText(firstName);
+            view.editUserLastNameField.setText(lastName);
+            view.editUserUsernameField.setText(username);
+            view.editUserPasswordField.setText(password);
+            view.editUserEmailField.setText(email);
+        }
+    }
+
+    private class saveEditsAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int    id        = Integer.parseInt(view.editUserIdField.getText());
+            String firstName = view.editUserFirstNameField.getText();
+            String lastName  = view.editUserLastNameField.getText();
+            String username  = view.editUserUsernameField.getText();
+            String email     = view.editUserEmailField.getText();
+            String userType  = String.valueOf(view.editUserAccountTypeField.getSelectedItem());
+            String password  = String.valueOf(view.editUserPasswordField.getPassword());
+
+            System.out.println(lastName);
+            User updatedUser = new User(id, firstName, lastName, username, password, email, userType);
+
+            try {
+                // Update user in DB
+                userModel.editUser(updatedUser);
+                view.editUserFrame.dispatchEvent(new WindowEvent(view.editUserFrame, WindowEvent.WINDOW_CLOSING));
+                view.dataTable.setModel(userModel.buildTableModel(userType));
+
+
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 }

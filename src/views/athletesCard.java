@@ -56,7 +56,7 @@ public class athletesCard extends card {
     Dimension editUserFrameDimensions = new Dimension(400, 400);
     JPanel editUserPanel = new JPanel(new GridBagLayout());
     JLabel editUserIdLabel = new JLabel("ID:", SwingConstants.RIGHT);
-    JTextField editUserIdField = new JTextField(20);
+    public JTextField editUserIdField = new JTextField(20);
     JLabel editUserUsernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
     public JTextField editUserUsernameField = new JTextField(20);
     JLabel editUserFirstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
@@ -100,6 +100,7 @@ public class athletesCard extends card {
         // add action listeners
         newAthleteButton.addActionListener(actionListeners.get("newUserAction"));
         newUserSaveButton.addActionListener(actionListeners.get("saveNewUserAction"));
+        editUserSaveButton.addActionListener(actionListeners.get("saveEditsAction"));
 
         editButton.setEnabled(false);
         editButton.addActionListener(actionListeners.get("editAthleteAction"));
@@ -216,6 +217,7 @@ public class athletesCard extends card {
 
         constraints.gridx++;
         editUserPanel.add(editUserIdField, constraints);
+        editUserIdField.setEnabled(false);
 
         constraints.gridy++;
         constraints.gridx = 0;
@@ -223,6 +225,7 @@ public class athletesCard extends card {
 
         constraints.gridx++;
         editUserPanel.add(editUserUsernameField, constraints);
+        editUserUsernameField.setEnabled(false);
 
         constraints.gridy++;
         constraints.gridx = 0;
@@ -251,6 +254,7 @@ public class athletesCard extends card {
 
         constraints.gridx = 1;
         editUserPanel.add(editUserPasswordField, constraints);
+        editUserPasswordField.setEnabled(false);
 
         constraints.gridy++;
         constraints.gridx = 0;

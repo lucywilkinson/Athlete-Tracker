@@ -29,17 +29,22 @@ public class User {
     }
 
     /**
-     * Existing user object. Used to pass user data through the application. Username and password not needed after login.
-     * @param userId: UUID
-     * @param firstName: users first name
-     * @param lastName: users last name
-     * @param userType: Athelete, Admin, Worker
+     * Existing user object
+     * @param id
+     * @param firstName
+     * @param lastName
+     * @param username
+     * @param password
+     * @param email
+     * @param userType
      */
-    public User(int userId, String firstName, String lastName, String userType, String email) {
-        this.userId    = userId;
+    public User(int id, String firstName, String lastName, String username, String password, String email, String userType) {
+        this.userId    = id;
         this.firstName = firstName;
         this.lastName  = lastName;
+        this.username  = username;
         this.userType  = userType;
+        this.password  = password;
         this.email     = email;
     }
 

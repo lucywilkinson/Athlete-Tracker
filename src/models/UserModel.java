@@ -39,20 +39,20 @@ public class UserModel extends Model {
     /**
      * Updates all user fields in DB. Map must contain values for all user fields. To keep previous values in DB, set
      * the user values to the current value in the edits map.
-     * @param edits: Map of user field name to user field value.
+     * @param user: User object with all changes made
      * @throws SQLException
      */
-    public void editUser(HashMap<String, String> edits) throws SQLException {
+    public void editUser(User user) throws SQLException {
 
         String query = "UPDATE users SET first_name=?, last_name=?, email=?, active=?, user_type=? WHERE user_id = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
 
-        preparedStatement.setString(1, edits.get("firstName"));
-        preparedStatement.setString(2, edits.get("lastName"));
-        preparedStatement.setString(3, edits.get("email"));
-        preparedStatement.setBoolean(4, Boolean.parseBoolean(edits.get("accountEnabled")));
-        preparedStatement.setString(5, edits.get("accountType"));
-        preparedStatement.setString(6, edits.get("id"));
+        preparedStatement.setString(1, user.getFirstName());
+        preparedStatement.setString(2, user.getLastName());
+        preparedStatement.setString(3, user.getEmail());
+        preparedStatement.setBoolean(4, user.getStatus());
+        preparedStatement.setString(5, user.getUserType());
+        preparedStatement.setString(6, String.valueOf(user.getUserId()));
 
         preparedStatement.executeUpdate();
     }
@@ -84,10 +84,12 @@ public class UserModel extends Model {
             int id           = res.getInt(1);
             String firstName = res.getString(2);
             String lastName  = res.getString(3);
+            String username  = res.getString(4);
+            String password  = res.getString(5);
             String email     = res.getString(6);
             String userType  = res.getString(8);
 
-            return new User(id, firstName, lastName, userType, email);
+            return new User(id, firstName, lastName, username, password, userType, email);
         }
 
         throw new SQLException();

@@ -30,27 +30,17 @@ public class MyProfileController extends BasicController {
     private class editProfileAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String id = myProfileCard.idField.getText();
+            int id = Integer.parseInt(myProfileCard.idField.getText());
             String firstName = myProfileCard.firstNameField.getText();
             String lastName = myProfileCard.lastNameField.getText();
             String email = myProfileCard.emailField.getText();
             String accountType = myProfileCard.accountTypeField.getSelectedItem().toString();
-            String accountEnabled = String.valueOf(!myProfileCard.accountStatusField.isSelected());
 
-            HashMap<String, String> edits = new HashMap<String, String>();
-            edits.put("id", id);
-            edits.put("firstName", firstName);
-            edits.put("lastName", lastName);
-            edits.put("email", email);
-            edits.put("accountType", accountType);
-            edits.put("accountEnabled", accountEnabled);
+            User updatedUser = new User(id, firstName, lastName, _user.getUsername(), _user.getPassword(), accountType, _user.getEmail());
 
             try {
                 // Update user in DB
-                userModel.editUser(edits);
-
-                // Retrieve updated user from DB
-                User updatedUser = userModel.getUserData(Integer.parseInt(id));
+                userModel.editUser(updatedUser);
 
             } catch (SQLException e1) {
                 e1.printStackTrace();
@@ -62,8 +52,5 @@ public class MyProfileController extends BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
         }
-    }
-
-    private void insertData(User user) {
     }
 }
