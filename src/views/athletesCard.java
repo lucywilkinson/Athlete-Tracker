@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class athletesCard extends card {
-
     // left panel elements
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
@@ -52,6 +51,26 @@ public class athletesCard extends card {
     public JComboBox newUserAccountTypeField = new JComboBox();
     JButton newUserSaveButton = new JButton("Save");
 
+    // edit user elements
+    public JFrame editUserFrame = new JFrame("Edit Athlete");
+    Dimension editUserFrameDimensions = new Dimension(400, 400);
+    JPanel editUserPanel = new JPanel(new GridBagLayout());
+    JLabel editUserIdLabel = new JLabel("ID:", SwingConstants.RIGHT);
+    JTextField editUserIdField = new JTextField(20);
+    JLabel editUserUsernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
+    public JTextField editUserUsernameField = new JTextField(20);
+    JLabel editUserFirstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
+    public JTextField editUserFirstNameField = new JTextField(20);
+    JLabel editUserLastNameLabel = new JLabel("Last Name:", SwingConstants.RIGHT);
+    public JTextField editUserLastNameField = new JTextField(20);
+    JLabel editUserEmailLabel = new JLabel("Email:", SwingConstants.RIGHT);
+    public JTextField editUserEmailField = new JTextField(20);
+    JLabel editUserPasswordLabel = new JLabel("Password:", SwingConstants.RIGHT);
+    public JPasswordField editUserPasswordField = new JPasswordField();
+    JLabel editUserAccountTypeLabel = new JLabel("Account Type:", SwingConstants.RIGHT);
+    public JComboBox editUserAccountTypeField = new JComboBox();
+    JButton editUserSaveButton = new JButton("Save");
+
     GridBagConstraints constraints = new GridBagConstraints();
 
     public athletesCard(DefaultTableModel tableData, HashMap<String, ActionListener> actionListeners) {
@@ -82,6 +101,9 @@ public class athletesCard extends card {
         newAthleteButton.addActionListener(actionListeners.get("newUserAction"));
         newUserSaveButton.addActionListener(actionListeners.get("saveNewUserAction"));
 
+        editButton.setEnabled(false);
+        editButton.addActionListener(actionListeners.get("editAthleteAction"));
+
         // Save button disabled until all fields are filled
         newUserSaveButton.setEnabled(false);
 
@@ -93,20 +115,14 @@ public class athletesCard extends card {
         newUserPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
         newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
 
-        /**dataTable = new JTable(tableData);
-        scrollPane = new JScrollPane(dataTable);
-        rightPanel.remove(scrollPane);
-        constraints.gridy = 2;
-        constraints.gridx = 0;
-        constraints.fill = GridBagConstraints.BOTH;
-        rightPanel.add(scrollPane, constraints);**/
+        dataTable = new JTable(tableData);
+        rightPanel.remove(dataTable);
+        rightPanel.add(dataTable, constraints);
         rightPanel.repaint();
         rightPanel.revalidate();
 
         rowSelectionListener selectionListener = new rowSelectionListener();
         dataTable.getSelectionModel().addListSelectionListener(selectionListener);
-        editButton.setEnabled(false);
-        editButton.addActionListener(actionListeners.get("editAthleteAction"));
     }
 
     void buildLeftPanel() {
@@ -178,6 +194,85 @@ public class athletesCard extends card {
         rightPanel.add(scrollPane, constraints);
     }
 
+    public void launchEditUser() {
+        editUserFrame.setPreferredSize(this.editUserFrameDimensions);
+        this.buildEditUserFrame();
+        editUserFrame.pack();
+        editUserFrame.setVisible(true);
+    }
+
+    void buildEditUserFrame() {
+        constraints.weightx = 0.5;
+        constraints.insets = new Insets(5,5,5,5);
+        constraints.gridy = 0;
+        constraints.gridx = 0;
+        constraints.gridwidth = GridBagConstraints.RELATIVE;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        editUserPanel.add(editUserIdLabel, constraints);
+
+        constraints.gridx++;
+        editUserPanel.add(editUserIdField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserUsernameLabel, constraints);
+
+        constraints.gridx++;
+        editUserPanel.add(editUserUsernameField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserFirstNameLabel, constraints);
+
+        constraints.gridx = 1;
+        editUserPanel.add(editUserFirstNameField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserLastNameLabel, constraints);
+
+        constraints.gridx = 1;
+        editUserPanel.add(editUserLastNameField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserEmailLabel, constraints);
+
+        constraints.gridx = 1;
+        editUserPanel.add(editUserEmailField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserPasswordLabel, constraints);
+
+        constraints.gridx = 1;
+        editUserPanel.add(editUserPasswordField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserAccountTypeLabel, constraints);
+
+        constraints.gridx = 1;
+        editUserPanel.add(editUserAccountTypeField, constraints);
+        for(int i = 0; i < accountTypes.length; i++) {
+            editUserAccountTypeField.addItem(accountTypes[i]);
+        }
+        editUserAccountTypeField.setSelectedItem("athlete");
+        editUserAccountTypeField.setEnabled(false);
+
+        constraints.gridy++;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 1;
+        editUserPanel.add(editUserSaveButton, constraints);
+
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(10,10,10,10);
+        editUserFrame.add(this.editUserPanel);
+    }
+
     public void launchNewUser() {
         newUserFrame.setPreferredSize(this.newUserFrameDimensions);
         this.buildNewUserFrame();
@@ -190,6 +285,7 @@ public class athletesCard extends card {
         constraints.insets = new Insets(5,5,5,5);
         constraints.gridy = 0;
         constraints.gridx = 0;
+        constraints.gridwidth = GridBagConstraints.RELATIVE;
         constraints.fill = GridBagConstraints.HORIZONTAL;
 
         newUserPanel.add(newUserUsernameLabel, constraints);

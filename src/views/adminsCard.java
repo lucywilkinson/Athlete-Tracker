@@ -6,25 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-/**
- * Created by alex on 11/29/16.
- */
 public class adminsCard extends card {
-    // dummy data
-    String[] columnNames = {"First Name",
-            "Last Name",
-            "Sport",
-            "# of Years",
-            "Vegetarian"};
-
-    Object[][] data = {
-            {"Kathy", "Smith", "Snowboarding", new Integer(5), new Boolean(false)},
-            {"John", "Doe", "Rowing", new Integer(3), new Boolean(true)},
-            {"Sue", "Black", "Knitting", new Integer(2), new Boolean(false)},
-            {"Jane", "White", "Speed reading", new Integer(20), new Boolean(true)},
-            {"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}
-    };
-
     // left panel elements
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
@@ -42,7 +24,7 @@ public class adminsCard extends card {
     JLabel titleLabel = new JLabel("Admins");
     JButton newAdminButton = new JButton("New Admin");
     JButton saveChangesButton = new JButton("Save Changes");
-    JTable dataTable = new JTable(data, columnNames);
+    JTable dataTable = new JTable();
     JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new user elements

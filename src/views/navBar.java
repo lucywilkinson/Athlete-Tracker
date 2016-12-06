@@ -1,6 +1,7 @@
 package views;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -20,27 +21,31 @@ public class navBar extends JPanel {
     public JButton shipmentsButton = new JButton("Shipments");
     public JButton productsButton = new JButton("Products");
     public JButton myProfileButton  = new JButton("My Profile");
+    public JButton logoutButton  = new JButton("Logout");
 
     public navBar(HashMap<String, ActionListener> actionListeners) {
         this.setLayout(new GridBagLayout());
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(10, 0, 10, 0);
         constraints.gridy = 0;
         constraints.weighty = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
 
         constraints.gridx = 0;
         this.add(this.adminsButton, constraints);
-        constraints.gridx = 1;
+        constraints.gridx++;
         this.add(this.athletesButton, constraints);
-        constraints.gridx = 2;
+        constraints.gridx++;
         this.add(this.warehouseWorkersButton, constraints);
-        constraints.gridx = 3;
+        constraints.gridx++;
         this.add(this.shipmentsButton, constraints);
-        constraints.gridx = 4;
+        constraints.gridx++;
         this.add(this.productsButton, constraints);
-        constraints.gridx = 5;
+        constraints.gridx++;
         this.add(this.myProfileButton, constraints);
+        constraints.gridx++;
+        this.add(this.logoutButton, constraints);
 
         adminsButton.addActionListener(actionListeners.get("navigateToAdmins"));
         athletesButton.addActionListener(actionListeners.get("navigateToAthletes"));
@@ -48,5 +53,6 @@ public class navBar extends JPanel {
         shipmentsButton.addActionListener(actionListeners.get("navigateToShipments"));
         productsButton.addActionListener(actionListeners.get("navigateToProducts"));
         myProfileButton.addActionListener(actionListeners.get("navigateToMyProfile"));
+        logoutButton.addActionListener(actionListeners.get("logout"));
     }
 }
