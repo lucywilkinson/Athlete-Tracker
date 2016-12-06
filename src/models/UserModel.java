@@ -130,6 +130,51 @@ public class UserModel extends Model {
         return res;
     }
 
+    public DefaultTableModel filterUsers(String userType, boolean active, boolean inactive) throws SQLException {
+
+        String query;
+        if (active && inactive) {
+            query = "SELECT user_id, first_name, last_name, username, email, active, user_type FROM users WHERE user_type = ?";
+        } else if (active) {
+            query = "SELECT user_id, first_name, last_name, username, email, active, user_type FROM users WHERE user_type= ? AND active = 1";
+        } else {
+            query = "SELECT user_id, first_name, last_name, username, email, active, user_type FROM users WHERE user_type= ? AND active = 0";
+        }
+
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setString(1, userType);
+
+        ResultSet res = preparedStatement.executeQuery(query);
+
+        ResultSetMetaData metaData = res.getMetaData();
+
+        //fill column names
+        Vector<String> columnNames = new Vector<String>();
+        int columnCount = metaData.getColumnCount();
+        for(int column = 1; column<=columnCount; column++) {
+            columnNames.add(metaData.getColumnName(column));
+        }
+
+        //fill table data
+        Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+        while(res.next()) {
+            Vector<Object> vector = new Vector<Object>();
+            for(int columnIndex = 1; columnIndex<=columnCount; columnIndex++) {
+                vector.add(res.getObject(columnIndex));
+            }
+            data.add(vector);
+        }
+
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        return tableModel;
+    }
+
     /**
      * Builds table from ResultSet of users from database. Code adapted from http://stackoverflow.com/questions/10620448/most-simple-code-to-populate-jtable-from-resultset
      * @param userType type of user admin/worker/athlete

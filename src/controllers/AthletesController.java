@@ -74,7 +74,7 @@ public class AthletesController extends BasicController {
             String firstName = String.valueOf(view.dataTable.getValueAt(row, 1));
             String lastName  = String.valueOf(view.dataTable.getValueAt(row, 2));
             String username  = String.valueOf(view.dataTable.getValueAt(row, 3));
-            String email     = String.valueOf(view.dataTable.getValueAt(row, 5));
+            String email     = String.valueOf(view.dataTable.getValueAt(row, 4));
 
             view.editUserIdField.setText(id);
             view.editUserFirstNameField.setText(firstName);
