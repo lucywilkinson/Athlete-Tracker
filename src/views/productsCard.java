@@ -43,6 +43,7 @@ public class productsCard extends card {
     JButton newProductButton = new JButton("New Product");
     JButton saveChangesButton = new JButton("Save Changes");
     JTable dataTable = new JTable(data, columnNames);
+    JScrollPane scrollPane = new JScrollPane(dataTable);
     JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new product elements
@@ -143,7 +144,8 @@ public class productsCard extends card {
         rightPanel.add(headerPanel, constraints);
 
         constraints.gridy++;
-        rightPanel.add(dataTable, constraints);
+        //rightPanel.add(dataTable, constraints);
+        rightPanel.add(scrollPane, constraints);
 
         constraints.gridy++;
         constraints.fill = GridBagConstraints.NONE;
