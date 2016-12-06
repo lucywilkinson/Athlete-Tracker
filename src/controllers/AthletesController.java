@@ -3,18 +3,16 @@ package controllers;
 import common.User;
 import models.UserModel;
 import views.athletesCard;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 public class AthletesController extends BasicController {
+
     UserModel userModel = new UserModel();
     athletesCard view;
 
@@ -28,11 +26,10 @@ public class AthletesController extends BasicController {
         actionListeners.put("editAthleteAction", new editAthleteAction());
 
         view = new athletesCard(tableData, actionListeners);
-        masterView.addCard("My Profile", view);
+        masterView.addCard("Athletes", view);
 
         view.dataTable.setModel(userModel.buildTableModel("athlete"));
     }
-
 
     private class newUserAction implements ActionListener {
         @Override
