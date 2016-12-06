@@ -14,6 +14,11 @@ public class ShipmentsModel extends Model {
         super();
     }
 
+    /*
+    public DefaultTableModel filterShipments(boolean active, boolean inactive) {
+    }
+    */
+
     private ResultSet getRawShipmentData() throws SQLException {
         String shipmentFields = "shipments.shipment_creator, " +
                 "shipments.shipment_worker, " +

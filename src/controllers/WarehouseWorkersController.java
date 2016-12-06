@@ -24,13 +24,14 @@ public class WarehouseWorkersController extends BasicController {
         actionListeners.put("newUserAction", new newUserAction());
         actionListeners.put("saveNewUserAction", new saveNewUserAction());
         actionListeners.put("editWorkerAction", new editWorkerAction());
-        actionListeners.put("saveEditWorkerAction", new saveEditsAction());
+        actionListeners.put("saveEditsAction", new saveEditsAction());
 
         view = new warehouseWorkersCard(actionListeners);
         masterView.addCard("Workers", view);
 
         view.dataTable.setModel(userModel.buildTableModel("worker"));
     }
+
     private class newUserAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -76,14 +77,12 @@ public class WarehouseWorkersController extends BasicController {
             String firstName = String.valueOf(view.dataTable.getValueAt(row, 1));
             String lastName  = String.valueOf(view.dataTable.getValueAt(row, 2));
             String username  = String.valueOf(view.dataTable.getValueAt(row, 3));
-            String password  = String.valueOf(view.dataTable.getValueAt(row, 4));
-            String email     = String.valueOf(view.dataTable.getValueAt(row, 5));
+            String email     = String.valueOf(view.dataTable.getValueAt(row, 4));
 
             view.editUserIdField.setText(id);
             view.editUserFirstNameField.setText(firstName);
             view.editUserLastNameField.setText(lastName);
             view.editUserUsernameField.setText(username);
-            view.editUserPasswordField.setText(password);
             view.editUserEmailField.setText(email);
         }
     }
