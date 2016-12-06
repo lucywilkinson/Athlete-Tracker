@@ -16,8 +16,8 @@ public class shipmentsCard extends card {
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
     JLabel statusFilterHeader = new JLabel("Filter By Status");
-    JCheckBox activeCheckbox = new JCheckBox("Active", true);
-    JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
+    JCheckBox activeCheckbox = new JCheckBox("Pending", true);
+    JCheckBox inactiveCheckbox = new JCheckBox("Fulfilled", true);
 
     // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
@@ -171,6 +171,7 @@ public class shipmentsCard extends card {
         constraints.insets = new Insets(5,5,5,5);
         constraints.gridy = 0;
         constraints.gridx = 0;
+        constraints.gridwidth = GridBagConstraints.RELATIVE;
         constraints.fill = GridBagConstraints.HORIZONTAL;
 
         newShipmentPanel.add(newShipmentWorkerLabel, constraints);
