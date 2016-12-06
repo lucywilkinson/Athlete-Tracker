@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * Created by alex on 11/29/16.
@@ -25,9 +27,10 @@ public class shipmentsCard extends card {
     JPanel headerPanel = new JPanel(new GridBagLayout());
     JLabel titleLabel = new JLabel("Shipments");
     JButton newShipmentButton = new JButton("New Shipment");
-    JButton editShipmentButton = new JButton("Edit");
+    JButton editButton = new JButton("Edit");
     public JTable dataTable = new JTable();
     JScrollPane scrollPane = new JScrollPane(dataTable);
+    JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new shipment elements
     JFrame newShipmentFrame = new JFrame("Create New Shipment");
@@ -44,6 +47,25 @@ public class shipmentsCard extends card {
     JLabel newShipmentQuantityLabel = new JLabel("Quantity:", SwingConstants.RIGHT);
     JTextField newShipmentQuantityField = new JTextField("0", 20);
     JButton newShipmentSaveButton = new JButton("Save");
+
+    //edit shipment elements
+    public JFrame editShipmentFrame = new JFrame("Edit Shipment");
+    Dimension editShipmentFrameDimensions = new Dimension(400,400);
+    JPanel editShipmentPanel = new JPanel(new GridBagLayout());
+    JLabel editShipmentIdLabel = new JLabel("ID:", SwingConstants.RIGHT);
+    public JTextField editShipmentIdField = new JTextField(20);
+    JLabel editShipmentWorkerLabel = new JLabel("Worker:", SwingConstants.RIGHT);
+    public JComboBox editShipmentWorkerField = new JComboBox();
+    JLabel editShipmentAthleteLabel = new JLabel("Athlete:", SwingConstants.RIGHT);
+    public JComboBox editShipmentAthleteField = new JComboBox();
+    JLabel editShipmentProductLabel = new JLabel("Product:", SwingConstants.RIGHT);
+    JLabel editShipmentProductMaxQuantityLabel = new JLabel("Quantity in stock:", SwingConstants.RIGHT);
+    public JTextField editShipmentProductMaxQuantityField = new JTextField("0", 20);
+    public JComboBox editShipmentProductField = new JComboBox();
+    JLabel editShipmentQuantityLabel = new JLabel("Quantity:", SwingConstants.RIGHT);
+    public JTextField editShipmentQuantityField = new JTextField("0", 20);
+    JButton editShipmentSaveButton = new JButton("Save");
+
 
     GridBagConstraints constraints = new GridBagConstraints();
 
@@ -74,10 +96,18 @@ public class shipmentsCard extends card {
         // add action listeners
         newShipmentButton.addActionListener(actionListeners.get("addShipment"));
         filterButton.addActionListener(actionListeners.get("filterShipmentsAction"));
+        editButton.addActionListener(actionListeners.get("editShipmentAction"));
+        editShipmentSaveButton.addActionListener(actionListeners.get("saveEditShipmentAction"));
+
+        editButton.setEnabled(false);
+        editButton.addActionListener(actionListeners.get("editShipmentAction"));
 
         // build table
         rightPanel.repaint();
         rightPanel.revalidate();
+
+        rowSelectionListener selectionListener = new rowSelectionListener();
+        dataTable.getSelectionModel().addListSelectionListener(selectionListener);
     }
 
     void buildLeftPanel() {
@@ -114,17 +144,23 @@ public class shipmentsCard extends card {
         constraints.gridx = 0;
         constraints.gridy = 0;
 
-        constraints.weightx = 0.6;
+        constraints.weightx = 0.8;
         headerPanel.add(titleLabel, constraints);
 
         constraints.gridx++;
         constraints.weightx = 0.2;
+        constraints.anchor = GridBagConstraints.NORTH;
         headerPanel.add(newShipmentButton, constraints);
 
         constraints.gridx++;
         constraints.weightx = 0.2;
+        headerPanel.add(editButton, constraints);
+
+        /*constraints.gridx = 0;
+        constraints.gridx++;
+        constraints.weightx = 0.2;
         editShipmentButton.setEnabled(false);
-        headerPanel.add(editShipmentButton, constraints);
+        headerPanel.add(editShipmentButton, constraints);*/
 
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         constraints.weighty = 0;
@@ -137,6 +173,10 @@ public class shipmentsCard extends card {
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weighty = 1;
         rightPanel.add(scrollPane, constraints);
+
+        constraints.gridy++;
+        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        rightPanel.add(editDataPanel, constraints);
     }
 
     public void populateWorkers(ArrayList data) {
@@ -155,6 +195,75 @@ public class shipmentsCard extends card {
         for(int i = 0; i < data.size(); i++) {
             newShipmentProductField.addItem(data.get(i));
         }
+    }
+
+    public void launchEditShipment() {
+        editShipmentFrame.setPreferredSize(this.editShipmentFrameDimensions);
+        this.buildEditShipmentFrame();
+        editShipmentFrame.pack();
+        editShipmentFrame.setVisible(true);
+    }
+
+    public void buildEditShipmentFrame() {
+        constraints.weightx = 0.5;
+        constraints.insets = new Insets(5,5,5,5);
+        constraints.gridy = 0;
+        constraints.gridx = 0;
+        constraints.gridwidth = GridBagConstraints.RELATIVE;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        editShipmentPanel.add(editShipmentIdLabel, constraints);
+
+        constraints.gridx++;
+        editShipmentPanel.add(editShipmentIdField, constraints);
+        editShipmentIdField.setEnabled(false);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editShipmentPanel.add(editShipmentWorkerLabel, constraints);
+
+        constraints.gridx++;
+        editShipmentPanel.add(editShipmentWorkerField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editShipmentPanel.add(editShipmentAthleteLabel, constraints);
+
+        constraints.gridx++;
+        editShipmentPanel.add(editShipmentAthleteField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editShipmentPanel.add(editShipmentProductLabel, constraints);
+
+        constraints.gridx++;
+        editShipmentPanel.add(editShipmentProductField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editShipmentPanel.add(editShipmentProductMaxQuantityLabel, constraints);
+
+        constraints.gridx = 1;
+        editShipmentProductMaxQuantityField.setEnabled(false);
+        editShipmentPanel.add(editShipmentProductMaxQuantityField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editShipmentPanel.add(editShipmentQuantityLabel, constraints);
+
+        constraints.gridx = 1;
+        editShipmentPanel.add(editShipmentQuantityField, constraints);
+
+        constraints.gridy++;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 1;
+        editShipmentPanel.add(editShipmentSaveButton, constraints);
+
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(10,10,10,10);
+        editShipmentFrame.add(this.editShipmentPanel);
     }
 
     public void launchNewShipment(HashMap itemListeners) {
@@ -219,5 +328,17 @@ public class shipmentsCard extends card {
         constraints.gridy = 0;
         constraints.insets = new Insets(10,10,10,10);
         newShipmentFrame.add(this.newShipmentPanel);
+    }
+
+    private class rowSelectionListener implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if (dataTable.getSelectedRow() < 0) {
+                editButton.setEnabled(false);
+            }
+            else {
+                editButton.setEnabled(true);
+            }
+        }
     }
 }
