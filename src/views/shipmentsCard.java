@@ -45,6 +45,7 @@ public class shipmentsCard extends card {
     JButton newShipmentButton = new JButton("New Shipment");
     JButton saveChangesButton = new JButton("Save Changes");
     JTable dataTable = new JTable(data, columnNames);
+    JScrollPane scrollPane = new JScrollPane(dataTable);
     JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new shipment elements
@@ -149,7 +150,8 @@ public class shipmentsCard extends card {
         rightPanel.add(headerPanel, constraints);
 
         constraints.gridy++;
-        rightPanel.add(dataTable, constraints);
+        //rightPanel.add(dataTable, constraints);
+        rightPanel.add(scrollPane, constraints);
 
         constraints.gridy++;
         constraints.fill = GridBagConstraints.NONE;
