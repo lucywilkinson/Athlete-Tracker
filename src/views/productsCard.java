@@ -56,6 +56,8 @@ public class productsCard extends card {
     public JTextField editProductValueField = new JTextField("0.00", 20);
     JLabel editProductQuantityLabel = new JLabel("Quantity:", SwingConstants.RIGHT);
     public JTextField editProductQuantityField = new JTextField ("0", 20);
+    JLabel editProductStatusLabel = new JLabel("Status", SwingConstants.RIGHT);
+    public JCheckBox editProductStatusField = new JCheckBox("Active", true);
     JButton editProductSaveButton = new JButton("Save");
 
     GridBagConstraints constraints = new GridBagConstraints();
@@ -247,6 +249,13 @@ public class productsCard extends card {
 
         constraints.gridx = 1;
         editProductPanel.add(editProductQuantityField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editProductPanel.add(editProductStatusLabel, constraints);
+
+        constraints.gridx = 1;
+        editProductPanel.add(editProductStatusField, constraints);
 
         constraints.gridy++;
         constraints.fill = GridBagConstraints.HORIZONTAL;
