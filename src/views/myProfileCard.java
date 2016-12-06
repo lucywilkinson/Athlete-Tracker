@@ -71,6 +71,7 @@ public class myProfileCard extends card {
         this.leftPanel.add(this.idLabel, constraints);
         constraints.gridx = 1;
         this.leftPanel.add(this.idField, constraints);
+        this.idField.setEnabled(false);
 
         // Name
         constraints.gridy = 2;
@@ -100,6 +101,7 @@ public class myProfileCard extends card {
         for(int i = 0; i < accountTypes.length; i++) {
             this.accountTypeField.addItem(accountTypes[i]);
         }
+        this.accountTypeField.setEnabled(false);
 
         // Account Status
         constraints.gridy = 6;
