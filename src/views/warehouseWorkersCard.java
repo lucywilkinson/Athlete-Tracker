@@ -65,8 +65,6 @@ public class warehouseWorkersCard extends card {
     public JTextField editUserLastNameField = new JTextField(20);
     JLabel editUserEmailLabel = new JLabel("Email:", SwingConstants.RIGHT);
     public JTextField editUserEmailField = new JTextField(20);
-    JLabel editUserPasswordLabel = new JLabel("Password:", SwingConstants.RIGHT);
-    public JPasswordField editUserPasswordField = new JPasswordField();
     JLabel editUserAccountTypeLabel = new JLabel("Account Type:", SwingConstants.RIGHT);
     public JComboBox editUserAccountTypeField = new JComboBox();
     JButton editUserSaveButton = new JButton("Save");
