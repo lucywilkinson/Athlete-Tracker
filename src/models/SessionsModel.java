@@ -7,10 +7,6 @@ import java.sql.PreparedStatement;
 
 import common.User;
 
-/**
- * Created by mattu on 11/14/16.
- */
-
 public class SessionsModel extends Model {
 
     public SessionsModel() throws SQLException, ClassNotFoundException, IOException {
@@ -41,9 +37,10 @@ public class SessionsModel extends Model {
             String username  = res.getString(4);
             String password  = res.getString(5);
             String email     = res.getString(6);
+            Boolean active   = res.getBoolean(7);
             String userType  = res.getString(8);
 
-            return new User(userId, firstName, lastName, username, password, email, userType);
+            return new User(userId, firstName, lastName, username, password, email, userType, active);
         }
 
         /* Invalid username || password */

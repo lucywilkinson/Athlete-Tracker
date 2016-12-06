@@ -65,37 +65,15 @@ public class ProductModel extends Model {
         }
     }
 
-    /**
-     * Inserts a new product into the DB.
-     * @param product: Product object to insert.
-     */
-    public void addProduct(Product product) throws SQLException {
-        String query = "INSERT INTO products (product_name, product_cost, product_quantity) VALUES (?, ?, ?)";
+    private ResultSet getProductsResultSet() throws SQLException {
+        String query = "SELECT * FROM products";
 
         PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setString(1, product.getName());
-        preparedStatement.setString(2, valueOf(product.getValue()));
-        preparedStatement.setString(3, valueOf(product.getQuantity()));
-        preparedStatement.executeUpdate();
+        return preparedStatement.executeQuery();
     }
 
-    private ResultSet getRawProductsData() throws SQLException {
-        String productFields = "products.product_id, " +
-                "products.product_name, " +
-                "products.product_cost, " +
-                "products.product_quantity, " +
-                "products.product_active";
-
-        String query = "SELECT " + productFields + " FROM products ";
-
-        PreparedStatement preparedStatement = conn.prepareStatement(query);
-        ResultSet res = preparedStatement.executeQuery();
-
-        return res;
-    }
-
-    public DefaultTableModel buildTableModel() throws SQLException {
-        ResultSet res = getRawProductsData();
+    public DefaultTableModel buildProductsTable() throws SQLException {
+        ResultSet res = getProductsResultSet();
         ResultSetMetaData metaData = res.getMetaData();
 
         //fill column names
@@ -123,5 +101,19 @@ public class ProductModel extends Model {
         };
 
         return tableModel;
+    }
+
+    /**
+     * Inserts a new product into the DB.
+     * @param product: Product object to insert.
+     */
+    public void addProduct(Product product) throws SQLException {
+        String query = "INSERT INTO products (product_name, product_cost, product_quantity) VALUES (?, ?, ?)";
+
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setString(1, product.getName());
+        preparedStatement.setString(2, valueOf(product.getValue()));
+        preparedStatement.setString(3, valueOf(product.getQuantity()));
+        preparedStatement.executeUpdate();
     }
 }

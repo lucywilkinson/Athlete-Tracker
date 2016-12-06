@@ -35,7 +35,7 @@ public class MyProfileController extends BasicController {
             String email = view.emailField.getText();
             String accountType = view.accountTypeField.getSelectedItem().toString();
 
-            User updatedUser = new User(id, firstName, lastName, _user.getUsername(), _user.getPassword(), email, accountType);
+            User updatedUser = new User(id, firstName, lastName, _user.getUsername(), _user.getPassword(), email, accountType, _user.getStatus());
 
             try {
                 // Update user in DB

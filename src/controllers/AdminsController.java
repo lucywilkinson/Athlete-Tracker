@@ -110,11 +110,12 @@ public class AdminsController extends BasicController {
             String username  = view.editUserUsernameField.getText();
             String email     = view.editUserEmailField.getText();
             String userType  = String.valueOf(view.editUserAccountTypeField.getSelectedItem());
+            Boolean active   = view.editUserStatusField.isSelected();
 
             // Placeholder
             String password  = "";
 
-            User updatedUser = new User(id, firstName, lastName, username, password, email, userType);
+            User updatedUser = new User(id, firstName, lastName, username, password, email, userType, active);
 
             try {
                 // Update user in DB

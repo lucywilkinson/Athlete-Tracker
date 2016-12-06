@@ -33,7 +33,7 @@ public class SessionsController extends BasicController {
             try {
                 // Use session model to validate login credentials
                 _user = sessionsModel.validateLogin(username, password);
-                
+
                 if(_user != null) {
                     // launch myProfile
                     MyProfileController MyProfileController = new MyProfileController();

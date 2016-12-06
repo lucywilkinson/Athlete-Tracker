@@ -13,9 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by mattu on 11/29/16.
- */
 public class ProductsController extends BasicController {
     ProductModel productModel;
     productsCard view;
@@ -29,12 +26,10 @@ public class ProductsController extends BasicController {
         actionListeners.put("editProducts",   new editProduct());
         actionListeners.put("disableProduct", new disableProduct());
 
-        ArrayList<Product> products = productModel.getProducts();
-
         view = new productsCard(actionListeners);
         masterView.addCard("Shipments", view);
 
-        view.dataTable.setModel(productModel.buildTableModel());
+        view.dataTable.setModel(productModel.buildProductsTable());
     }
 
     private class addProduct implements ActionListener{
@@ -57,7 +52,7 @@ public class ProductsController extends BasicController {
             try {
                 productModel.addProduct(product);
                 view.newProductFrame.dispatchEvent(new WindowEvent(view.newProductFrame, WindowEvent.WINDOW_CLOSING));
-                view.dataTable.setModel(productModel.buildTableModel());
+                view.dataTable.setModel(productModel.buildProductsTable());
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
@@ -90,7 +85,6 @@ public class ProductsController extends BasicController {
     private class disableProduct implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO
         }
     }
 }
