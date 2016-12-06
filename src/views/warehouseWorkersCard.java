@@ -20,6 +20,7 @@ public class warehouseWorkersCard extends card {
     JLabel statusFilterHeader = new JLabel("Filter By Status");
     JCheckBox activeCheckbox = new JCheckBox("Active", true);
     JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
+    JButton filterButton = new JButton("Filter");
 
     // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
@@ -29,7 +30,6 @@ public class warehouseWorkersCard extends card {
     JButton editButton = new JButton("Edit");
     public JTable dataTable = new JTable();
     JScrollPane scrollPane = new JScrollPane(dataTable);
-    JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new user elements
     public JFrame newUserFrame = new JFrame("Create New Warehouse Worker");
@@ -100,6 +100,7 @@ public class warehouseWorkersCard extends card {
         newUserSaveButton.addActionListener(actionListeners.get("saveNewUserAction"));
         editButton.addActionListener(actionListeners.get("editWorkerAction"));
         editUserSaveButton.addActionListener(actionListeners.get("saveEditsAction"));
+        filterButton.addActionListener(actionListeners.get("filterUsersAction"));
 
         editButton.setEnabled(false);
 
@@ -138,6 +139,10 @@ public class warehouseWorkersCard extends card {
         constraints.gridy++;
         constraints.insets = new Insets(0, 0, 10, 0);
         statusFilterPanel.add(inactiveCheckbox, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy++;
+        statusFilterPanel.add(filterButton, constraints);
 
         constraints.gridx = 0;
         constraints.gridy++;
