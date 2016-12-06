@@ -40,7 +40,7 @@ public class WarehouseWorkersController extends BasicController {
             boolean inactive = view.inactiveCheckbox.isSelected();
 
             try {
-                view.dataTable.setModel(userModel.filterUsers("athlete", active, inactive));
+                view.dataTable.setModel(userModel.filterUsers("worker", active, inactive));
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
