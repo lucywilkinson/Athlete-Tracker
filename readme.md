@@ -11,7 +11,7 @@ Athlete Tracker is a system for companies that sponsor athletes in various sport
 It is a way for the companies to keep track of who they're sponsoring, and the
 products that have been shipped or need to be shipped to the athlete.
 
-Users consist of Admins, Athlets, and Warehouse Workers.
+Users consist of Admins, Athletes, and Warehouse Workers.
 
 Admin:
 Admins can view and edit the profiles of every other user, and can view and edit all the shipment and

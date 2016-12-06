@@ -17,10 +17,6 @@ public class adminsCard extends card {
     JLabel statusFilterHeader = new JLabel("Filter By Status");
     JCheckBox activeCheckbox = new JCheckBox("Active", true);
     JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
-    JPanel dateFilterPanel = new JPanel(new GridBagLayout());
-    JLabel dateFilterHeader = new JLabel("Filter By Date");
-    JTextField dateStartField = new JTextField("12/1/2012");
-    JTextField dateEndField = new JTextField("12/31/2016");
 
     // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
@@ -29,6 +25,7 @@ public class adminsCard extends card {
     JButton newAdminButton = new JButton("New Admin");
     JButton editButton = new JButton("Edit");
     public JTable dataTable = new JTable();
+    JScrollPane scrollPane = new JScrollPane(dataTable);
 
     // new user elements
     public JFrame newUserFrame = new JFrame("Create New Admin");
@@ -55,7 +52,7 @@ public class adminsCard extends card {
     Dimension editUserFrameDimensions = new Dimension(400, 400);
     JPanel editUserPanel = new JPanel(new GridBagLayout());
     JLabel editUserIdLabel = new JLabel("ID:", SwingConstants.RIGHT);
-    JTextField editUserIdField = new JTextField(20);
+    public JTextField editUserIdField = new JTextField(20);
     JLabel editUserUsernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
     public JTextField editUserUsernameField = new JTextField(20);
     JLabel editUserFirstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
@@ -100,6 +97,7 @@ public class adminsCard extends card {
         newAdminButton.addActionListener(actionListeners.get("newUserAction"));
         newUserSaveButton.addActionListener(actionListeners.get("saveNewUserAction"));
         editButton.addActionListener(actionListeners.get("editAdminAction"));
+        editUserSaveButton.addActionListener(actionListeners.get("saveEditAdminAction"));
 
         editButton.setEnabled(false);
         editButton.addActionListener(actionListeners.get("editAthleteAction"));
@@ -116,11 +114,12 @@ public class adminsCard extends card {
         newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
 
         // build table
-        dataTable = new JTable(tableData);
-        rightPanel.remove(dataTable);
+        /*dataTable = new JTable(tableData);
+        scrollPane = new JScrollPane(dataTable);
+        rightPanel.remove(scrollPane);
         constraints.gridy = 2;
         constraints.gridx = 0;
-        rightPanel.add(dataTable, constraints);
+        rightPanel.add(scrollPane, constraints);*/
         rightPanel.repaint();
         rightPanel.revalidate();
 
@@ -150,20 +149,6 @@ public class adminsCard extends card {
         constraints.gridy++;
         constraints.insets = new Insets(0, 0, 0, 0);
         leftPanel.add(statusFilterPanel, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy++;
-        dateFilterPanel.add(dateFilterHeader, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy++;
-        dateFilterPanel.add(dateStartField, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy++;
-        dateFilterPanel.add(dateEndField, constraints);
-
-        leftPanel.add(dateFilterPanel, constraints);
     }
 
     void buildRightPanel() {
@@ -192,7 +177,8 @@ public class adminsCard extends card {
         constraints.gridx = 0;
         constraints.weightx = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
-        rightPanel.add(dataTable, constraints);
+        constraints.fill = GridBagConstraints.BOTH;
+        rightPanel.add(scrollPane, constraints);
     }
 
     public void populate(DefaultTableModel data) {
@@ -263,7 +249,7 @@ public class adminsCard extends card {
         for(int i = 0; i < accountTypes.length; i++) {
             editUserAccountTypeField.addItem(accountTypes[i]);
         }
-        editUserAccountTypeField.setSelectedItem("athlete");
+        editUserAccountTypeField.setSelectedItem("admin");
         editUserAccountTypeField.setEnabled(false);
 
         constraints.gridy++;
