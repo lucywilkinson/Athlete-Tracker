@@ -15,8 +15,9 @@ public class adminsCard extends card {
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
     JLabel statusFilterHeader = new JLabel("Filter By Status");
-    JCheckBox activeCheckbox = new JCheckBox("Active", true);
-    JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
+    JButton filterButton = new JButton("Filter");
+    public JCheckBox activeCheckbox = new JCheckBox("Active", true);
+    public JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
 
     // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
@@ -61,10 +62,10 @@ public class adminsCard extends card {
     public JTextField editUserLastNameField = new JTextField(20);
     JLabel editUserEmailLabel = new JLabel("Email:", SwingConstants.RIGHT);
     public JTextField editUserEmailField = new JTextField(20);
-    JLabel editUserPasswordLabel = new JLabel("Password:", SwingConstants.RIGHT);
-    public JPasswordField editUserPasswordField = new JPasswordField();
     JLabel editUserAccountTypeLabel = new JLabel("Account Type:", SwingConstants.RIGHT);
     public JComboBox editUserAccountTypeField = new JComboBox();
+    JLabel editUserStatusLabel = new JLabel("Status", SwingConstants.RIGHT);
+    public JCheckBox editUserStatusField = new JCheckBox("Active", true);
     JButton editUserSaveButton = new JButton("Save");
 
     GridBagConstraints constraints = new GridBagConstraints();
@@ -90,6 +91,7 @@ public class adminsCard extends card {
         constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.weightx = 0.75;
+        constraints.fill = GridBagConstraints.BOTH;
         constraints.insets = new Insets(20, 20, 20, 20);
         this.add(rightPanel, constraints);
 
@@ -98,6 +100,7 @@ public class adminsCard extends card {
         newUserSaveButton.addActionListener(actionListeners.get("saveNewUserAction"));
         editButton.addActionListener(actionListeners.get("editAdminAction"));
         editUserSaveButton.addActionListener(actionListeners.get("saveEditAdminAction"));
+        filterButton.addActionListener(actionListeners.get("filterUsersAction"));
 
         editButton.setEnabled(false);
         editButton.addActionListener(actionListeners.get("editAthleteAction"));
@@ -140,6 +143,10 @@ public class adminsCard extends card {
 
         constraints.gridx = 0;
         constraints.gridy++;
+        statusFilterPanel.add(filterButton, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy++;
         constraints.insets = new Insets(0, 0, 0, 0);
         leftPanel.add(statusFilterPanel, constraints);
     }
@@ -163,6 +170,7 @@ public class adminsCard extends card {
         headerPanel.add(editButton, constraints);
 
         constraints.gridx = 0;
+        constraints.weighty = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         rightPanel.add(headerPanel, constraints);
 
@@ -171,11 +179,8 @@ public class adminsCard extends card {
         constraints.weightx = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.fill = GridBagConstraints.BOTH;
+        constraints.weighty = 1;
         rightPanel.add(scrollPane, constraints);
-    }
-
-    public void populate(DefaultTableModel data) {
-        dataTable = new JTable(data);
     }
 
     public void launchEditUser() {
@@ -196,6 +201,7 @@ public class adminsCard extends card {
         editUserPanel.add(editUserIdLabel, constraints);
 
         constraints.gridx++;
+        editUserIdField.setEnabled(false);
         editUserPanel.add(editUserIdField, constraints);
 
         constraints.gridy++;
@@ -203,6 +209,7 @@ public class adminsCard extends card {
         editUserPanel.add(editUserUsernameLabel, constraints);
 
         constraints.gridx++;
+        editUserUsernameField.setEnabled(false);
         editUserPanel.add(editUserUsernameField, constraints);
 
         constraints.gridy++;
@@ -228,13 +235,6 @@ public class adminsCard extends card {
 
         constraints.gridy++;
         constraints.gridx = 0;
-        editUserPanel.add(editUserPasswordLabel, constraints);
-
-        constraints.gridx = 1;
-        editUserPanel.add(editUserPasswordField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
         editUserPanel.add(editUserAccountTypeLabel, constraints);
 
         constraints.gridx = 1;
@@ -244,6 +244,13 @@ public class adminsCard extends card {
         }
         editUserAccountTypeField.setSelectedItem("admin");
         editUserAccountTypeField.setEnabled(false);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserStatusLabel, constraints);
+
+        constraints.gridx++;
+        editUserPanel.add(editUserStatusField, constraints);
 
         constraints.gridy++;
         constraints.fill = GridBagConstraints.HORIZONTAL;

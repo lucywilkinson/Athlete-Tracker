@@ -1,6 +1,10 @@
 package views;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -14,38 +18,58 @@ public class warehouseWorkersCard extends card {
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
     JLabel statusFilterHeader = new JLabel("Filter By Status");
-    JCheckBox activeCheckbox = new JCheckBox("Active", true);
-    JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
+    public JCheckBox activeCheckbox = new JCheckBox("Active", true);
+    public JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
+    JButton filterButton = new JButton("Filter");
 
     // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
     JPanel headerPanel = new JPanel(new GridBagLayout());
     JLabel titleLabel = new JLabel("Warehouse Workers");
     JButton newWorkerButton = new JButton("New Worker");
-    JButton saveChangesButton = new JButton("Save Changes");
-    JTable dataTable = new JTable();
+    JButton editButton = new JButton("Edit");
+    public JTable dataTable = new JTable();
     JScrollPane scrollPane = new JScrollPane(dataTable);
-    JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new user elements
-    JFrame newUserFrame = new JFrame("Create New Warehouse Worker");
+    public JFrame newUserFrame = new JFrame("Create New Warehouse Worker");
     Dimension newUserFrameDimensions = new Dimension(400, 400);
     JPanel newUserPanel = new JPanel(new GridBagLayout());
     JLabel newUserUsernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
-    JTextField newUserUsernameField = new JTextField(20);
+    public JTextField newUserUsernameField = new JTextField(20);
     JLabel newUserFirstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
-    JTextField newUserFirstNameField = new JTextField(20);
+    public JTextField newUserFirstNameField = new JTextField(20);
     JLabel newUserLastNameLabel = new JLabel("Last Name:", SwingConstants.RIGHT);
-    JTextField newUserLastNameField = new JTextField(20);
+    public JTextField newUserLastNameField = new JTextField(20);
     JLabel newUserEmailLabel = new JLabel("Email:", SwingConstants.RIGHT);
-    JTextField newUserEmailField = new JTextField(20);
+    public JTextField newUserEmailField = new JTextField(20);
     JLabel newUserAccountTypeLabel = new JLabel("Account Type:", SwingConstants.RIGHT);
     JLabel newUserPasswordLabel = new JLabel("Password:", SwingConstants.RIGHT);
-    JPasswordField newUserPasswordField = new JPasswordField();
+    public JPasswordField newUserPasswordField = new JPasswordField();
     JLabel newUserConfirmPasswordLabel = new JLabel("Confirm Password:", SwingConstants.RIGHT);
-    JPasswordField newUserConfirmPasswordField = new JPasswordField();
-    JComboBox newUserAccountTypeField = new JComboBox();
+    public JPasswordField newUserConfirmPasswordField = new JPasswordField();
+    public JComboBox newUserAccountTypeField = new JComboBox();
     JButton newUserSaveButton = new JButton("Save");
+
+    // edit user elements
+    public JFrame editUserFrame = new JFrame("Edit Warehouse Worker");
+    Dimension editUserFrameDimensions = new Dimension(400, 400);
+    JPanel editUserPanel = new JPanel(new GridBagLayout());
+    JLabel editUserIdLabel = new JLabel("ID:", SwingConstants.RIGHT);
+    public JTextField editUserIdField = new JTextField(20);
+    JLabel editUserUsernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
+    public JTextField editUserUsernameField = new JTextField(20);
+    JLabel editUserFirstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
+    public JTextField editUserFirstNameField = new JTextField(20);
+    JLabel editUserLastNameLabel = new JLabel("Last Name:", SwingConstants.RIGHT);
+    public JTextField editUserLastNameField = new JTextField(20);
+    JLabel editUserEmailLabel = new JLabel("Email:", SwingConstants.RIGHT);
+    public JTextField editUserEmailField = new JTextField(20);
+    JLabel editUserAccountTypeLabel = new JLabel("Account Type:", SwingConstants.RIGHT);
+    public JComboBox editUserAccountTypeField = new JComboBox();
+    JLabel editUserStatusLabel = new JLabel("Status", SwingConstants.RIGHT);
+    public JCheckBox editUserStatusField = new JCheckBox("Active", true);
+    JButton editUserSaveButton = new JButton("Save");
 
     GridBagConstraints constraints = new GridBagConstraints();
 
@@ -75,6 +99,29 @@ public class warehouseWorkersCard extends card {
 
         // add action listeners
         newWorkerButton.addActionListener(actionListeners.get("newUserAction"));
+        newUserSaveButton.addActionListener(actionListeners.get("saveNewUserAction"));
+        editButton.addActionListener(actionListeners.get("editWorkerAction"));
+        editUserSaveButton.addActionListener(actionListeners.get("saveEditsAction"));
+        filterButton.addActionListener(actionListeners.get("filterUsersAction"));
+
+        editButton.setEnabled(false);
+
+        // Save button disabled until all fields are filled
+        newUserSaveButton.setEnabled(false);
+
+        // Add document listeners to each "New User Field".
+        SaveButtonDocumentListener saveButtonEnabler = new SaveButtonDocumentListener();
+        newUserFirstNameField.getDocument().addDocumentListener(saveButtonEnabler);
+        newUserLastNameField.getDocument().addDocumentListener(saveButtonEnabler);
+        newUserEmailField.getDocument().addDocumentListener(saveButtonEnabler);
+        newUserPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
+        newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
+
+        rightPanel.repaint();
+        rightPanel.revalidate();
+
+        rowSelectionListener selectionListener = new rowSelectionListener();
+        dataTable.getSelectionModel().addListSelectionListener(selectionListener);
     }
 
     void buildLeftPanel() {
@@ -97,6 +144,10 @@ public class warehouseWorkersCard extends card {
 
         constraints.gridx = 0;
         constraints.gridy++;
+        statusFilterPanel.add(filterButton, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy++;
         constraints.insets = new Insets(0, 0, 0, 0);
         leftPanel.add(statusFilterPanel, constraints);
     }
@@ -107,7 +158,7 @@ public class warehouseWorkersCard extends card {
         constraints.gridx = 0;
         constraints.gridy = 0;
 
-        constraints.weightx = 0.8;
+        constraints.weightx = 0.6;
         headerPanel.add(titleLabel, constraints);
 
         constraints.gridx++;
@@ -115,26 +166,22 @@ public class warehouseWorkersCard extends card {
         constraints.anchor = GridBagConstraints.NORTH;
         headerPanel.add(newWorkerButton, constraints);
 
+        constraints.gridx++;
+        constraints.weightx = 0.2;
+        headerPanel.add(editButton, constraints);
+
+        constraints.gridx = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.weighty = 0;
         rightPanel.add(headerPanel, constraints);
 
         constraints.gridy++;
-        //rightPanel.add(dataTable, constraints);
+        constraints.gridx = 0;
+        constraints.weightx = 1;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weighty = 1;
         rightPanel.add(scrollPane, constraints);
-
-        constraints.gridy++;
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.NORTHEAST;
-        constraints.insets = new Insets(10, 0, 10, 0);
-        rightPanel.add(saveChangesButton, constraints);
-
-        constraints.gridy++;
-        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-        rightPanel.add(editDataPanel, constraints);
-    }
-
-    public void populate(DefaultTableModel data) {
-        dataTable = new JTable(data);
     }
 
     public void launchNewUser() {
@@ -149,6 +196,7 @@ public class warehouseWorkersCard extends card {
         constraints.insets = new Insets(5,5,5,5);
         constraints.gridy = 0;
         constraints.gridx = 0;
+        constraints.gridwidth = GridBagConstraints.RELATIVE;
         constraints.fill = GridBagConstraints.HORIZONTAL;
 
         newUserPanel.add(newUserUsernameLabel, constraints);
@@ -213,5 +261,133 @@ public class warehouseWorkersCard extends card {
         constraints.gridy = 0;
         constraints.insets = new Insets(10,10,10,10);
         newUserFrame.add(this.newUserPanel);
+    }
+
+    public void launchEditUser() {
+        editUserFrame.setPreferredSize(this.editUserFrameDimensions);
+        this.buildEditUserFrame();
+        editUserFrame.pack();
+        editUserFrame.setVisible(true);
+    }
+
+    void buildEditUserFrame() {
+        constraints.weightx = 0.5;
+        constraints.insets = new Insets(5,5,5,5);
+        constraints.gridy = 0;
+        constraints.gridx = 0;
+        constraints.gridwidth = GridBagConstraints.RELATIVE;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        editUserPanel.add(editUserIdLabel, constraints);
+
+        constraints.gridx++;
+        editUserIdField.setEnabled(false);
+        editUserPanel.add(editUserIdField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserUsernameLabel, constraints);
+
+        constraints.gridx++;
+        editUserPanel.add(editUserUsernameField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserFirstNameLabel, constraints);
+
+        constraints.gridx = 1;
+        editUserPanel.add(editUserFirstNameField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserLastNameLabel, constraints);
+
+        constraints.gridx = 1;
+        editUserUsernameField.setEnabled(false);
+        editUserPanel.add(editUserLastNameField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserEmailLabel, constraints);
+
+        constraints.gridx = 1;
+        editUserPanel.add(editUserEmailField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserAccountTypeLabel, constraints);
+
+        constraints.gridx = 1;
+        editUserPanel.add(editUserAccountTypeField, constraints);
+        for(int i = 0; i < accountTypes.length; i++) {
+            editUserAccountTypeField.addItem(accountTypes[i]);
+        }
+        editUserAccountTypeField.setSelectedItem("worker");
+        editUserAccountTypeField.setEnabled(false);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserStatusLabel, constraints);
+
+        constraints.gridx++;
+        editUserPanel.add(editUserStatusField, constraints);
+
+        constraints.gridy++;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 1;
+        editUserPanel.add(editUserSaveButton, constraints);
+
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(10,10,10,10);
+        editUserFrame.add(this.editUserPanel);
+    }
+
+    /**
+     * Checks that all fields are filled before enabling newUserSaveButton.
+     */
+    private void checkFields() {
+        boolean email = !newUserEmailField.getText().trim().isEmpty();
+        boolean firstName = !newUserFirstNameField.getText().trim().isEmpty();
+        boolean lastName  = !newUserLastNameField.getText().trim().isEmpty();
+        boolean username = !newUserUsernameField.getText().trim().isEmpty();
+        boolean password  = (newUserPasswordField.getPassword().length != 0);
+        boolean confirmPassword = (newUserConfirmPasswordField.getPassword().length != 0);
+
+
+        if (email && firstName && lastName && username && password && confirmPassword) {
+            newUserSaveButton.setEnabled(true);
+        } else {
+            newUserSaveButton.setEnabled(false);
+        }
+    }
+
+    private class SaveButtonDocumentListener implements DocumentListener {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            checkFields();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            checkFields();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            checkFields();
+        }
+    }
+
+    private class rowSelectionListener implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if (dataTable.getSelectedRow() < 0){
+                editButton.setEnabled(false);
+            } else {
+                editButton.setEnabled(true);
+            }
+        }
     }
 }

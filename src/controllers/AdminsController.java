@@ -24,11 +24,26 @@ public class AdminsController extends BasicController {
         actionListeners.put("saveNewUserAction", new saveNewUserAction());
         actionListeners.put("editAdminAction", new editAdminAction());
         actionListeners.put("saveEditAdminAction", new saveEditAdminAction());
+        actionListeners.put("filterUsersAction", new filterUsers());
 
         view = new adminsCard(tableData, actionListeners);
         masterView.addCard("Admins", view);
 
         view.dataTable.setModel(userModel.buildTableModel("admin"));
+    }
+
+    private class filterUsers implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            boolean active = view.activeCheckbox.isSelected();
+            boolean inactive = view.inactiveCheckbox.isSelected();
+
+            try {
+                view.dataTable.setModel(userModel.filterUsers("admin", active, inactive));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     private class newUserAction implements ActionListener {
@@ -76,14 +91,12 @@ public class AdminsController extends BasicController {
             String firstName = String.valueOf(view.dataTable.getValueAt(row, 1));
             String lastName  = String.valueOf(view.dataTable.getValueAt(row, 2));
             String username  = String.valueOf(view.dataTable.getValueAt(row, 3));
-            String password  = String.valueOf(view.dataTable.getValueAt(row, 4));
-            String email     = String.valueOf(view.dataTable.getValueAt(row, 5));
+            String email     = String.valueOf(view.dataTable.getValueAt(row, 4));
 
             view.editUserIdField.setText(id);
             view.editUserFirstNameField.setText(firstName);
             view.editUserLastNameField.setText(lastName);
             view.editUserUsernameField.setText(username);
-            view.editUserPasswordField.setText(password);
             view.editUserEmailField.setText(email);
         }
     }
@@ -97,7 +110,9 @@ public class AdminsController extends BasicController {
             String username  = view.editUserUsernameField.getText();
             String email     = view.editUserEmailField.getText();
             String userType  = String.valueOf(view.editUserAccountTypeField.getSelectedItem());
-            String password  = String.valueOf(view.editUserPasswordField.getPassword());
+
+            // Placeholder
+            String password  = "";
 
             User updatedUser = new User(id, firstName, lastName, username, password, email, userType);
 

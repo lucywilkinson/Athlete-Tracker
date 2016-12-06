@@ -32,6 +32,11 @@ public class ShipmentsModel extends Model {
         preparedStatement.executeUpdate();
     }
 
+    /*
+    public DefaultTableModel filterShipments(boolean active, boolean inactive) {
+    }
+    */
+
     private ResultSet getRawShipmentData() throws SQLException {
         String shipmentFields = "shipments.shipment_creator, " +
                 "shipments.shipment_worker, " +

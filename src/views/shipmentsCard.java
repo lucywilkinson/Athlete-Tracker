@@ -16,18 +16,18 @@ public class shipmentsCard extends card {
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
     JLabel statusFilterHeader = new JLabel("Filter By Status");
-    JCheckBox activeCheckbox = new JCheckBox("Active", true);
-    JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
+    JCheckBox activeCheckbox = new JCheckBox("Pending", true);
+    JCheckBox inactiveCheckbox = new JCheckBox("Fulfilled", true);
+    JButton filterButton = new JButton("Filter");
 
     // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
     JPanel headerPanel = new JPanel(new GridBagLayout());
     JLabel titleLabel = new JLabel("Shipments");
     JButton newShipmentButton = new JButton("New Shipment");
-    JButton saveChangesButton = new JButton("Save Changes");
+    JButton editShipmentButton = new JButton("Edit");
     public JTable dataTable = new JTable();
     JScrollPane scrollPane = new JScrollPane(dataTable);
-    JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new shipment elements
     JFrame newShipmentFrame = new JFrame("Create New Shipment");
@@ -73,6 +73,7 @@ public class shipmentsCard extends card {
 
         // add action listeners
         newShipmentButton.addActionListener(actionListeners.get("addShipment"));
+        filterButton.addActionListener(actionListeners.get("filterShipmentsAction"));
 
         // build table
         rightPanel.repaint();
@@ -97,6 +98,9 @@ public class shipmentsCard extends card {
         constraints.insets = new Insets(0, 0, 10, 0);
         statusFilterPanel.add(inactiveCheckbox, constraints);
 
+        constraints.gridy++;
+        statusFilterPanel.add(filterButton, constraints);
+
         constraints.gridx = 0;
         constraints.gridy++;
         constraints.insets = new Insets(0, 0, 0, 0);
@@ -105,19 +109,25 @@ public class shipmentsCard extends card {
 
     void buildRightPanel() {
         constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.LINE_START;
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.gridx = 0;
         constraints.gridy = 0;
 
-        constraints.weightx = 0.8;
+        constraints.weightx = 0.6;
         headerPanel.add(titleLabel, constraints);
 
         constraints.gridx++;
         constraints.weightx = 0.2;
-        constraints.anchor = GridBagConstraints.NORTH;
         headerPanel.add(newShipmentButton, constraints);
 
+        constraints.gridx++;
+        constraints.weightx = 0.2;
+        editShipmentButton.setEnabled(false);
+        headerPanel.add(editShipmentButton, constraints);
+
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.weighty = 0;
         rightPanel.add(headerPanel, constraints);
 
         constraints.gridx = 0;
@@ -125,17 +135,8 @@ public class shipmentsCard extends card {
         constraints.weightx = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.fill = GridBagConstraints.BOTH;
+        constraints.weighty = 1;
         rightPanel.add(scrollPane, constraints);
-
-        constraints.gridy++;
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.NORTHEAST;
-        constraints.insets = new Insets(10, 0, 10, 0);
-        rightPanel.add(saveChangesButton, constraints);
-
-        constraints.gridy++;
-        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-        rightPanel.add(editDataPanel, constraints);
     }
 
     public void populateWorkers(ArrayList data) {
@@ -171,6 +172,7 @@ public class shipmentsCard extends card {
         constraints.insets = new Insets(5,5,5,5);
         constraints.gridy = 0;
         constraints.gridx = 0;
+        constraints.gridwidth = GridBagConstraints.RELATIVE;
         constraints.fill = GridBagConstraints.HORIZONTAL;
 
         newShipmentPanel.add(newShipmentWorkerLabel, constraints);
