@@ -57,8 +57,6 @@ public class ShipmentsController extends BasicController {
 
                 String productName = view.newShipmentProductField.getSelectedItem().toString();
 
-                System.out.println("selection change detected, current selection: " + productName);
-
                 try {
                     productModel = new ProductModel();
 
