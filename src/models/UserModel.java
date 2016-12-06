@@ -1,6 +1,7 @@
 package models;
 
 import common.User;
+import views.myProfileCard;
 
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
@@ -55,6 +56,7 @@ public class UserModel extends Model {
         preparedStatement.setString(6, String.valueOf(user.getUserId()));
 
         preparedStatement.executeUpdate();
+
     }
 
     public void addUser(User user) throws SQLException {

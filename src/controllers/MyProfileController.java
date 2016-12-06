@@ -30,17 +30,19 @@ public class MyProfileController extends BasicController {
     private class editProfileAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int id = Integer.parseInt(myProfileCard.idField.getText());
+            int id = _user.getUserId(); //Don't want to be able to edit userID from text field...
             String firstName = myProfileCard.firstNameField.getText();
             String lastName = myProfileCard.lastNameField.getText();
             String email = myProfileCard.emailField.getText();
             String accountType = myProfileCard.accountTypeField.getSelectedItem().toString();
 
-            User updatedUser = new User(id, firstName, lastName, _user.getUsername(), _user.getPassword(), accountType, _user.getEmail());
+            User updatedUser = new User(id, firstName, lastName, _user.getUsername(), _user.getPassword(), email, accountType);
+
 
             try {
                 // Update user in DB
                 userModel.editUser(updatedUser);
+                myProfileCard.populate(updatedUser);
 
             } catch (SQLException e1) {
                 e1.printStackTrace();
