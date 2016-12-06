@@ -33,11 +33,11 @@ public class productsCard extends card {
     Dimension newUserFrameDimensions = new Dimension(400, 400);
     JPanel newProductPanel = new JPanel(new GridBagLayout());
     JLabel newProductNameLabel = new JLabel("Name:", SwingConstants.RIGHT);
-    JTextField newProductNameField = new JTextField(20);
+    public JTextField newProductNameField = new JTextField(20);
     JLabel newProductValueLabel = new JLabel("Value:", SwingConstants.RIGHT);
-    JTextField newProductValueField = new JTextField("0.00", 20);
+    public JTextField newProductValueField = new JTextField("0.00", 20);
     JLabel newProductQuantityLabel = new JLabel("Quantity:", SwingConstants.RIGHT);
-    JTextField newProductQuantityField = new JTextField ("0", 20);
+    public JTextField newProductQuantityField = new JTextField ("0", 20);
     JButton newProductSaveButton = new JButton("Save");
 
     GridBagConstraints constraints = new GridBagConstraints();
@@ -69,6 +69,7 @@ public class productsCard extends card {
         // add action listeners
         newProductButton.addActionListener(actionListeners.get("addProduct"));
         filterButton.addActionListener(actionListeners.get("filterProductsAction"));
+        newProductSaveButton.addActionListener(actionListeners.get("saveNewProduct"));
     }
 
     void buildLeftPanel() {
