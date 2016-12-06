@@ -42,6 +42,26 @@ public class ProductModel extends Model {
         return products;
     }
 
+    public Product getProduct(String product_name) throws SQLException {
+        String query = "SELECT * FROM products WHERE product_name = ?";
+
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setString(1, product_name);
+        ResultSet res = preparedStatement.executeQuery();
+
+        if (res.next()) {
+            int productID       = res.getInt(1);
+            String productName  = res.getString(2);
+            float productValue  = res.getFloat(3);
+            int productQuantity = res.getInt(4);
+
+            Product product = new Product(productName, productID, productValue, productQuantity);
+            return product;
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Inserts a new product into the DB.
      * @param product: Product object to insert.
