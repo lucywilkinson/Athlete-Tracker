@@ -25,6 +25,7 @@ public class adminsCard extends card {
     JButton newAdminButton = new JButton("New Admin");
     JButton editButton = new JButton("Edit");
     public JTable dataTable = new JTable();
+    JScrollPane scrollPane = new JScrollPane(dataTable);
 
     // new user elements
     public JFrame newUserFrame = new JFrame("Create New Admin");
@@ -112,12 +113,13 @@ public class adminsCard extends card {
         newUserPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
         newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
 
-
-        dataTable = new JTable(tableData);
-        rightPanel.remove(dataTable);
+        // build table
+        /*dataTable = new JTable(tableData);
+        scrollPane = new JScrollPane(dataTable);
+        rightPanel.remove(scrollPane);
         constraints.gridy = 2;
         constraints.gridx = 0;
-        rightPanel.add(dataTable, constraints);
+        rightPanel.add(scrollPane, constraints);*/
         rightPanel.repaint();
         rightPanel.revalidate();
 
@@ -175,7 +177,8 @@ public class adminsCard extends card {
         constraints.gridx = 0;
         constraints.weightx = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
-        rightPanel.add(dataTable, constraints);
+        constraints.fill = GridBagConstraints.BOTH;
+        rightPanel.add(scrollPane, constraints);
     }
 
     public void populate(DefaultTableModel data) {
