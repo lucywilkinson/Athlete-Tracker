@@ -192,6 +192,8 @@ public class shipmentsCard extends card {
     }
 
     public void populateWorkers(ArrayList data) {
+        newShipmentWorkerField.removeAllItems();
+        editShipmentWorkerField.removeAllItems();
         for(int i = 0; i < data.size(); i++) {
             newShipmentWorkerField.addItem(data.get(i));
             editShipmentWorkerField.addItem(data.get(i));
@@ -199,6 +201,8 @@ public class shipmentsCard extends card {
     }
 
     public void populateAthletes(ArrayList data) {
+        newShipmentAthleteField.removeAllItems();
+        editShipmentAthleteField.removeAllItems();
         for(int i = 0; i < data.size(); i++) {
             newShipmentAthleteField.addItem(data.get(i));
             editShipmentAthleteField.addItem(data.get(i));
@@ -206,6 +210,8 @@ public class shipmentsCard extends card {
     }
 
     public void populateProducts(ArrayList data) {
+        newShipmentProductField.removeAllItems();
+        editShipmentProductField.removeAllItems();
         for(int i = 0; i < data.size(); i++) {
             newShipmentProductField.addItem(data.get(i));
             editShipmentProductField.addItem(data.get(i));
