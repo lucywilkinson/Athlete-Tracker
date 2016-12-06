@@ -168,6 +168,8 @@ public class athletesCard extends card {
         constraints.gridx = 1;
         newUserPanel.add(newUserUsernameField, constraints);
 
+        constraints.gridy++;
+        constraints.gridx = 0;
         newUserPanel.add(newUserFirstNameLabel, constraints);
 
         constraints.gridx = 1;
