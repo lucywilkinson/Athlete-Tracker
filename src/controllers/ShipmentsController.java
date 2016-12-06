@@ -52,6 +52,7 @@ public class ShipmentsController extends BasicController {
             }
         }
     }
+
     private class addShipment implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -92,6 +93,7 @@ public class ShipmentsController extends BasicController {
             }
         }
     }
+
     private class editShipmentAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

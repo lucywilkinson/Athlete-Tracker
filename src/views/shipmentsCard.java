@@ -1,6 +1,11 @@
 package views;
 
+import com.sun.tools.javac.util.StringUtils;
+import sun.swing.StringUIClientPropertyKey;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -108,8 +113,13 @@ public class shipmentsCard extends card {
         rightPanel.repaint();
         rightPanel.revalidate();
 
+        // add rowSelectionListener to table
         rowSelectionListener selectionListener = new rowSelectionListener();
         dataTable.getSelectionModel().addListSelectionListener(selectionListener);
+
+        // add document listeners to each "new product" field
+        SaveButtonDocumentListener saveButtonEnabler = new SaveButtonDocumentListener();
+        newShipmentQuantityField.getDocument().addDocumentListener(saveButtonEnabler);
     }
 
     void buildLeftPanel() {
@@ -351,6 +361,37 @@ public class shipmentsCard extends card {
             else {
                 editButton.setEnabled(true);
             }
+        }
+    }
+
+    /**
+     * Checks that all fields are filled before enabling newShipmentSaveButton.
+     */
+    private void checkFields() {
+        boolean quantityExists = !newShipmentQuantityField.getText().trim().isEmpty();
+        boolean quantityIsInt = newShipmentQuantityField.getText().trim().matches("-?\\d+(\\.\\d+)?"); // check if integer
+
+        if (quantityExists && quantityIsInt) {
+            newShipmentSaveButton.setEnabled(true);
+        } else {
+            newShipmentSaveButton.setEnabled(false);
+        }
+    }
+
+    private class SaveButtonDocumentListener implements DocumentListener {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            checkFields();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            checkFields();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            checkFields();
         }
     }
 }
