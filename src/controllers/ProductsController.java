@@ -8,6 +8,7 @@ import views.productsCard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.awt.geom.Arc2D;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,12 +25,27 @@ public class ProductsController extends BasicController {
         actionListeners.put("addProduct",     new addProduct());
         actionListeners.put("saveNewProduct", new saveNewProduct());
         actionListeners.put("editProducts",   new editProduct());
-        actionListeners.put("disableProduct", new disableProduct());
+        actionListeners.put("saveEditProduct", new saveEditProduct());
+        actionListeners.put("filterProducts", new filterProducts());
 
         view = new productsCard(actionListeners);
         masterView.addCard("Shipments", view);
 
         view.dataTable.setModel(productModel.buildProductsTable());
+    }
+
+    private class filterProducts implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Boolean active = view.activeCheckbox.isSelected();
+            Boolean inactive = view.inactiveCheckbox.isSelected();
+
+            try {
+                view.dataTable.setModel(productModel.filterProducts(active, inactive));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     private class addProduct implements ActionListener{
@@ -66,15 +82,11 @@ public class ProductsController extends BasicController {
 
             int row = view.dataTable.getSelectedRow();
 
-            // the below column numbers likely need to change. I have no data to test with yet, so leaving that for you Matt
-
-            // gather data from dataTable
             String id = String.valueOf(view.dataTable.getValueAt(row, 0));
             String productName = String.valueOf(view.dataTable.getValueAt(row, 2));
             String value = String.valueOf(view.dataTable.getValueAt(row, 3));
             String quantity = String.valueOf(view.dataTable.getValueAt(row, 3));
 
-            // insert data into edit fields
             view.editProductIdField.setText(id);
             view.editProductNameField.setText(productName);
             view.editProductValueField.setText(value);
@@ -82,9 +94,27 @@ public class ProductsController extends BasicController {
         }
     }
 
-    private class disableProduct implements ActionListener{
+    private class saveEditProduct implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+            view.launchEditProduct();
+
+            int id = Integer.parseInt(view.editProductIdField.getText());
+            String productName = view.editProductNameField.getText();
+            double value = Double.parseDouble(view.editProductValueField.getText());
+            int quantity = Integer.parseInt(view.editProductQuantityField.getText());
+            Boolean active = view.editProductStatusField.isSelected();
+
+            Product updatedProduct = new Product(id, productName, value, quantity, active);
+
+            try {
+                productModel.editProduct(id, updatedProduct);
+                view.editProductFrame.dispatchEvent(new WindowEvent(view.editProductFrame, WindowEvent.WINDOW_CLOSING));
+                view.dataTable.setModel(productModel.buildProductsTable());
+
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 }

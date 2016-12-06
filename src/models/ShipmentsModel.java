@@ -139,13 +139,12 @@ public class ShipmentsModel extends Model {
         updateProductStock(shipment.getProduct(), quantityDifference);
 
         query = "UPDATE shipments SET " +
-                "shipment_product  = (SELECT product_id FROM products WHERE product_name = ?), " +
-                "shipment_creator  = ?, " +
-                "shipment_worker   = ?, " +
+                "shipment_product = (SELECT product_id FROM products WHERE product_name = ?), " +
+                "shipment_creator = ?, " +
+                "shipment_worker = ?, " +
                 "shipment_reciever = ?, " +
                 "shipment_quantity = ?, " +
-                "shipment_fulfilled = ? " +
-                "WHERE shipment_id = ?";
+                "shipment_fulfilled = ? WHERE shipment_id = ?";
 
         preparedStatement = conn.prepareStatement(query);
         preparedStatement.setString(1, shipment.getProduct());
@@ -153,8 +152,8 @@ public class ShipmentsModel extends Model {
         preparedStatement.setInt(3, shipment.getWorkerID());
         preparedStatement.setInt(4, shipment.getAthleteID());
         preparedStatement.setInt(5, shipment.getQuantity());
-        preparedStatement.setInt(6, shipmentID);
-        preparedStatement.setBoolean(7, shipment.getFulfilled());
+        preparedStatement.setBoolean(6, shipment.getFulfilled());
+        preparedStatement.setInt(7, shipmentID);
 
         preparedStatement.executeUpdate();
     }
