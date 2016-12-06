@@ -26,11 +26,26 @@ public class ProductsController extends BasicController {
         actionListeners.put("saveNewProduct", new saveNewProduct());
         actionListeners.put("editProducts",   new editProduct());
         actionListeners.put("saveEditProduct", new saveEditProduct());
+        actionListeners.put("filterProducts", new filterProducts());
 
         view = new productsCard(actionListeners);
         masterView.addCard("Shipments", view);
 
         view.dataTable.setModel(productModel.buildProductsTable());
+    }
+
+    private class filterProducts implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Boolean active = view.activeCheckbox.isSelected();
+            Boolean inactive = view.inactiveCheckbox.isSelected();
+
+            try {
+                view.dataTable.setModel(productModel.filterProducts(active, inactive));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     private class addProduct implements ActionListener{

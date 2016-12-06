@@ -88,7 +88,7 @@ public class productsCard extends card {
 
         // add action listeners
         newProductButton.addActionListener(actionListeners.get("addProduct"));
-        filterButton.addActionListener(actionListeners.get("filterProductsAction"));
+        filterButton.addActionListener(actionListeners.get("filterProducts"));
         newProductSaveButton.addActionListener(actionListeners.get("saveNewProduct"));
         editProductButton.addActionListener(actionListeners.get("editProducts"));
         editProductSaveButton.addActionListener(actionListeners.get("saveEditProduct"));

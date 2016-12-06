@@ -19,6 +19,49 @@ public class ProductModel extends Model {
         super();
     }
 
+    public DefaultTableModel filterProducts(Boolean active, Boolean inactive) throws SQLException {
+        String query;
+
+        if (active && inactive) {
+            query = "SELECT * FROM products";
+        } else if (active) {
+            query = "SELECT * FROM products WHERE product_active = 1";
+        } else {
+            query = "SELECT * FROM products WHERE product_active = 0";
+        }
+
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        ResultSet res = preparedStatement.executeQuery();
+
+        ResultSetMetaData metaData = res.getMetaData();
+
+        //fill column names
+        Vector<String> columnNames = new Vector<String>();
+        int columnCount = metaData.getColumnCount();
+        for (int column = 1; column <= columnCount; column++) {
+            columnNames.add(metaData.getColumnName(column));
+        }
+
+        //fill table data
+        Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+        while (res.next()) {
+            Vector<Object> vector = new Vector<Object>();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                vector.add(res.getObject(columnIndex));
+            }
+            data.add(vector);
+        }
+
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        return tableModel;
+
+    }
     /**
      * Returns an ArrayList of all currently active products.
      * @return ArrayList<Product> products. ArrayList products.
