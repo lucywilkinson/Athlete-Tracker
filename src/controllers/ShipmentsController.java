@@ -1,5 +1,6 @@
 package controllers;
 
+import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
 import common.Product;
 import common.Shipment;
 import common.User;
@@ -7,10 +8,9 @@ import models.ProductModel;
 import models.ShipmentsModel;
 import models.UserModel;
 import views.shipmentsCard;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+
+import javax.swing.*;
+import java.awt.event.*;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,8 +28,10 @@ public class ShipmentsController extends BasicController {
         shipmentsModel = new ShipmentsModel();
 
         actionListeners.put("addShipment", new addShipment());
+        actionListeners.put("saveNewShipmentAction", new saveNewShipmentAction());
         actionListeners.put("editShipmentAction", new editShipmentAction());
         actionListeners.put("saveEditShipmentAction", new saveEditShipmentAction());
+        actionListeners.put("filterShipmentsAction", new filterShipmentsAction());
 
         view = new shipmentsCard(actionListeners);
         masterView.addCard("Shipments", view);
@@ -37,6 +39,19 @@ public class ShipmentsController extends BasicController {
         view.dataTable.setModel(shipmentsModel.buildTableModel());
     }
 
+    private class filterShipmentsAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Boolean pending = view.activeCheckbox.isSelected();
+            Boolean fullfilled = view.inactiveCheckbox.isSelected();
+
+            try {
+                view.dataTable.setModel(shipmentsModel.filterShipments(pending, fullfilled));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
     private class addShipment implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -50,6 +65,33 @@ public class ShipmentsController extends BasicController {
         }
     }
 
+    private class saveNewShipmentAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int workerID  = Character.getNumericValue((String.valueOf(view.newShipmentWorkerField.getSelectedItem()).charAt(0)));
+            int athleteID = Character.getNumericValue((String.valueOf(view.newShipmentAthleteField.getSelectedItem()).charAt(0)));
+            String product = String.valueOf(view.newShipmentProductField.getSelectedItem());
+            int quantity   = Integer.parseInt(view.newShipmentQuantityField.getText());
+            int inStock    = Integer.parseInt(view.newShipmentProductMaxQuantityField.getText());
+            Boolean fulfilled = false;
+
+            if (quantity > inStock || quantity < 0) {
+                JOptionPane.showMessageDialog(new JFrame(), "Invalid Quantity", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Shipment newShipment = new Shipment(workerID, athleteID, _user.getUserId(), product, quantity, fulfilled);
+
+            try {
+                shipmentsModel.addShipment(newShipment);
+                view.newShipmentFrame.dispatchEvent(new WindowEvent(view.newShipmentFrame, WindowEvent.WINDOW_CLOSING));
+                view.newShipmentProductMaxQuantityField.setText(String.valueOf(inStock - quantity));
+                view.dataTable.setModel(shipmentsModel.buildTableModel());
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
     private class editShipmentAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -57,18 +99,36 @@ public class ShipmentsController extends BasicController {
 
             int row = view.dataTable.getSelectedRow();
 
-            //String id = String.valueOf(view.dataTable.getValueAt(row, 0));
             String product = String.valueOf(view.dataTable.getValueAt(row, 2));
-            //String creator = String.valueOf(view.dataTable.getValueAt(row, 2));
             String worker = String.valueOf(view.dataTable.getValueAt(row, 1));
             String reciever = String.valueOf(view.dataTable.getValueAt(row, 4));
-            //String address = String.valueOf(view.dataTable.getValueAt(row, 5));
             String quantity = String.valueOf(view.dataTable.getValueAt(row, 3));
+            String id = null;
 
+            try {
+                id = String.valueOf(shipmentsModel.getShipmentID(product));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+
+            view.editShipmentIdField.setText(id);
             view.editShipmentWorkerField.setSelectedItem(worker);
             view.editShipmentAthleteField.setSelectedItem(reciever);
             view.editShipmentProductField.setSelectedItem(product);
             view.editShipmentQuantityField.setText(quantity);
+
+            try {
+                view.editShipmentProductMaxQuantityField.setText(String.valueOf(shipmentsModel.getProductQuantity(product)));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+
+            view.editShipmentIdField.setEnabled(false);
+
+            populateAthletes();
+            populateProducts();
+            populateWorkers();
+
         }
     }
 
@@ -76,13 +136,29 @@ public class ShipmentsController extends BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
             int id = Integer.parseInt(view.editShipmentIdField.getText());
+            int workerID = Character.getNumericValue((String.valueOf(view.editShipmentWorkerField.getSelectedItem()).charAt(0)));
+            int athleteID = Character.getNumericValue((String.valueOf(view.editShipmentAthleteField.getSelectedItem()).charAt(0)));
             String product = String.valueOf(view.editShipmentProductField.getSelectedItem());
-            String worker = String.valueOf(view.editShipmentWorkerField.getSelectedItem());
-            String reciever = String.valueOf(view.editShipmentAthleteField.getSelectedItem());
-            String quantity = String.valueOf(view.editShipmentQuantityField.getText());
-;       }
+            int quantity = Integer.parseInt(view.editShipmentQuantityField.getText());
+            int inStock = Integer.parseInt(view.editShipmentProductMaxQuantityField.getText());
+            Boolean fulfilled = view.editShipmentFulfilledField.isSelected();
 
-        //Shipment updatedShipment = new Shipment(User.userId)
+            if (quantity > inStock || quantity < 0) {
+                JOptionPane.showMessageDialog(new JFrame(), "Invalid Quantity", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Shipment updatedShipment = new Shipment(workerID, athleteID, _user.getUserId(), product, quantity, fulfilled);
+
+            try {
+                shipmentsModel.editShipment(id, updatedShipment);
+                view.editShipmentFrame.dispatchEvent(new WindowEvent(view.editShipmentFrame, WindowEvent.WINDOW_CLOSING));
+                view.dataTable.setModel(shipmentsModel.buildTableModel());
+
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     /*
@@ -143,7 +219,7 @@ public class ShipmentsController extends BasicController {
 
             // convert ResultSet to ArrayList
             while (workersResult.next()) {
-                workers.add(workersResult.getString("first_name") + " " + workersResult.getString("last_name"));
+                workers.add(workersResult.getString("user_id") + " (" +workersResult.getString("first_name") + " " + workersResult.getString("last_name") + ")");
             }
 
             view.populateWorkers(workers);
@@ -164,7 +240,7 @@ public class ShipmentsController extends BasicController {
 
             // convert ResultSet to ArrayList
             while (athletesResult.next()) {
-                athletes.add(athletesResult.getString("first_name") + " " + athletesResult.getString("last_name"));
+                athletes.add(athletesResult.getString("user_id") + " (" + athletesResult.getString("first_name") + " " + athletesResult.getString("last_name") + ")");
             }
 
             view.populateAthletes(athletes);

@@ -38,7 +38,7 @@ public class User {
      * @param email
      * @param userType
      */
-    public User(int id, String firstName, String lastName, String username, String password, String email, String userType) {
+    public User(int id, String firstName, String lastName, String username, String password, String email, String userType, boolean active) {
         this.userId    = id;
         this.firstName = firstName;
         this.lastName  = lastName;
@@ -46,6 +46,7 @@ public class User {
         this.userType  = userType;
         this.password  = password;
         this.email     = email;
+        this.active    = active;
     }
 
     // Getters

@@ -2,11 +2,14 @@ package models;
 
 import common.Product;
 
+import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import static java.lang.String.valueOf;
 
@@ -60,6 +63,44 @@ public class ProductModel extends Model {
         } else {
             return null;
         }
+    }
+
+    private ResultSet getProductsResultSet() throws SQLException {
+        String query = "SELECT * FROM products";
+
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        return preparedStatement.executeQuery();
+    }
+
+    public DefaultTableModel buildProductsTable() throws SQLException {
+        ResultSet res = getProductsResultSet();
+        ResultSetMetaData metaData = res.getMetaData();
+
+        //fill column names
+        Vector<String> columnNames = new Vector<String>();
+        int columnCount = metaData.getColumnCount();
+        for (int column = 1; column <= columnCount; column++) {
+            columnNames.add(metaData.getColumnName(column));
+        }
+
+        //fill table data
+        Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+        while (res.next()) {
+            Vector<Object> vector = new Vector<Object>();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                vector.add(res.getObject(columnIndex));
+            }
+            data.add(vector);
+        }
+
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        return tableModel;
     }
 
     /**

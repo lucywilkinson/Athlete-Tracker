@@ -18,8 +18,8 @@ public class shipmentsCard extends card {
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
     JLabel statusFilterHeader = new JLabel("Filter By Status");
-    JCheckBox activeCheckbox = new JCheckBox("Pending", true);
-    JCheckBox inactiveCheckbox = new JCheckBox("Fulfilled", true);
+    public JCheckBox activeCheckbox = new JCheckBox("Pending", true);
+    public JCheckBox inactiveCheckbox = new JCheckBox("Fulfilled", true);
     JButton filterButton = new JButton("Filter");
 
     // right panel elements
@@ -96,6 +96,7 @@ public class shipmentsCard extends card {
 
         // add action listeners
         newShipmentButton.addActionListener(actionListeners.get("addShipment"));
+        newShipmentSaveButton.addActionListener(actionListeners.get("saveNewShipmentAction"));
         filterButton.addActionListener(actionListeners.get("filterShipmentsAction"));
         editButton.addActionListener(actionListeners.get("editShipmentAction"));
         editShipmentSaveButton.addActionListener(actionListeners.get("saveEditShipmentAction"));
@@ -183,18 +184,21 @@ public class shipmentsCard extends card {
     public void populateWorkers(ArrayList data) {
         for(int i = 0; i < data.size(); i++) {
             newShipmentWorkerField.addItem(data.get(i));
+            editShipmentWorkerField.addItem(data.get(i));
         }
     }
 
     public void populateAthletes(ArrayList data) {
         for(int i = 0; i < data.size(); i++) {
             newShipmentAthleteField.addItem(data.get(i));
+            editShipmentAthleteField.addItem(data.get(i));
         }
     }
 
     public void populateProducts(ArrayList data) {
         for(int i = 0; i < data.size(); i++) {
             newShipmentProductField.addItem(data.get(i));
+            editShipmentProductField.addItem(data.get(i));
         }
     }
 

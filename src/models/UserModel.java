@@ -74,51 +74,6 @@ public class UserModel extends Model {
         preparedStatement.executeUpdate();
     }
 
-    public User getUserData(int userID) throws SQLException {
-        String query = "SELECT * FROM users WHERE user_id = ?";
-
-        PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setString(1, valueOf(userID));
-
-        ResultSet res = preparedStatement.executeQuery();
-
-        if (res.next()) {
-            int id           = res.getInt(1);
-            String firstName = res.getString(2);
-            String lastName  = res.getString(3);
-            String username  = res.getString(4);
-            String password  = res.getString(5);
-            String email     = res.getString(6);
-            String userType  = res.getString(8);
-
-            return new User(id, firstName, lastName, username, password, userType, email);
-        }
-
-        throw new SQLException();
-    }
-
-    /**
-     * "Deletes" a user profile by deactivating their account. Active attribute in DB set to false.
-     * User info is not deleted as it could still be linked to shipments / orders.
-     * @param userID ID of user to deactivate.
-     * @return true if deactivation is successful. false if deactivation fails.
-     */
-    public boolean deleteProfile(int userID) throws SQLException {
-
-        // Query will succeed for any userID. Check user exists before updating table.
-        if (!userExists(userID)) {
-           return false;
-        }
-
-        String query = "UPDATE users SET active = false WHERE user_id = ?";
-
-        PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setString(1, valueOf(userID));
-        ResultSet res = preparedStatement.executeQuery();
-
-        return true;
-    }
-    
     public ResultSet returnUsersOfType (String type) throws SQLException {
         String query = "SELECT user_id, first_name, last_name, username, email, active, user_type FROM users WHERE user_type = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -208,7 +163,6 @@ public class UserModel extends Model {
                 return false;
             }
         };
-
         return tableModel;
     }
 }
