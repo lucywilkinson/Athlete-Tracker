@@ -72,6 +72,7 @@ public class AthletesController extends BasicController {
     private class editAthleteAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            view.launchEditUser();
         }
     }
 }
