@@ -64,6 +64,8 @@ public class adminsCard extends card {
     public JTextField editUserEmailField = new JTextField(20);
     JLabel editUserAccountTypeLabel = new JLabel("Account Type:", SwingConstants.RIGHT);
     public JComboBox editUserAccountTypeField = new JComboBox();
+    JLabel editUserStatusLabel = new JLabel("Status", SwingConstants.RIGHT);
+    public JCheckBox editUserStatusField = new JCheckBox("Active", true);
     JButton editUserSaveButton = new JButton("Save");
 
     GridBagConstraints constraints = new GridBagConstraints();
@@ -242,6 +244,13 @@ public class adminsCard extends card {
         }
         editUserAccountTypeField.setSelectedItem("admin");
         editUserAccountTypeField.setEnabled(false);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserStatusLabel, constraints);
+
+        constraints.gridx++;
+        editUserPanel.add(editUserStatusField, constraints);
 
         constraints.gridy++;
         constraints.fill = GridBagConstraints.HORIZONTAL;

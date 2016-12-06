@@ -63,6 +63,8 @@ public class athletesCard extends card {
     JLabel editUserEmailLabel = new JLabel("Email:", SwingConstants.RIGHT);
     public JTextField editUserEmailField = new JTextField(20);
     JLabel editUserAccountTypeLabel = new JLabel("Account Type:", SwingConstants.RIGHT);
+    JLabel editUserStatusLabel = new JLabel("Status", SwingConstants.RIGHT);
+    public JCheckBox editUserStatusField = new JCheckBox("Active", true);
     public JComboBox editUserAccountTypeField = new JComboBox();
     JButton editUserSaveButton = new JButton("Save");
 
@@ -244,6 +246,13 @@ public class athletesCard extends card {
         }
         editUserAccountTypeField.setSelectedItem("athlete");
         editUserAccountTypeField.setEnabled(false);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editUserPanel.add(editUserStatusLabel, constraints);
+
+        constraints.gridx++;
+        editUserPanel.add(editUserStatusField, constraints);
 
         constraints.gridy++;
         constraints.fill = GridBagConstraints.HORIZONTAL;
