@@ -113,7 +113,6 @@ public class ShipmentsController extends BasicController {
         }
     }
 
-
     void populateProducts() {
         try {
             productModel = new ProductModel();

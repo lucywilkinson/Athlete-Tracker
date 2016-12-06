@@ -1,6 +1,8 @@
 package views;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -31,8 +33,8 @@ public class productsCard extends card {
     JScrollPane scrollPane = new JScrollPane(dataTable);
 
     // new product elements
-    JFrame newUserFrame = new JFrame("Create New Product");
-    Dimension newUserFrameDimensions = new Dimension(400, 400);
+    public JFrame newProductFrame = new JFrame("Create New Product");
+    Dimension newProductFrameDimensions = new Dimension(400, 400);
     JPanel newProductPanel = new JPanel(new GridBagLayout());
     JLabel newProductNameLabel = new JLabel("Name:", SwingConstants.RIGHT);
     public JTextField newProductNameField = new JTextField(20);
@@ -43,8 +45,8 @@ public class productsCard extends card {
     JButton newProductSaveButton = new JButton("Save");
 
     // edit product elements
-    JFrame editUserFrame = new JFrame("Edit Product");
-    Dimension editUserFrameDimensions = new Dimension(400, 400);
+    public JFrame editProductFrame = new JFrame("Edit Product");
+    Dimension editProductFrameDimensions = new Dimension(400, 400);
     JPanel editProductPanel = new JPanel(new GridBagLayout());
     JLabel editProductIdLabel = new JLabel("ID:", SwingConstants.RIGHT);
     public JTextField editProductIdField = new JTextField(20);
@@ -90,6 +92,12 @@ public class productsCard extends card {
         // add row selection listener
         rowSelectionListener selectionListener = new rowSelectionListener();
         dataTable.getSelectionModel().addListSelectionListener(selectionListener);
+
+        // add document listeners to each "new product" field
+        SaveButtonDocumentListener saveButtonEnabler = new SaveButtonDocumentListener();
+        newProductNameField.getDocument().addDocumentListener(saveButtonEnabler);
+        newProductValueField.getDocument().addDocumentListener(saveButtonEnabler);
+        newProductQuantityField.getDocument().addDocumentListener(saveButtonEnabler);
     }
 
     void buildLeftPanel() {
@@ -152,10 +160,10 @@ public class productsCard extends card {
     }
 
     public void launchNewProduct() {
-        newUserFrame.setPreferredSize(this.newUserFrameDimensions);
+        newProductFrame.setPreferredSize(this.newProductFrameDimensions);
         this.buildNewProductFrame();
-        newUserFrame.pack();
-        newUserFrame.setVisible(true);
+        newProductFrame.pack();
+        newProductFrame.setVisible(true);
     }
 
     void buildNewProductFrame() {
@@ -188,20 +196,21 @@ public class productsCard extends card {
         constraints.gridy++;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1;
+        newProductSaveButton.setEnabled(false);
         newProductPanel.add(newProductSaveButton, constraints);
 
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(10,10,10,10);
-        newUserFrame.add(this.newProductPanel);
+        newProductFrame.add(this.newProductPanel);
     }
 
     public void launchEditProduct() {
-        newUserFrame.setPreferredSize(this.editUserFrameDimensions);
+        editProductFrame.setPreferredSize(this.editProductFrameDimensions);
         this.buildEditProductFrame();
-        newUserFrame.pack();
-        newUserFrame.setVisible(true);
+        editProductFrame.pack();
+        editProductFrame.setVisible(true);
     }
 
     void buildEditProductFrame() {
@@ -248,7 +257,7 @@ public class productsCard extends card {
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(10,10,10,10);
-        editUserFrame.add(this.editProductPanel);
+        editProductFrame.add(this.editProductPanel);
     }
 
     private class rowSelectionListener implements ListSelectionListener {
@@ -263,4 +272,35 @@ public class productsCard extends card {
         }
     }
 
+    /**
+     * Checks that all fields are filled before enabling newProductSaveButton.
+     */
+    private void checkFields() {
+        boolean name = !newProductNameField.getText().trim().isEmpty();
+        boolean value= !newProductValueField.getText().trim().isEmpty();
+        boolean quantity= !newProductQuantityField.getText().trim().isEmpty();
+
+        if (name && value && quantity) {
+            newProductSaveButton.setEnabled(true);
+        } else {
+            newProductSaveButton.setEnabled(false);
+        }
+    }
+
+    private class SaveButtonDocumentListener implements DocumentListener {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            checkFields();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            checkFields();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            checkFields();
+        }
+    }
 }

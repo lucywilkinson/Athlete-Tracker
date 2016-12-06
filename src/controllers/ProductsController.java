@@ -7,6 +7,7 @@ import views.productsCard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class ProductsController extends BasicController {
 
         view = new productsCard(actionListeners);
         masterView.addCard("Shipments", view);
+
+        view.dataTable.setModel(productModel.buildTableModel());
     }
 
     private class addProduct implements ActionListener{
@@ -49,7 +52,15 @@ public class ProductsController extends BasicController {
             Float value = Float.parseFloat(view.newProductValueField.getText());
             Integer quantity = Integer.parseInt(view.newProductQuantityField.getText());
 
-            /* the above is working well, leaving this data for you to implement, Matt */
+            Product product = new Product(productName, value, quantity);
+
+            try {
+                productModel.addProduct(product);
+                view.newProductFrame.dispatchEvent(new WindowEvent(view.newProductFrame, WindowEvent.WINDOW_CLOSING));
+                view.dataTable.setModel(productModel.buildTableModel());
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
