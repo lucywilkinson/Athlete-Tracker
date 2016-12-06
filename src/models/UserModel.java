@@ -163,6 +163,5 @@ public class UserModel extends Model {
         };
 
         return tableModel;
-
     }
 }

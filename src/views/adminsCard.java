@@ -17,10 +17,6 @@ public class adminsCard extends card {
     JLabel statusFilterHeader = new JLabel("Filter By Status");
     JCheckBox activeCheckbox = new JCheckBox("Active", true);
     JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
-    JPanel dateFilterPanel = new JPanel(new GridBagLayout());
-    JLabel dateFilterHeader = new JLabel("Filter By Date");
-    JTextField dateStartField = new JTextField("12/1/2012");
-    JTextField dateEndField = new JTextField("12/31/2016");
 
     // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
@@ -151,20 +147,6 @@ public class adminsCard extends card {
         constraints.gridy++;
         constraints.insets = new Insets(0, 0, 0, 0);
         leftPanel.add(statusFilterPanel, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy++;
-        dateFilterPanel.add(dateFilterHeader, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy++;
-        dateFilterPanel.add(dateStartField, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy++;
-        dateFilterPanel.add(dateEndField, constraints);
-
-        leftPanel.add(dateFilterPanel, constraints);
     }
 
     void buildRightPanel() {
