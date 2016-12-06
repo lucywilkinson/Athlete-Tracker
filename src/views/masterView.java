@@ -21,6 +21,7 @@ public class masterView {
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.pack();
         this.frame.setVisible(true);
+        this.frame.setResizable(false);
     }
 
     public void addCard(String name, JPanel panel) {
