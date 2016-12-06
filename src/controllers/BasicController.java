@@ -35,6 +35,7 @@ public abstract class BasicController {
         actionListeners.put("navigateToProducts", new clickProductsButton());
         actionListeners.put("navigateToShipments", new clickShipmentsButton());
         actionListeners.put("navigateToWarehouseWorkers", new clickWarehouseWorkersButton());
+        actionListeners.put("logout", new clickLogoutButton());
     }
 
     private class clickAthletesButton implements ActionListener {
@@ -109,6 +110,21 @@ public abstract class BasicController {
         public void actionPerformed(ActionEvent e) {
             try {
                 AdminsController AdminsController = new AdminsController(_user);
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+
+    private class clickLogoutButton implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                SessionsController sessionsController = new SessionsController();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             } catch (IOException e1) {
