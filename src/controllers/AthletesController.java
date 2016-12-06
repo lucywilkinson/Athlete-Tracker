@@ -25,6 +25,7 @@ public class AthletesController extends BasicController {
 
         actionListeners.put("newUserAction", new newUserAction());
         actionListeners.put("saveNewUserAction", new saveNewUserAction());
+        actionListeners.put("editAthleteAction", new editAthleteAction());
 
         view = new athletesCard(tableData, actionListeners);
         masterView.addCard("My Profile", view);
@@ -65,6 +66,12 @@ public class AthletesController extends BasicController {
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
+        }
+    }
+
+    private class editAthleteAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
         }
     }
 }

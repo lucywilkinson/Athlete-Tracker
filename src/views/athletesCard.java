@@ -3,12 +3,17 @@ package views;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class athletesCard extends card {
+
+    JButton editButton = new JButton("Edit");
+
     // left panel elements
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
@@ -96,6 +101,10 @@ public class athletesCard extends card {
         rightPanel.repaint();
         rightPanel.revalidate();
 
+        rowSelectionListener selectionListener = new rowSelectionListener();
+        dataTable.getSelectionModel().addListSelectionListener(selectionListener);
+        editButton.setEnabled(false);
+        editButton.addActionListener(actionListeners.get("editAthleteAction"));
     }
 
     void buildLeftPanel() {
@@ -115,6 +124,7 @@ public class athletesCard extends card {
         constraints.gridy++;
         constraints.insets = new Insets(0, 0, 10, 0);
         statusFilterPanel.add(inactiveCheckbox, constraints);
+        statusFilterPanel.add(editButton);
 
         constraints.gridx = 0;
         constraints.gridy++;
@@ -278,6 +288,14 @@ public class athletesCard extends card {
         @Override
         public void changedUpdate(DocumentEvent e) {
             checkFields();
+        }
+    }
+
+    private class rowSelectionListener implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if (dataTable.getSelectedRow() < 0) editButton.setEnabled(false);
+            else editButton.setEnabled(true);
         }
     }
 }
