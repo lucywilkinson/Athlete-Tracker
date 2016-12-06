@@ -18,6 +18,7 @@ public class shipmentsCard extends card {
     JLabel statusFilterHeader = new JLabel("Filter By Status");
     JCheckBox activeCheckbox = new JCheckBox("Pending", true);
     JCheckBox inactiveCheckbox = new JCheckBox("Fulfilled", true);
+    JButton filterButton = new JButton("Filter");
 
     // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
@@ -72,6 +73,7 @@ public class shipmentsCard extends card {
 
         // add action listeners
         newShipmentButton.addActionListener(actionListeners.get("addShipment"));
+        filterButton.addActionListener(actionListeners.get("filterShipmentsAction"));
 
         // build table
         rightPanel.repaint();
@@ -95,6 +97,9 @@ public class shipmentsCard extends card {
         constraints.gridy++;
         constraints.insets = new Insets(0, 0, 10, 0);
         statusFilterPanel.add(inactiveCheckbox, constraints);
+
+        constraints.gridy++;
+        statusFilterPanel.add(filterButton, constraints);
 
         constraints.gridx = 0;
         constraints.gridy++;

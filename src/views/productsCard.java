@@ -31,6 +31,7 @@ public class productsCard extends card {
     JLabel statusFilterHeader = new JLabel("Filter By Status");
     JCheckBox activeCheckbox = new JCheckBox("Active", true);
     JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
+    JButton filterButton = new JButton("Filter");
 
     // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
@@ -81,6 +82,7 @@ public class productsCard extends card {
 
         // add action listeners
         newProductButton.addActionListener(actionListeners.get("addProduct"));
+        filterButton.addActionListener(actionListeners.get("filterProductsAction"));
     }
 
     void buildLeftPanel() {
@@ -100,6 +102,9 @@ public class productsCard extends card {
         constraints.gridy++;
         constraints.insets = new Insets(0, 0, 10, 0);
         statusFilterPanel.add(inactiveCheckbox, constraints);
+
+        constraints.gridy++;
+        statusFilterPanel.add(filterButton, constraints);
 
         constraints.gridx = 0;
         constraints.gridy++;
