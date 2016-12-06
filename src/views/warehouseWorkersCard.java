@@ -99,10 +99,9 @@ public class warehouseWorkersCard extends card {
         newWorkerButton.addActionListener(actionListeners.get("newUserAction"));
         newUserSaveButton.addActionListener(actionListeners.get("saveNewUserAction"));
         editButton.addActionListener(actionListeners.get("editWorkerAction"));
-        editUserSaveButton.addActionListener(actionListeners.get("saveEditWorkerAction"));
+        editUserSaveButton.addActionListener(actionListeners.get("saveEditsAction"));
 
         editButton.setEnabled(false);
-        editButton.addActionListener(actionListeners.get("editAthleteAction"));
 
         // Save button disabled until all fields are filled
         newUserSaveButton.setEnabled(false);

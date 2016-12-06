@@ -42,23 +42,22 @@ public class WarehouseWorkersController extends BasicController {
     private class saveNewUserAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String firstName = view.newUserFirstNameField.getText();
-            String lastName  = view.newUserLastNameField.getText();
-            String username  = view.newUserUsernameField.getText();
-            String email     = view.newUserEmailField.getText();
-            String userType  = String.valueOf(view.newUserAccountTypeField.getSelectedItem());
-            String password  = String.valueOf(view.newUserPasswordField.getPassword());
-            String confirmPassword  = String.valueOf(view.newUserConfirmPasswordField.getPassword());
+            int    id        = Integer.parseInt(view.editUserIdField.getText());
+            String firstName = view.editUserFirstNameField.getText();
+            String lastName  = view.editUserLastNameField.getText();
+            String username  = view.editUserUsernameField.getText();
+            String email     = view.editUserEmailField.getText();
+            String userType  = String.valueOf(view.editUserAccountTypeField.getSelectedItem());
 
-            if (!password.equals(confirmPassword)) {
-                JOptionPane.showMessageDialog(new JFrame(), "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            // Placeholder password
+            String password  = "";
+
+            User updatedUser = new User(id, firstName, lastName, username, password, email, userType);
 
             try {
-                User newUser = new User(firstName, lastName, username, userType, password, email);
-                userModel.addUser(newUser);
-                view.newUserFrame.dispatchEvent(new WindowEvent(view.newUserFrame, WindowEvent.WINDOW_CLOSING));
+                // Update user in DB
+                userModel.editUser(updatedUser);
+                view.editUserFrame.dispatchEvent(new WindowEvent(view.editUserFrame, WindowEvent.WINDOW_CLOSING));
                 view.dataTable.setModel(userModel.buildTableModel(userType));
 
             } catch (SQLException e1) {
@@ -96,7 +95,9 @@ public class WarehouseWorkersController extends BasicController {
             String username  = view.editUserUsernameField.getText();
             String email     = view.editUserEmailField.getText();
             String userType  = String.valueOf(view.editUserAccountTypeField.getSelectedItem());
-            String password  = String.valueOf(view.editUserPasswordField.getPassword());
+
+            // Placeholder
+            String password  = "";
 
             User updatedUser = new User(id, firstName, lastName, username, password, email, userType);
 
