@@ -32,7 +32,6 @@ public class myProfileCard extends card {
 
     public myProfileCard(User user, HashMap<String, ActionListener> actionListeners) {
         super(actionListeners); // adds nav bar
-        populate(user); //populates fields in myProfile
 
         constraints.weighty = 1;
         constraints.weightx = 1;
@@ -115,6 +114,7 @@ public class myProfileCard extends card {
 
         // editing disabled by default
         makeEditable(false);
+        populate(user); //populates fields in myProfile
     }
 
     public void populate(User user) {
