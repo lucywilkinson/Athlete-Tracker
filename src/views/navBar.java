@@ -1,6 +1,7 @@
 package views;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class navBar extends JPanel {
         this.setLayout(new GridBagLayout());
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(10, 0, 10, 0);
         constraints.gridy = 0;
         constraints.weighty = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
