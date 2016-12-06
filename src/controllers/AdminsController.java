@@ -3,53 +3,72 @@ package controllers;
 import common.User;
 import models.UserModel;
 import views.adminsCard;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.table.DefaultTableModel;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-
-/**
- * Created by alex on 11/27/16. Updated by Lucy on 12/4/16
- */
 
 public class AdminsController extends BasicController {
 
-    UserModel userModel;
+    UserModel userModel = new UserModel();
     adminsCard view;
-
 
     public AdminsController(User user) throws SQLException, IOException, ClassNotFoundException {
         super(user);
 
-        userModel = new UserModel();
-
         DefaultTableModel tableData = userModel.buildTableModel("admin");
 
-        view = new adminsCard(actionListeners);
-        view.populate(tableData);
+        actionListeners.put("newUserAction", new newUserAction());
+        actionListeners.put("saveNewUserAction", new saveNewUserAction());
+        actionListeners.put("editAdminAction", new editAdminAction());
 
-        masterView.addCard("My Profile", view);
-    }
+        view = new adminsCard(tableData, actionListeners);
+        masterView.addCard("Admins", view);
 
-    private class fillTableAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                view.populate(userModel.buildTableModel("admin"));
-            }
-            catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-        }
+        view.dataTable.setModel(userModel.buildTableModel("admin"));
     }
 
     private class newUserAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.launchNewUser();
+        }
+    }
+
+    private class saveNewUserAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String firstName = view.newUserFirstNameField.getText();
+            String lastName  = view.newUserLastNameField.getText();
+            String username  = view.newUserUsernameField.getText();
+            String email     = view.newUserEmailField.getText();
+            String userType  = String.valueOf(view.newUserAccountTypeField.getSelectedItem());
+            String password  = String.valueOf(view.newUserPasswordField.getPassword());
+            String confirmPassword  = String.valueOf(view.newUserConfirmPasswordField.getPassword());
+
+            if (!password.equals(confirmPassword)) {
+                JOptionPane.showMessageDialog(new JFrame(), "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            try {
+                User newUser = new User(firstName, lastName, username, userType, password, email);
+                userModel.addUser(newUser);
+                view.newUserFrame.dispatchEvent(new WindowEvent(view.newUserFrame, WindowEvent.WINDOW_CLOSING));
+                view.dataTable.setModel(userModel.buildTableModel(userType));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+
+    private class editAdminAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.launchEditUser();
         }
     }
 }
