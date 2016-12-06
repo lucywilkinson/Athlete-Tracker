@@ -43,7 +43,7 @@ public class SessionsModel extends Model {
             String email     = res.getString(6);
             String userType  = res.getString(8);
 
-            return new User(userId, firstName, lastName, username, password, userType, email);
+            return new User(userId, firstName, lastName, username, password, email, userType);
         }
 
         /* Invalid username || password */
