@@ -15,8 +15,8 @@ public class athletesCard extends card {
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
     JLabel statusFilterHeader = new JLabel("Filter By Status");
-    JCheckBox activeCheckbox = new JCheckBox("Active", true);
-    JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
+    public JCheckBox activeCheckbox = new JCheckBox("Active", true);
+    public JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
     JButton filterButton = new JButton("Filter");
 
     // right panel elements

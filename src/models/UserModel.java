@@ -136,15 +136,15 @@ public class UserModel extends Model {
         if (active && inactive) {
             query = "SELECT user_id, first_name, last_name, username, email, active, user_type FROM users WHERE user_type = ?";
         } else if (active) {
-            query = "SELECT user_id, first_name, last_name, username, email, active, user_type FROM users WHERE user_type= ? AND active = 1";
+            query = "SELECT user_id, first_name, last_name, username, email, active, user_type FROM users WHERE user_type= ? AND active = true";
         } else {
-            query = "SELECT user_id, first_name, last_name, username, email, active, user_type FROM users WHERE user_type= ? AND active = 0";
+            query = "SELECT user_id, first_name, last_name, username, email, active, user_type FROM users WHERE user_type= ? AND active = false";
         }
 
         PreparedStatement preparedStatement = conn.prepareStatement(query);
         preparedStatement.setString(1, userType);
 
-        ResultSet res = preparedStatement.executeQuery(query);
+        ResultSet res = preparedStatement.executeQuery();
 
         ResultSetMetaData metaData = res.getMetaData();
 

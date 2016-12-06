@@ -25,11 +25,26 @@ public class WarehouseWorkersController extends BasicController {
         actionListeners.put("saveNewUserAction", new saveNewUserAction());
         actionListeners.put("editWorkerAction", new editWorkerAction());
         actionListeners.put("saveEditsAction", new saveEditsAction());
+        actionListeners.put("filterUsersAction", new filterUsers());
 
         view = new warehouseWorkersCard(actionListeners);
         masterView.addCard("Workers", view);
 
         view.dataTable.setModel(userModel.buildTableModel("worker"));
+    }
+
+    private class filterUsers implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            boolean active = view.activeCheckbox.isSelected();
+            boolean inactive = view.inactiveCheckbox.isSelected();
+
+            try {
+                view.dataTable.setModel(userModel.filterUsers("athlete", active, inactive));
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     private class newUserAction implements ActionListener {
