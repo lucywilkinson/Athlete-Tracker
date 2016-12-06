@@ -55,7 +55,7 @@ public class adminsCard extends card {
     Dimension editUserFrameDimensions = new Dimension(400, 400);
     JPanel editUserPanel = new JPanel(new GridBagLayout());
     JLabel editUserIdLabel = new JLabel("ID:", SwingConstants.RIGHT);
-    JTextField editUserIdField = new JTextField(20);
+    public JTextField editUserIdField = new JTextField(20);
     JLabel editUserUsernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
     public JTextField editUserUsernameField = new JTextField(20);
     JLabel editUserFirstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
@@ -100,6 +100,7 @@ public class adminsCard extends card {
         newAdminButton.addActionListener(actionListeners.get("newUserAction"));
         newUserSaveButton.addActionListener(actionListeners.get("saveNewUserAction"));
         editButton.addActionListener(actionListeners.get("editAdminAction"));
+        editUserSaveButton.addActionListener(actionListeners.get("saveEditAdminAction"));
 
         editButton.setEnabled(false);
         editButton.addActionListener(actionListeners.get("editAthleteAction"));
@@ -115,7 +116,7 @@ public class adminsCard extends card {
         newUserPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
         newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
 
-        // build table
+
         dataTable = new JTable(tableData);
         rightPanel.remove(dataTable);
         constraints.gridy = 2;
@@ -263,7 +264,7 @@ public class adminsCard extends card {
         for(int i = 0; i < accountTypes.length; i++) {
             editUserAccountTypeField.addItem(accountTypes[i]);
         }
-        editUserAccountTypeField.setSelectedItem("athlete");
+        editUserAccountTypeField.setSelectedItem("admin");
         editUserAccountTypeField.setEnabled(false);
 
         constraints.gridy++;
