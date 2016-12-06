@@ -1,5 +1,7 @@
 package models;
 
+import common.Shipment;
+
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.sql.ResultSetMetaData;
@@ -12,6 +14,22 @@ public class ShipmentsModel extends Model {
 
     public ShipmentsModel() throws SQLException, IOException, ClassNotFoundException {
         super();
+    }
+
+    public void editShipment(Shipment shipment) throws SQLException{
+        String query = "UPDATE shipments SET shipment_product = ?, shipment_creator = ?, shipment_worker = ?, shipment_reciever = ?, shipment_address = ?, shipment_quantity = ?, shipment_fulfilled = ? WHERE shipment_id = ?";
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+
+        preparedStatement.setString(1, shipment.getProduct());
+        preparedStatement.setString(2, shipment.getCreator());
+        preparedStatement.setString(3, shipment.getWorker());
+        preparedStatement.setString(4, shipment.getReciever());
+        preparedStatement.setString(5, shipment.getAddress());
+        preparedStatement.setString(6, String.valueOf(shipment.getQuantity()));
+        preparedStatement.setString(7, String.valueOf(shipment.getFulfilled()));
+        preparedStatement.setString(8, String.valueOf(shipment.getShipmentId()));
+
+        preparedStatement.executeUpdate();
     }
 
     private ResultSet getRawShipmentData() throws SQLException {

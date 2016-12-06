@@ -1,6 +1,7 @@
 package controllers;
 
 import common.Product;
+import common.Shipment;
 import common.User;
 import models.ProductModel;
 import models.ShipmentsModel;
@@ -25,7 +26,10 @@ public class ShipmentsController extends BasicController {
 
     public ShipmentsController() throws SQLException, IOException, ClassNotFoundException {
         shipmentsModel = new ShipmentsModel();
+
         actionListeners.put("addShipment", new addShipment());
+        actionListeners.put("editShipmentAction", new editShipmentAction());
+        actionListeners.put("saveEditShipmentAction", new saveEditShipmentAction());
 
         view = new shipmentsCard(actionListeners);
         masterView.addCard("Shipments", view);
@@ -44,6 +48,41 @@ public class ShipmentsController extends BasicController {
             populateWorkers();
             populateAthletes();
         }
+    }
+
+    private class editShipmentAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.launchEditShipment();
+
+            int row = view.dataTable.getSelectedRow();
+
+            //String id = String.valueOf(view.dataTable.getValueAt(row, 0));
+            String product = String.valueOf(view.dataTable.getValueAt(row, 2));
+            //String creator = String.valueOf(view.dataTable.getValueAt(row, 2));
+            String worker = String.valueOf(view.dataTable.getValueAt(row, 1));
+            String reciever = String.valueOf(view.dataTable.getValueAt(row, 4));
+            //String address = String.valueOf(view.dataTable.getValueAt(row, 5));
+            String quantity = String.valueOf(view.dataTable.getValueAt(row, 3));
+
+            view.editShipmentWorkerField.setSelectedItem(worker);
+            view.editShipmentAthleteField.setSelectedItem(reciever);
+            view.editShipmentProductField.setSelectedItem(product);
+            view.editShipmentQuantityField.setText(quantity);
+        }
+    }
+
+    private class saveEditShipmentAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int id = Integer.parseInt(view.editShipmentIdField.getText());
+            String product = String.valueOf(view.editShipmentProductField.getSelectedItem());
+            String worker = String.valueOf(view.editShipmentWorkerField.getSelectedItem());
+            String reciever = String.valueOf(view.editShipmentAthleteField.getSelectedItem());
+            String quantity = String.valueOf(view.editShipmentQuantityField.getText());
+;       }
+
+        //Shipment updatedShipment = new Shipment(User.userId)
     }
 
     /*
