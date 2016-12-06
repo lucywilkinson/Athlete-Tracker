@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class athletesCard extends card {
-
     // left panel elements
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
@@ -30,6 +29,7 @@ public class athletesCard extends card {
     JButton newAthleteButton = new JButton("New Athlete");
     JButton editButton = new JButton("Edit");
     public JTable dataTable = new JTable();
+    JScrollPane scrollPane = new JScrollPane(dataTable);
 
     // new user elements
     public JFrame newUserFrame = new JFrame("Create New Athlete");
@@ -188,11 +188,13 @@ public class athletesCard extends card {
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         rightPanel.add(headerPanel, constraints);
 
-        constraints.gridy++;
+        //constraints.gridy++;
         constraints.gridx = 0;
+        constraints.gridy = 2;
         constraints.weightx = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
-        rightPanel.add(dataTable, constraints);
+        constraints.fill = GridBagConstraints.BOTH;
+        rightPanel.add(scrollPane, constraints);
     }
 
     public void launchEditUser() {
