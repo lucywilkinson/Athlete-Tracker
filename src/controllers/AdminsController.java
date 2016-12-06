@@ -19,7 +19,7 @@ public class AdminsController extends BasicController {
 
     UserModel userModel;
     adminsCard view;
-    HashMap actionListeners = new HashMap<String, ActionListener>();
+
 
     public AdminsController(User user) throws SQLException, IOException, ClassNotFoundException {
         super(user);

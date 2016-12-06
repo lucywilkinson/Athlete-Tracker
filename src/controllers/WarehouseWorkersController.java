@@ -20,7 +20,7 @@ public class WarehouseWorkersController extends BasicController {
     UserModel userModel = new UserModel();
     warehouseWorkersCard view;
     User _user;
-    HashMap actionListeners = new HashMap<String, ActionListener>();
+
 
     public WarehouseWorkersController(User user) throws SQLException, IOException, ClassNotFoundException {
         super(user);
