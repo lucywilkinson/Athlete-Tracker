@@ -74,14 +74,12 @@ public class AthletesController extends BasicController {
             String firstName = String.valueOf(view.dataTable.getValueAt(row, 1));
             String lastName  = String.valueOf(view.dataTable.getValueAt(row, 2));
             String username  = String.valueOf(view.dataTable.getValueAt(row, 3));
-            String password  = String.valueOf(view.dataTable.getValueAt(row, 4));
             String email     = String.valueOf(view.dataTable.getValueAt(row, 5));
 
             view.editUserIdField.setText(id);
             view.editUserFirstNameField.setText(firstName);
             view.editUserLastNameField.setText(lastName);
             view.editUserUsernameField.setText(username);
-            view.editUserPasswordField.setText(password);
             view.editUserEmailField.setText(email);
         }
     }
@@ -95,7 +93,9 @@ public class AthletesController extends BasicController {
             String username  = view.editUserUsernameField.getText();
             String email     = view.editUserEmailField.getText();
             String userType  = String.valueOf(view.editUserAccountTypeField.getSelectedItem());
-            String password  = String.valueOf(view.editUserPasswordField.getPassword());
+
+            // Placeholder
+            String password  = "";
 
             User updatedUser = new User(id, firstName, lastName, username, password, email, userType);
 
