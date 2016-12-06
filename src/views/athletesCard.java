@@ -113,11 +113,11 @@ public class athletesCard extends card {
         newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
 
         // build table
-        dataTable = new JTable(tableData);
+        /*dataTable = new JTable(tableData);
         rightPanel.remove(dataTable);
         constraints.gridy = 2;
         constraints.gridx = 0;
-        rightPanel.add(dataTable, constraints);
+        rightPanel.add(dataTable, constraints);*/
         rightPanel.repaint();
         rightPanel.revalidate();
 
