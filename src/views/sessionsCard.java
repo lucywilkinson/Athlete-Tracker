@@ -12,9 +12,9 @@ public class sessionsCard extends card {
     JPanel centerPanel = new JPanel(new GridBagLayout());
     public JButton loginBtn = new JButton("Log In");
     JLabel usernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
-    public JTextField usernameField = new JTextField("Dragon");
+    public JTextField usernameField = new JTextField();
     JLabel passwordLabel = new JLabel("Password:", SwingConstants.RIGHT);
-    public JPasswordField passwordField = new JPasswordField("Dragon-1");
+    public JPasswordField passwordField = new JPasswordField();
 
     GridBagConstraints constraints = new GridBagConstraints();
 
