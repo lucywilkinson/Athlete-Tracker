@@ -33,21 +33,13 @@ public class shipmentsCard extends card {
     JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new shipment elements
-    JFrame newShipmentFrame = new JFrame("Create New Shipment");
+    public JFrame newShipmentFrame = new JFrame("Create New Shipment");
     Dimension newShipmentFrameDimensions = new Dimension(400, 400);
     JPanel newShipmentPanel = new JPanel(new GridBagLayout());
     JLabel newShipmentWorkerLabel = new JLabel("Worker:", SwingConstants.RIGHT);
     public JComboBox newShipmentWorkerField = new JComboBox();
     JLabel newShipmentAthleteLabel = new JLabel("Athlete:", SwingConstants.RIGHT);
     public JComboBox newShipmentAthleteField = new JComboBox();
-    JLabel newShipmentAddressLabel = new JLabel("Address:", SwingConstants.RIGHT);
-    public JTextField newShipmentAddressField = new JTextField(20);
-    JLabel newShipmentCityLabel= new JLabel("City:", SwingConstants.RIGHT);
-    public JTextField newShipmentStateField = new JTextField(20);
-    JLabel newShipmentStateLabel = new JLabel("State:", SwingConstants.RIGHT);
-    public JTextField newShipmentCityField = new JTextField(20);
-    JLabel newShipmentCountryLabel = new JLabel("Country:", SwingConstants.RIGHT);
-    public JTextField newShipmentCountryField = new JTextField(20);
     JLabel newShipmentProductLabel = new JLabel("Product:", SwingConstants.RIGHT);
     JLabel newShipmentProductMaxQuantityLabel = new JLabel("Quantity in stock:", SwingConstants.RIGHT);
     public JTextField newShipmentProductMaxQuantityField = new JTextField("0", 20);
@@ -66,14 +58,6 @@ public class shipmentsCard extends card {
     public JComboBox editShipmentWorkerField = new JComboBox();
     JLabel editShipmentAthleteLabel = new JLabel("Athlete:", SwingConstants.RIGHT);
     public JComboBox editShipmentAthleteField = new JComboBox();
-    JLabel editShipmentAddressLabel = new JLabel("Address:", SwingConstants.RIGHT);
-    public JTextField editShipmentAddressField = new JTextField(20);
-    JLabel editShipmentCityLabel = new JLabel("City:", SwingConstants.RIGHT);
-    public JTextField editShipmentStateField = new JTextField(20);
-    JLabel editShipmentStateLabel = new JLabel("State:", SwingConstants.RIGHT);
-    public JTextField editShipmentCityField = new JTextField(20);
-    JLabel editShipmentCountryLabel = new JLabel("Country:", SwingConstants.RIGHT);
-    public JTextField editShipmentCountryField = new JTextField(20);
     JLabel editShipmentProductLabel = new JLabel("Product:", SwingConstants.RIGHT);
     JLabel editShipmentProductMaxQuantityLabel = new JLabel("Quantity in stock:", SwingConstants.RIGHT);
     public JTextField editShipmentProductMaxQuantityField = new JTextField("0", 20);
@@ -251,34 +235,6 @@ public class shipmentsCard extends card {
 
         constraints.gridy++;
         constraints.gridx = 0;
-        editShipmentPanel.add(editShipmentAddressLabel, constraints);
-
-        constraints.gridx = 1;
-        editShipmentPanel.add(editShipmentAddressField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
-        editShipmentPanel.add(editShipmentCityLabel, constraints);
-
-        constraints.gridx = 1;
-        editShipmentPanel.add(editShipmentCityField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
-        editShipmentPanel.add(editShipmentStateLabel, constraints);
-
-        constraints.gridx = 1;
-        editShipmentPanel.add(editShipmentStateField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
-        editShipmentPanel.add(editShipmentCountryLabel, constraints);
-
-        constraints.gridx = 1;
-        editShipmentPanel.add(editShipmentCountryField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
         editShipmentPanel.add(editShipmentProductLabel, constraints);
 
         constraints.gridx++;
@@ -298,6 +254,13 @@ public class shipmentsCard extends card {
 
         constraints.gridx = 1;
         editShipmentPanel.add(editShipmentQuantityField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        editShipmentPanel.add(editShipmentFulfilledLabel, constraints);
+
+        constraints.gridx = 1;
+        editShipmentPanel.add(editShipmentFulfilledField, constraints);
 
         constraints.gridy++;
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -340,34 +303,6 @@ public class shipmentsCard extends card {
 
         constraints.gridx = 1;
         newShipmentPanel.add(newShipmentAthleteField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
-        newShipmentPanel.add(newShipmentAddressLabel, constraints);
-
-        constraints.gridx = 1;
-        newShipmentPanel.add(newShipmentAddressField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
-        newShipmentPanel.add(newShipmentCityLabel, constraints);
-
-        constraints.gridx = 1;
-        newShipmentPanel.add(newShipmentCityField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
-        newShipmentPanel.add(newShipmentStateLabel, constraints);
-
-        constraints.gridx = 1;
-        newShipmentPanel.add(newShipmentStateField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
-        newShipmentPanel.add(newShipmentCountryLabel, constraints);
-
-        constraints.gridx = 1;
-        newShipmentPanel.add(newShipmentCountryField, constraints);
 
         constraints.gridy++;
         constraints.gridx = 0;
