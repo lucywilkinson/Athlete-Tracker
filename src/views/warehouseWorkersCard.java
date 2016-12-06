@@ -99,8 +99,6 @@ public class warehouseWorkersCard extends card {
         constraints.gridy++;
         constraints.insets = new Insets(0, 0, 0, 0);
         leftPanel.add(statusFilterPanel, constraints);
-
-        leftPanel.add(dateFilterPanel, constraints);
     }
 
     void buildRightPanel() {

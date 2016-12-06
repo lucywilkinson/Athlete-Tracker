@@ -42,7 +42,7 @@ public abstract class BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                AthletesController AthletesController = new AthletesController(_user);
+                AthletesController AthletesController = new AthletesController();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             } catch (IOException e1) {
@@ -56,7 +56,7 @@ public abstract class BasicController {
     private class clickShipmentsButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ShipmentsController ShipmentsController = new ShipmentsController(_user);
+            ShipmentsController ShipmentsController = new ShipmentsController();
         }
     }
 
@@ -64,7 +64,7 @@ public abstract class BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                WarehouseWorkersController WarehouseWorkersController = new WarehouseWorkersController(_user);
+                WarehouseWorkersController WarehouseWorkersController = new WarehouseWorkersController();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             } catch (IOException e1) {
@@ -79,7 +79,7 @@ public abstract class BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                ProductsController ProductsController = new ProductsController(_user);
+                ProductsController ProductsController = new ProductsController();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             } catch (IOException e1) {
@@ -94,7 +94,7 @@ public abstract class BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                MyProfileController MyProfileController = new MyProfileController(_user);
+                MyProfileController MyProfileController = new MyProfileController();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             } catch (IOException e1) {
@@ -109,7 +109,7 @@ public abstract class BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                AdminsController AdminsController = new AdminsController(_user);
+                AdminsController AdminsController = new AdminsController();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             } catch (IOException e1) {

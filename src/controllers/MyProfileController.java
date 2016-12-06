@@ -16,14 +16,14 @@ public class MyProfileController extends BasicController {
     private UserModel userModel = new UserModel();
     private myProfileCard myProfileCard;
 
-    public MyProfileController(User user) throws SQLException, IOException, ClassNotFoundException {
-        super(user);
-
+    public MyProfileController() throws SQLException, IOException, ClassNotFoundException {
         // attach action listeners
         actionListeners.put("editProfileAction", new editProfileAction());
         actionListeners.put("saveProfileAction", new saveProfileAction());
 
-        myProfileCard = new myProfileCard(user, actionListeners);
+        myProfileCard = new myProfileCard(_user, actionListeners);
+
+        // myProfileCard = new myProfileCard(_user, actionListeners);
         masterView.addCard("My Profile", myProfileCard);
     }
 

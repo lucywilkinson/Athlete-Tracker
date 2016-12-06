@@ -16,8 +16,7 @@ public class AdminsController extends BasicController {
     UserModel userModel = new UserModel();
     adminsCard view;
 
-    public AdminsController(User user) throws SQLException, IOException, ClassNotFoundException {
-        super(user);
+    public AdminsController() throws SQLException, IOException, ClassNotFoundException {
 
         DefaultTableModel tableData = userModel.buildTableModel("admin");
 

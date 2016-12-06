@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-/**
- * Created by lucywilkinson on 12/1/16.
- */
 
 public class WarehouseWorkersController extends BasicController {
     UserModel userModel = new UserModel();
@@ -22,8 +19,7 @@ public class WarehouseWorkersController extends BasicController {
     User _user;
 
 
-    public WarehouseWorkersController(User user) throws SQLException, IOException, ClassNotFoundException {
-        super(user);
+    public WarehouseWorkersController() throws SQLException, IOException, ClassNotFoundException {
 
         DefaultTableModel tableData = userModel.buildTableModel("worker");
 

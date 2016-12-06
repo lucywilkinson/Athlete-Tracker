@@ -12,31 +12,12 @@ import java.util.HashMap;
  * Created by alex on 11/29/16.
  */
 public class shipmentsCard extends card {
-    // dummy data
-    String[] columnNames = {"First Name",
-            "Last Name",
-            "Sport",
-            "# of Years",
-            "Vegetarian"};
-
-    Object[][] data = {
-            {"Kathy", "Smith", "Snowboarding", new Integer(5), new Boolean(false)},
-            {"John", "Doe", "Rowing", new Integer(3), new Boolean(true)},
-            {"Sue", "Black", "Knitting", new Integer(2), new Boolean(false)},
-            {"Jane", "White", "Speed reading", new Integer(20), new Boolean(true)},
-            {"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}
-    };
-
     // left panel elements
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
     JLabel statusFilterHeader = new JLabel("Filter By Status");
     JCheckBox activeCheckbox = new JCheckBox("Active", true);
     JCheckBox inactiveCheckbox = new JCheckBox("Inactive", true);
-    JPanel dateFilterPanel = new JPanel(new GridBagLayout());
-    JLabel dateFilterHeader = new JLabel("Filter By Date");
-    JTextField dateStartField = new JTextField("12/1/2012");
-    JTextField dateEndField = new JTextField("12/31/2016");
 
     // right panel elements
     JPanel rightPanel = new JPanel(new GridBagLayout());
@@ -44,7 +25,7 @@ public class shipmentsCard extends card {
     JLabel titleLabel = new JLabel("Shipments");
     JButton newShipmentButton = new JButton("New Shipment");
     JButton saveChangesButton = new JButton("Save Changes");
-    JTable dataTable = new JTable(data, columnNames);
+    JTable dataTable = new JTable();
     JScrollPane scrollPane = new JScrollPane(dataTable);
     JPanel editDataPanel = new JPanel(new GridBagLayout());
 
@@ -116,20 +97,6 @@ public class shipmentsCard extends card {
         constraints.gridy++;
         constraints.insets = new Insets(0, 0, 0, 0);
         leftPanel.add(statusFilterPanel, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy++;
-        dateFilterPanel.add(dateFilterHeader, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy++;
-        dateFilterPanel.add(dateStartField, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy++;
-        dateFilterPanel.add(dateEndField, constraints);
-
-        leftPanel.add(dateFilterPanel, constraints);
     }
 
     void buildRightPanel() {

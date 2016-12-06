@@ -15,10 +15,7 @@ public class SessionsController extends BasicController {
     SessionsModel sessionsModel = new SessionsModel();
     sessionsCard sessionsCard;
 
-    User _user;
-
     public SessionsController() throws SQLException, IOException, ClassNotFoundException {
-        super();
         actionListeners.put("loginAction", new loginAction());
 
         sessionsCard = new sessionsCard(actionListeners);
@@ -37,9 +34,10 @@ public class SessionsController extends BasicController {
                 // Use session model to validate login credentials
                 _user = sessionsModel.validateLogin(username, password);
 
+                System.out.println(_user.getUserId());
                 if(_user != null) {
                     // launch myProfile
-                    MyProfileController MyProfileController = new MyProfileController(_user);
+                    MyProfileController MyProfileController = new MyProfileController();
                 } else {
                     System.out.println("LOGIN FAILED");
                 }
