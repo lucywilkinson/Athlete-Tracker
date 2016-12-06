@@ -151,7 +151,6 @@ public class ShipmentsController extends BasicController {
             }
 
             Shipment updatedShipment = new Shipment(workerID, athleteID, _user.getUserId(), product, quantity, fulfilled);
-
             try {
                 shipmentsModel.editShipment(id, updatedShipment);
                 view.editShipmentFrame.dispatchEvent(new WindowEvent(view.editShipmentFrame, WindowEvent.WINDOW_CLOSING));

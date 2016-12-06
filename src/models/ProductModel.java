@@ -37,8 +37,9 @@ public class ProductModel extends Model {
             String productName  = res.getString(2);
             float productValue  = res.getFloat(3);
             int productQuantity = res.getInt(4);
+            boolean active      = res.getBoolean(5);
 
-            Product product = new Product(productName, productID, productValue, productQuantity);
+            Product product = new Product(productID, productName, productValue, productQuantity, active);
             products.add(product);
         }
 
@@ -57,8 +58,9 @@ public class ProductModel extends Model {
             String productName  = res.getString(2);
             float productValue  = res.getFloat(3);
             int productQuantity = res.getInt(4);
+            boolean active      = res.getBoolean(5);
 
-            Product product = new Product(productName, productID, productValue, productQuantity);
+            Product product = new Product(productID, productName, productValue, productQuantity, active);
             return product;
         } else {
             return null;
@@ -114,6 +116,24 @@ public class ProductModel extends Model {
         preparedStatement.setString(1, product.getName());
         preparedStatement.setString(2, valueOf(product.getValue()));
         preparedStatement.setString(3, valueOf(product.getQuantity()));
+        preparedStatement.executeUpdate();
+    }
+
+    public void editProduct(int productID, Product product) throws SQLException {
+        String query = "UPDATE products SET " +
+                "product_name = ?, " +
+                "product_cost = ?, " +
+                "product_quantity = ?, " +
+                "product_active = ? " +
+                "WHERE product_id = ?";
+
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setString(1, product.getName());
+        preparedStatement.setDouble(2, product.getValue());
+        preparedStatement.setInt(3, product.getQuantity());
+        preparedStatement.setBoolean(4, product.getActive());
+        preparedStatement.setInt(5, productID);
+
         preparedStatement.executeUpdate();
     }
 }
