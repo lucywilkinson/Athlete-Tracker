@@ -1,7 +1,5 @@
 package models;
 
-import common.Product;
-
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.sql.ResultSetMetaData;
@@ -10,9 +8,7 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.Vector;
 
-/**
- * Updated by lucywilkinson on 12/5/16.
- */
+import static models.Model.conn;
 
 public class ShipmentsModel extends Model {
 

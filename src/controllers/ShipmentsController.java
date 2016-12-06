@@ -104,7 +104,7 @@ public class ShipmentsController extends BasicController {
     void populateWorkers() {
         try {
             userModel = new UserModel();
-            ResultSet workersResult = userModel.returnUsersofType("worker");
+            ResultSet workersResult = userModel.returnUsersOfType("worker");
             ArrayList workers = new ArrayList();
 
             // convert ResultSet to ArrayList
@@ -125,7 +125,7 @@ public class ShipmentsController extends BasicController {
     void populateAthletes() {
         try {
             userModel = new UserModel();
-            ResultSet athletesResult = userModel.returnUsersofType("athlete");
+            ResultSet athletesResult = userModel.returnUsersOfType("athlete");
             ArrayList athletes = new ArrayList();
 
             // convert ResultSet to ArrayList

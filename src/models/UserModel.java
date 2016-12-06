@@ -57,6 +57,21 @@ public class UserModel extends Model {
         preparedStatement.executeUpdate();
     }
 
+    public void addUser(User user) throws SQLException {
+        String query = "INSERT INTO users (first_name, last_name, username, password, email, user_type)" +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setString(1, user.getFirstName());
+        preparedStatement.setString(2, user.getLastName());
+        preparedStatement.setString(3, user.getUsername());
+        preparedStatement.setString(4, user.getPassword());
+        preparedStatement.setString(5, user.getEmail());
+        preparedStatement.setString(6, user.getUserType());
+
+        preparedStatement.executeUpdate();
+    }
+
     public User getUserData(int userID) throws SQLException {
         String query = "SELECT * FROM users WHERE user_id = ?";
 
@@ -100,7 +115,7 @@ public class UserModel extends Model {
         return true;
     }
     
-    public ResultSet returnUsersofType (String type) throws SQLException {
+    public ResultSet returnUsersOfType (String type) throws SQLException {
         String query = "SELECT * FROM users WHERE user_type = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
 
@@ -113,11 +128,12 @@ public class UserModel extends Model {
 
     /**
      * Builds table from ResultSet of users from database. Code adapted from http://stackoverflow.com/questions/10620448/most-simple-code-to-populate-jtable-from-resultset
-     * @param res ResultSet of users of type admin/worker/athlete
+     * @param userType type of user admin/worker/athlete
      * @return TableModel to be passed to JTable constructor
      * @throws SQLException
      */
-    public static DefaultTableModel buildTableModel(ResultSet res) throws SQLException {
+    public DefaultTableModel buildTableModel(String userType) throws SQLException {
+        ResultSet res = returnUsersOfType(userType);
         ResultSetMetaData metaData = res.getMetaData();
 
         //fill column names

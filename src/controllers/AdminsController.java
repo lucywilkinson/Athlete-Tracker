@@ -26,7 +26,7 @@ public class AdminsController extends BasicController {
 
         userModel = new UserModel();
 
-        DefaultTableModel tableData = userModel.buildTableModel(userModel.returnUsersofType("admin"));
+        DefaultTableModel tableData = userModel.buildTableModel("admin");
 
         view = new adminsCard(actionListeners);
         view.populate(tableData);
@@ -38,8 +38,7 @@ public class AdminsController extends BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                ResultSet rs = userModel.returnUsersofType("admin");
-                view.populate(userModel.buildTableModel(rs));
+                view.populate(userModel.buildTableModel("admin"));
             }
             catch (SQLException e1) {
                 e1.printStackTrace();

@@ -25,7 +25,7 @@ public class WarehouseWorkersController extends BasicController {
     public WarehouseWorkersController(User user) throws SQLException, IOException, ClassNotFoundException {
         super(user);
 
-        DefaultTableModel tableData = userModel.buildTableModel(userModel.returnUsersofType("worker"));
+        DefaultTableModel tableData = userModel.buildTableModel("worker");
 
         actionListeners.put("newUserAction", new newUserAction());
 
@@ -41,8 +41,7 @@ public class WarehouseWorkersController extends BasicController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                ResultSet rs = userModel.returnUsersofType("worker");
-                view.populate(userModel.buildTableModel(rs));
+                view.populate(userModel.buildTableModel("worker"));
             }
             catch (SQLException e1) {
                 e1.printStackTrace();

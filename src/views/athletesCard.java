@@ -8,9 +8,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-/**
- * Created by alex on 11/29/16.
- */
 public class athletesCard extends card {
     // left panel elements
     JPanel leftPanel = new JPanel(new GridBagLayout());
@@ -29,11 +26,11 @@ public class athletesCard extends card {
     JLabel titleLabel = new JLabel("Athletes");
     JButton newAthleteButton = new JButton("New Athlete");
     JButton saveChangesButton = new JButton("Save Changes");
-    JTable dataTable = new JTable();
+    public JTable dataTable = new JTable();
     JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new user elements
-    JFrame newUserFrame = new JFrame("Create New Athlete");
+    public JFrame newUserFrame = new JFrame("Create New Athlete");
     Dimension newUserFrameDimensions = new Dimension(400, 400);
     JPanel newUserPanel = new JPanel(new GridBagLayout());
     JLabel newUserUsernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
@@ -54,7 +51,7 @@ public class athletesCard extends card {
 
     GridBagConstraints constraints = new GridBagConstraints();
 
-    public athletesCard(HashMap<String, ActionListener> actionListeners) {
+    public athletesCard(DefaultTableModel tableData, HashMap<String, ActionListener> actionListeners) {
         super(actionListeners); // adds nav bar
 
         constraints.weighty = 1;
@@ -80,6 +77,10 @@ public class athletesCard extends card {
 
         // add action listeners
         newAthleteButton.addActionListener(actionListeners.get("newUserAction"));
+        newUserSaveButton.addActionListener(actionListeners.get("saveNewUserAction"));
+
+        // Save button disabled until all fields are filled
+        newUserSaveButton.setEnabled(false);
 
         // Add document listeners to each "New User Field".
         SaveButtonDocumentListener saveButtonEnabler = new SaveButtonDocumentListener();
@@ -89,8 +90,12 @@ public class athletesCard extends card {
         newUserPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
         newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
 
-        // Save button disabled until all fields are filled
-        newUserSaveButton.setEnabled(false);
+        dataTable = new JTable(tableData);
+        rightPanel.remove(dataTable);
+        rightPanel.add(dataTable, constraints);
+        rightPanel.repaint();
+        rightPanel.revalidate();
+
     }
 
     void buildLeftPanel() {
@@ -238,14 +243,6 @@ public class athletesCard extends card {
         constraints.gridy = 0;
         constraints.insets = new Insets(10,10,10,10);
         newUserFrame.add(this.newUserPanel);
-    }
-
-    public void populate(DefaultTableModel data) {
-        dataTable = new JTable(data);
-        rightPanel.remove(dataTable);
-        rightPanel.add(dataTable, constraints);
-        rightPanel.repaint();
-        rightPanel.revalidate();
     }
 
     /**

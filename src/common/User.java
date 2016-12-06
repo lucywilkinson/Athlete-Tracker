@@ -12,7 +12,6 @@ public class User {
 
     /**
      * User Object User to create and add a new user to the DB
-     * @param userId: UUID
      * @param firstName: users first name
      * @param lastName: users last name
      * @param username: unique username
@@ -20,8 +19,7 @@ public class User {
      * @param password: user password
      * @param email: user email
      */
-    public User(int userId, String firstName, String lastName, String username, String userType, String password, String email) {
-        this.userId    = userId;
+    public User(String firstName, String lastName, String username, String userType, String password, String email) {
         this.firstName = firstName;
         this.lastName  = lastName;
         this.username  = username;
