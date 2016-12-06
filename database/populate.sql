@@ -28,6 +28,28 @@ VALUES (
   "Athlete"
 );
 
+INSERT INTO users (first_name, last_name, username, email, password, active, user_type)
+VALUES (
+  "Mark",
+  "Uhlar",
+  "DogBone",
+  "Clacious@colorado.edu",
+  "Clacious-1",
+  false,
+  "Athlete"
+);
+
+INSERT INTO users (first_name, last_name, username, email, password, active, user_type)
+VALUES (
+  "Malk",
+  "Uhlar",
+  "FishBone",
+  "Clacious@colorado.edu",
+  "Clacious-1",
+  false,
+  "Athlete"
+);
+
 INSERT INTO users (first_name, last_name, username, email, password, user_type)
 VALUES (
   "Alex",
