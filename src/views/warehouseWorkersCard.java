@@ -279,6 +279,7 @@ public class warehouseWorkersCard extends card {
         editUserPanel.add(editUserIdLabel, constraints);
 
         constraints.gridx++;
+        editUserIdField.setEnabled(false);
         editUserPanel.add(editUserIdField, constraints);
 
         constraints.gridy++;
@@ -300,6 +301,7 @@ public class warehouseWorkersCard extends card {
         editUserPanel.add(editUserLastNameLabel, constraints);
 
         constraints.gridx = 1;
+        editUserUsernameField.setEnabled(false);
         editUserPanel.add(editUserLastNameField, constraints);
 
         constraints.gridy++;
@@ -311,6 +313,7 @@ public class warehouseWorkersCard extends card {
 
         constraints.gridy++;
         constraints.gridx = 0;
+        editUserPasswordField.setEnabled(false);
         editUserPanel.add(editUserPasswordLabel, constraints);
 
         constraints.gridx = 1;

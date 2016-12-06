@@ -202,8 +202,8 @@ public class athletesCard extends card {
         editUserPanel.add(editUserUsernameLabel, constraints);
 
         constraints.gridx++;
-        editUserPanel.add(editUserUsernameField, constraints);
         editUserUsernameField.setEnabled(false);
+        editUserPanel.add(editUserUsernameField, constraints);
 
         constraints.gridy++;
         constraints.gridx = 0;
@@ -228,6 +228,7 @@ public class athletesCard extends card {
 
         constraints.gridy++;
         constraints.gridx = 0;
+        editUserPasswordField.setEnabled(false);
         editUserPanel.add(editUserPasswordLabel, constraints);
 
         constraints.gridx = 1;
