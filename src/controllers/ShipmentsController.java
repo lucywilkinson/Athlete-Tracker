@@ -106,7 +106,7 @@ public class ShipmentsController extends BasicController {
 
             // convert ResultSet to ArrayList
             while (workersResult.next()) {
-                workers.add(workersResult.getString("first_name") + workersResult.getString("last_name"));
+                workers.add(workersResult.getString("first_name") + " " + workersResult.getString("last_name"));
             }
 
             view.populateWorkers(workers);
@@ -127,7 +127,7 @@ public class ShipmentsController extends BasicController {
 
             // convert ResultSet to ArrayList
             while (athletesResult.next()) {
-                athletes.add(athletesResult.getString("first_name") + athletesResult.getString("last_name"));
+                athletes.add(athletesResult.getString("first_name") + " " + athletesResult.getString("last_name"));
             }
 
             view.populateAthletes(athletes);
