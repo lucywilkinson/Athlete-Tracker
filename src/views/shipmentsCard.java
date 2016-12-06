@@ -24,10 +24,9 @@ public class shipmentsCard extends card {
     JPanel headerPanel = new JPanel(new GridBagLayout());
     JLabel titleLabel = new JLabel("Shipments");
     JButton newShipmentButton = new JButton("New Shipment");
-    JButton saveChangesButton = new JButton("Save Changes");
+    JButton editShipmentButton = new JButton("Edit");
     public JTable dataTable = new JTable();
     JScrollPane scrollPane = new JScrollPane(dataTable);
-    JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new shipment elements
     JFrame newShipmentFrame = new JFrame("Create New Shipment");
@@ -105,19 +104,25 @@ public class shipmentsCard extends card {
 
     void buildRightPanel() {
         constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.LINE_START;
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.gridx = 0;
         constraints.gridy = 0;
 
-        constraints.weightx = 0.8;
+        constraints.weightx = 0.6;
         headerPanel.add(titleLabel, constraints);
 
         constraints.gridx++;
         constraints.weightx = 0.2;
-        constraints.anchor = GridBagConstraints.NORTH;
         headerPanel.add(newShipmentButton, constraints);
 
+        constraints.gridx++;
+        constraints.weightx = 0.2;
+        editShipmentButton.setEnabled(false);
+        headerPanel.add(editShipmentButton, constraints);
+
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.weighty = 0;
         rightPanel.add(headerPanel, constraints);
 
         constraints.gridx = 0;
@@ -125,17 +130,8 @@ public class shipmentsCard extends card {
         constraints.weightx = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.fill = GridBagConstraints.BOTH;
+        constraints.weighty = 1;
         rightPanel.add(scrollPane, constraints);
-
-        constraints.gridy++;
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.NORTHEAST;
-        constraints.insets = new Insets(10, 0, 10, 0);
-        rightPanel.add(saveChangesButton, constraints);
-
-        constraints.gridy++;
-        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-        rightPanel.add(editDataPanel, constraints);
     }
 
     public void populateWorkers(ArrayList data) {

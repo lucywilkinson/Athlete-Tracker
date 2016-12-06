@@ -89,6 +89,7 @@ public class athletesCard extends card {
         constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.weightx = 0.75;
+        constraints.fill = GridBagConstraints.BOTH;
         constraints.insets = new Insets(20, 20, 20, 20);
         this.add(rightPanel, constraints);
 
@@ -169,6 +170,7 @@ public class athletesCard extends card {
 
         constraints.gridx = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.weighty = 0;
         rightPanel.add(headerPanel, constraints);
 
         //constraints.gridy++;
@@ -177,6 +179,7 @@ public class athletesCard extends card {
         constraints.weightx = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.fill = GridBagConstraints.BOTH;
+        constraints.weighty = 1;
         rightPanel.add(scrollPane, constraints);
     }
 
