@@ -44,18 +44,35 @@ public class ProductsController extends BasicController {
     private class saveNewProduct implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+            // gather data
             String productName = view.newProductNameField.getText();
             Float value = Float.parseFloat(view.newProductValueField.getText());
             Integer quantity = Integer.parseInt(view.newProductQuantityField.getText());
 
-            System.out.println(productName + " " + value.toString() + " " + quantity.toString()); // working well, leaving this data for you to implement, Matt
+            /* the above is working well, leaving this data for you to implement, Matt */
         }
     }
 
     private class editProduct implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO
+            view.launchEditProduct();
+
+            int row = view.dataTable.getSelectedRow();
+
+            // the below column numbers likely need to change. I have no data to test with yet, so leaving that for you Matt
+
+            // gather data from dataTable
+            String id = String.valueOf(view.dataTable.getValueAt(row, 0));
+            String productName = String.valueOf(view.dataTable.getValueAt(row, 2));
+            String value = String.valueOf(view.dataTable.getValueAt(row, 3));
+            String quantity = String.valueOf(view.dataTable.getValueAt(row, 3));
+
+            // insert data into edit fields
+            view.editProductIdField.setText(id);
+            view.editProductNameField.setText(productName);
+            view.editProductValueField.setText(value);
+            view.editProductQuantityField.setText(quantity);
         }
     }
 
