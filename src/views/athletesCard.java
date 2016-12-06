@@ -3,12 +3,15 @@ package views;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class athletesCard extends card {
+
     // left panel elements
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
@@ -25,9 +28,9 @@ public class athletesCard extends card {
     JPanel headerPanel = new JPanel(new GridBagLayout());
     JLabel titleLabel = new JLabel("Athletes");
     JButton newAthleteButton = new JButton("New Athlete");
-    JButton saveChangesButton = new JButton("Save Changes");
+    JButton editButton = new JButton("Edit");
     public JTable dataTable = new JTable();
-    JPanel editDataPanel = new JPanel(new GridBagLayout());
+    JScrollPane scrollPane = new JScrollPane(dataTable);
 
     // new user elements
     public JFrame newUserFrame = new JFrame("Create New Athlete");
@@ -90,12 +93,20 @@ public class athletesCard extends card {
         newUserPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
         newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
 
-        dataTable = new JTable(tableData);
-        rightPanel.remove(dataTable);
-        rightPanel.add(dataTable, constraints);
+        /**dataTable = new JTable(tableData);
+        scrollPane = new JScrollPane(dataTable);
+        rightPanel.remove(scrollPane);
+        constraints.gridy = 2;
+        constraints.gridx = 0;
+        constraints.fill = GridBagConstraints.BOTH;
+        rightPanel.add(scrollPane, constraints);**/
         rightPanel.repaint();
         rightPanel.revalidate();
 
+        rowSelectionListener selectionListener = new rowSelectionListener();
+        dataTable.getSelectionModel().addListSelectionListener(selectionListener);
+        editButton.setEnabled(false);
+        editButton.addActionListener(actionListeners.get("editAthleteAction"));
     }
 
     void buildLeftPanel() {
@@ -142,7 +153,7 @@ public class athletesCard extends card {
         constraints.gridx = 0;
         constraints.gridy = 0;
 
-        constraints.weightx = 0.8;
+        constraints.weightx = 0.6;
         headerPanel.add(titleLabel, constraints);
 
         constraints.gridx++;
@@ -150,21 +161,21 @@ public class athletesCard extends card {
         constraints.anchor = GridBagConstraints.NORTH;
         headerPanel.add(newAthleteButton, constraints);
 
+        constraints.gridx++;
+        constraints.weightx = 0.2;
+        headerPanel.add(editButton, constraints);
+
+        constraints.gridx = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         rightPanel.add(headerPanel, constraints);
 
-        constraints.gridy++;
-        rightPanel.add(dataTable, constraints);
-
-        constraints.gridy++;
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.NORTHEAST;
-        constraints.insets = new Insets(10, 0, 10, 0);
-        rightPanel.add(saveChangesButton, constraints);
-
-        constraints.gridy++;
-        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-        rightPanel.add(editDataPanel, constraints);
+        //constraints.gridy++;
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.weightx = 1;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
+        constraints.fill = GridBagConstraints.BOTH;
+        rightPanel.add(scrollPane, constraints);
     }
 
     public void launchNewUser() {
@@ -278,6 +289,17 @@ public class athletesCard extends card {
         @Override
         public void changedUpdate(DocumentEvent e) {
             checkFields();
+        }
+    }
+
+    private class rowSelectionListener implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if (dataTable.getSelectedRow() < 0){
+                editButton.setEnabled(false);
+            } else {
+                editButton.setEnabled(true);
+            }
         }
     }
 }
