@@ -69,7 +69,7 @@ public class athletesCard extends card {
 
     GridBagConstraints constraints = new GridBagConstraints();
 
-    public athletesCard(DefaultTableModel tableData, HashMap<String, ActionListener> actionListeners) {
+    public athletesCard(HashMap<String, ActionListener> actionListeners) {
         super(actionListeners); // adds nav bar
 
         constraints.weighty = 1;

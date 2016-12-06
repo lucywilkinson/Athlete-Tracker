@@ -8,15 +8,13 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.Vector;
 
-import static models.Model.conn;
-
 public class ShipmentsModel extends Model {
 
     public ShipmentsModel() throws SQLException, IOException, ClassNotFoundException {
         super();
     }
 
-    public ResultSet getRawShipmentData() throws SQLException {
+    private ResultSet getRawShipmentData() throws SQLException {
         String shipmentFields = "shipments.shipment_creator, " +
                 "shipments.shipment_worker, " +
                 "products.product_name, " +
@@ -41,28 +39,35 @@ public class ShipmentsModel extends Model {
         return res;
     }
 
-    public static DefaultTableModel buildTableModel(ResultSet res) throws SQLException {
+    public DefaultTableModel buildTableModel() throws SQLException {
+        ResultSet res = getRawShipmentData();
         ResultSetMetaData metaData = res.getMetaData();
 
         //fill column names
         Vector<String> columnNames = new Vector<String>();
         int columnCount = metaData.getColumnCount();
-        for(int column = 1; column<=columnCount; column++) {
+        for (int column = 1; column <= columnCount; column++) {
             columnNames.add(metaData.getColumnName(column));
         }
 
         //fill table data
         Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-        while(res.next()) {
+        while (res.next()) {
             Vector<Object> vector = new Vector<Object>();
-            for(int columnIndex = 1; columnIndex<=columnCount; columnIndex++) {
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
                 vector.add(res.getObject(columnIndex));
             }
             data.add(vector);
         }
 
-        return new DefaultTableModel(data, columnNames);
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
+        return tableModel;
     }
 }
 

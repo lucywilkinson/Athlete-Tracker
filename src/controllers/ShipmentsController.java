@@ -16,10 +16,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by mattu on 11/29/16. Updated by lucywilkinson on 12/5/16.
- */
-
 public class ShipmentsController extends BasicController {
     shipmentsCard view;
     ProductModel productModel;
@@ -27,12 +23,14 @@ public class ShipmentsController extends BasicController {
     ShipmentsModel shipmentsModel;
     HashMap itemListeners = new HashMap<String, ItemListener>();
 
-    public ShipmentsController() {
-
+    public ShipmentsController() throws SQLException, IOException, ClassNotFoundException {
+        shipmentsModel = new ShipmentsModel();
         actionListeners.put("addShipment", new addShipment());
 
         view = new shipmentsCard(actionListeners);
         masterView.addCard("Shipments", view);
+
+        view.dataTable.setModel(shipmentsModel.buildTableModel());
     }
 
     private class addShipment implements ActionListener {
@@ -142,22 +140,4 @@ public class ShipmentsController extends BasicController {
         }
 
     }
-
-    private class fillTableAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                shipmentsModel = new ShipmentsModel();
-                ResultSet rs = shipmentsModel.getRawShipmentData();
-                view.populate(shipmentsModel.buildTableModel(rs));
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            } catch (ClassNotFoundException e1) {
-                e1.printStackTrace();
-            }
-        }
-    }
-
 }

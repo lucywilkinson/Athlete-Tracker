@@ -56,7 +56,15 @@ public abstract class BasicController {
     private class clickShipmentsButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ShipmentsController ShipmentsController = new ShipmentsController();
+            try {
+                ShipmentsController ShipmentsController = new ShipmentsController();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

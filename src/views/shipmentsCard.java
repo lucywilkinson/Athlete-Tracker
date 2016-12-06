@@ -25,7 +25,7 @@ public class shipmentsCard extends card {
     JLabel titleLabel = new JLabel("Shipments");
     JButton newShipmentButton = new JButton("New Shipment");
     JButton saveChangesButton = new JButton("Save Changes");
-    JTable dataTable = new JTable();
+    public JTable dataTable = new JTable();
     JScrollPane scrollPane = new JScrollPane(dataTable);
     JPanel editDataPanel = new JPanel(new GridBagLayout());
 
@@ -73,6 +73,10 @@ public class shipmentsCard extends card {
 
         // add action listeners
         newShipmentButton.addActionListener(actionListeners.get("addShipment"));
+
+        // build table
+        rightPanel.repaint();
+        rightPanel.revalidate();
     }
 
     void buildLeftPanel() {
@@ -116,8 +120,11 @@ public class shipmentsCard extends card {
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         rightPanel.add(headerPanel, constraints);
 
-        constraints.gridy++;
-        //rightPanel.add(dataTable, constraints);
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.weightx = 1;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
+        constraints.fill = GridBagConstraints.BOTH;
         rightPanel.add(scrollPane, constraints);
 
         constraints.gridy++;
@@ -129,10 +136,6 @@ public class shipmentsCard extends card {
         constraints.gridy++;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         rightPanel.add(editDataPanel, constraints);
-    }
-
-    public void populate(DefaultTableModel data) {
-        dataTable = new JTable(data);
     }
 
     public void populateWorkers(ArrayList data) {

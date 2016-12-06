@@ -18,15 +18,14 @@ public class AthletesController extends BasicController {
 
     public AthletesController() throws SQLException, IOException, ClassNotFoundException {
 
-        DefaultTableModel tableData = userModel.buildTableModel(("athlete"));
-
         actionListeners.put("newUserAction", new newUserAction());
         actionListeners.put("saveNewUserAction", new saveNewUserAction());
         actionListeners.put("editAthleteAction", new editAthleteAction());
         actionListeners.put("saveEditsAction", new saveEditsAction());
 
-        view = new athletesCard(tableData, actionListeners);
+        view = new athletesCard(actionListeners);
         masterView.addCard("Athletes", view);
+
         view.dataTable.setModel(userModel.buildTableModel("athlete"));
     }
 
