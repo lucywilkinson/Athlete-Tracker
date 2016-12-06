@@ -16,7 +16,7 @@ import java.util.HashMap;
 public abstract class BasicController {
     basicView view;
     masterView masterView = new masterView();
-    User _user;
+    static User _user;
     HashMap actionListeners = new HashMap<String, ActionListener>();
 
     public BasicController() {
