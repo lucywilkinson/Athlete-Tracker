@@ -36,7 +36,7 @@ VALUES (
   "Clacious@colorado.edu",
   "Clacious-1",
   false,
-  "Athlete"
+  "Worker"
 );
 
 INSERT INTO users (first_name, last_name, username, email, password, active, user_type)
@@ -47,7 +47,7 @@ VALUES (
   "Clacious@colorado.edu",
   "Clacious-1",
   false,
-  "Athlete"
+  "Worker"
 );
 
 INSERT INTO users (first_name, last_name, username, email, password, user_type)
