@@ -37,10 +37,9 @@ public class productsCard extends card {
     JPanel headerPanel = new JPanel(new GridBagLayout());
     JLabel titleLabel = new JLabel("Products");
     JButton newProductButton = new JButton("New Product");
-    JButton saveChangesButton = new JButton("Save Changes");
+    JButton editProductButton = new JButton("Edit");
     JTable dataTable = new JTable(data, columnNames);
     JScrollPane scrollPane = new JScrollPane(dataTable);
-    JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new product elements
     JFrame newUserFrame = new JFrame("Create New Product");
@@ -110,34 +109,34 @@ public class productsCard extends card {
 
     void buildRightPanel() {
         constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.LINE_START;
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.gridx = 0;
         constraints.gridy = 0;
 
-        constraints.weightx = 0.8;
+        constraints.weightx = 0.6;
         headerPanel.add(titleLabel, constraints);
 
         constraints.gridx++;
         constraints.weightx = 0.2;
-        constraints.anchor = GridBagConstraints.NORTH;
         headerPanel.add(newProductButton, constraints);
 
+        constraints.gridx++;
+        constraints.weightx = 0.2;
+        editProductButton.setEnabled(false);
+        headerPanel.add(editProductButton, constraints);
+
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.weighty = 0;
         rightPanel.add(headerPanel, constraints);
 
-        constraints.gridy++;
-        //rightPanel.add(dataTable, constraints);
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.weightx = 1;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weighty = 1;
         rightPanel.add(scrollPane, constraints);
-
-        constraints.gridy++;
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.NORTHEAST;
-        constraints.insets = new Insets(10, 0, 10, 0);
-        rightPanel.add(saveChangesButton, constraints);
-
-        constraints.gridy++;
-        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-        rightPanel.add(editDataPanel, constraints);
     }
 
     public void populate(DefaultTableModel data) {
@@ -156,6 +155,7 @@ public class productsCard extends card {
         constraints.insets = new Insets(5,5,5,5);
         constraints.gridy = 0;
         constraints.gridx = 0;
+        constraints.gridwidth = GridBagConstraints.RELATIVE;
         constraints.fill = GridBagConstraints.HORIZONTAL;
 
         newProductPanel.add(newProductNameLabel, constraints);
