@@ -12,8 +12,6 @@ import java.util.HashMap;
 
 public class athletesCard extends card {
 
-    JButton editButton = new JButton("Edit");
-
     // left panel elements
     JPanel leftPanel = new JPanel(new GridBagLayout());
     JPanel statusFilterPanel = new JPanel(new GridBagLayout());
@@ -30,9 +28,8 @@ public class athletesCard extends card {
     JPanel headerPanel = new JPanel(new GridBagLayout());
     JLabel titleLabel = new JLabel("Athletes");
     JButton newAthleteButton = new JButton("New Athlete");
-    JButton saveChangesButton = new JButton("Save Changes");
+    JButton editButton = new JButton("Edit");
     public JTable dataTable = new JTable();
-    JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new user elements
     public JFrame newUserFrame = new JFrame("Create New Athlete");
@@ -97,6 +94,8 @@ public class athletesCard extends card {
 
         dataTable = new JTable(tableData);
         rightPanel.remove(dataTable);
+        constraints.gridy = 2;
+        constraints.gridx = 0;
         rightPanel.add(dataTable, constraints);
         rightPanel.repaint();
         rightPanel.revalidate();
@@ -124,7 +123,6 @@ public class athletesCard extends card {
         constraints.gridy++;
         constraints.insets = new Insets(0, 0, 10, 0);
         statusFilterPanel.add(inactiveCheckbox, constraints);
-        statusFilterPanel.add(editButton);
 
         constraints.gridx = 0;
         constraints.gridy++;
@@ -152,7 +150,7 @@ public class athletesCard extends card {
         constraints.gridx = 0;
         constraints.gridy = 0;
 
-        constraints.weightx = 0.8;
+        constraints.weightx = 0.6;
         headerPanel.add(titleLabel, constraints);
 
         constraints.gridx++;
@@ -160,21 +158,19 @@ public class athletesCard extends card {
         constraints.anchor = GridBagConstraints.NORTH;
         headerPanel.add(newAthleteButton, constraints);
 
+        constraints.gridx++;
+        constraints.weightx = 0.2;
+        headerPanel.add(editButton, constraints);
+
+        constraints.gridx = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         rightPanel.add(headerPanel, constraints);
 
         constraints.gridy++;
+        constraints.gridx = 0;
+        constraints.weightx = 1;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
         rightPanel.add(dataTable, constraints);
-
-        constraints.gridy++;
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.NORTHEAST;
-        constraints.insets = new Insets(10, 0, 10, 0);
-        rightPanel.add(saveChangesButton, constraints);
-
-        constraints.gridy++;
-        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-        rightPanel.add(editDataPanel, constraints);
     }
 
     public void launchNewUser() {
@@ -294,8 +290,11 @@ public class athletesCard extends card {
     private class rowSelectionListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            if (dataTable.getSelectedRow() < 0) editButton.setEnabled(false);
-            else editButton.setEnabled(true);
+            if (dataTable.getSelectedRow() < 0){
+                editButton.setEnabled(false);
+            } else {
+                editButton.setEnabled(true);
+            }
         }
     }
 }
