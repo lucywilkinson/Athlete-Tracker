@@ -68,7 +68,7 @@ public class warehouseWorkersCard extends card {
     JLabel editUserAccountTypeLabel = new JLabel("Account Type:", SwingConstants.RIGHT);
     public JComboBox editUserAccountTypeField = new JComboBox();
     JLabel editUserStatusLabel = new JLabel("Status", SwingConstants.RIGHT);
-    public JCheckBox editUserStatusField = new JCheckBox("Active", true);
+    public JCheckBox editUserStatusField = new JCheckBox("Active");
     JButton editUserSaveButton = new JButton("Save");
 
     GridBagConstraints constraints = new GridBagConstraints();
