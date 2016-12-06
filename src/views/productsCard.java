@@ -199,7 +199,7 @@ public class productsCard extends card {
 
     public void launchEditProduct() {
         newUserFrame.setPreferredSize(this.editUserFrameDimensions);
-        this.buildNewProductFrame();
+        this.buildEditProductFrame();
         newUserFrame.pack();
         newUserFrame.setVisible(true);
     }
