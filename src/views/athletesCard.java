@@ -112,17 +112,13 @@ public class athletesCard extends card {
         newUserPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
         newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
 
-        // build table
-        /*dataTable = new JTable(tableData);
-        rightPanel.remove(dataTable);
-        constraints.gridy = 2;
-        constraints.gridx = 0;
-        rightPanel.add(dataTable, constraints);*/
+        // Add row selection listener to enable edit button
+        rowSelectionListener selectionListener = new rowSelectionListener();
+        dataTable.getSelectionModel().addListSelectionListener(selectionListener);
+
         rightPanel.repaint();
         rightPanel.revalidate();
 
-        rowSelectionListener selectionListener = new rowSelectionListener();
-        dataTable.getSelectionModel().addListSelectionListener(selectionListener);
     }
 
     void buildLeftPanel() {

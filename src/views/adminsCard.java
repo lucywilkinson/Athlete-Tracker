@@ -113,13 +113,6 @@ public class adminsCard extends card {
         newUserPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
         newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
 
-        // build table
-        /*dataTable = new JTable(tableData);
-        scrollPane = new JScrollPane(dataTable);
-        rightPanel.remove(scrollPane);
-        constraints.gridy = 2;
-        constraints.gridx = 0;
-        rightPanel.add(scrollPane, constraints);*/
         rightPanel.repaint();
         rightPanel.revalidate();
 

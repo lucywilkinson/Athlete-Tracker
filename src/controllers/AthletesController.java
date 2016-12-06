@@ -27,7 +27,6 @@ public class AthletesController extends BasicController {
 
         view = new athletesCard(tableData, actionListeners);
         masterView.addCard("Athletes", view);
-
         view.dataTable.setModel(userModel.buildTableModel("athlete"));
     }
 
