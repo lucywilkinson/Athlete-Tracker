@@ -6,13 +6,15 @@ import models.ProductModel;
 import models.ShipmentsModel;
 import models.UserModel;
 import views.shipmentsCard;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by mattu on 11/29/16. Updated by lucywilkinson on 12/5/16.
@@ -23,6 +25,7 @@ public class ShipmentsController extends BasicController {
     ProductModel productModel;
     UserModel userModel;
     ShipmentsModel shipmentsModel;
+    HashMap itemListeners = new HashMap<String, ItemListener>();
 
     public ShipmentsController(User user) {
         super();
@@ -36,13 +39,46 @@ public class ShipmentsController extends BasicController {
     private class addShipment implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.launchNewShipment();
+            itemListeners.put("productChanged", new productChanged());
+
+            view.launchNewShipment(itemListeners);
 
             populateProducts();
             populateWorkers();
             populateAthletes();
         }
     }
+
+    /*
+        When the user changes the product selection, update the max quantity field with the current stock of that product
+     */
+    class productChanged implements ItemListener {
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+            if (event.getStateChange() == ItemEvent.SELECTED) {
+                Object item = event.getItem();
+
+                String productName = view.newShipmentProductField.getSelectedItem().toString();
+
+                System.out.println("selection change detected, current selection: " + productName);
+
+                try {
+                    productModel = new ProductModel();
+
+                    Product product = productModel.getProduct(productName);
+
+                    view.newShipmentProductMaxQuantityField.setText(Integer.toString(product.getQuantity()));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
     void populateProducts() {
         try {

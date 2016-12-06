@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -55,7 +56,9 @@ public class shipmentsCard extends card {
     JLabel newShipmentAthleteLabel = new JLabel("Athlete:", SwingConstants.RIGHT);
     JComboBox newShipmentAthleteField = new JComboBox();
     JLabel newShipmentProductLabel = new JLabel("Product:", SwingConstants.RIGHT);
-    JComboBox newShipmentProductField = new JComboBox();
+    JLabel newShipmentProductMaxQuantityLabel = new JLabel("Quantity in stock:", SwingConstants.RIGHT);
+    public JTextField newShipmentProductMaxQuantityField = new JTextField("0", 20);
+    public JComboBox newShipmentProductField = new JComboBox();
     JLabel newShipmentQuantityLabel = new JLabel("Quantity:", SwingConstants.RIGHT);
     JTextField newShipmentQuantityField = new JTextField("0", 20);
     JButton newShipmentSaveButton = new JButton("Save");
@@ -181,9 +184,12 @@ public class shipmentsCard extends card {
         }
     }
 
-    public void launchNewShipment() {
-        newShipmentFrame .setPreferredSize(this.newShipmentFrameDimensions);
+    public void launchNewShipment(HashMap itemListeners) {
         this.buildNewShipmentFrame();
+
+        newShipmentProductField.addItemListener((ItemListener) itemListeners.get("productChanged"));
+
+        newShipmentFrame .setPreferredSize(this.newShipmentFrameDimensions);
         newShipmentFrame .pack();
         newShipmentFrame .setVisible(true);
     }
@@ -213,6 +219,14 @@ public class shipmentsCard extends card {
 
         constraints.gridx = 1;
         newShipmentPanel.add(newShipmentProductField, constraints);
+
+        constraints.gridy++;
+        constraints.gridx = 0;
+        newShipmentPanel.add(newShipmentProductMaxQuantityLabel, constraints);
+
+        constraints.gridx = 1;
+        newShipmentProductMaxQuantityField.setEnabled(false);
+        newShipmentPanel.add(newShipmentProductMaxQuantityField, constraints);
 
         constraints.gridy++;
         constraints.gridx = 0;
