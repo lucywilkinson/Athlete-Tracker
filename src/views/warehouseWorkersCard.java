@@ -313,14 +313,6 @@ public class warehouseWorkersCard extends card {
 
         constraints.gridy++;
         constraints.gridx = 0;
-        editUserPasswordField.setEnabled(false);
-        editUserPanel.add(editUserPasswordLabel, constraints);
-
-        constraints.gridx = 1;
-        editUserPanel.add(editUserPasswordField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
         editUserPanel.add(editUserAccountTypeLabel, constraints);
 
         constraints.gridx = 1;

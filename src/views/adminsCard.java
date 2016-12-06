@@ -230,14 +230,6 @@ public class adminsCard extends card {
 
         constraints.gridy++;
         constraints.gridx = 0;
-        editUserPanel.add(editUserPasswordLabel, constraints);
-
-        constraints.gridx = 1;
-        editUserPasswordField.setEnabled(false);
-        editUserPanel.add(editUserPasswordField, constraints);
-
-        constraints.gridy++;
-        constraints.gridx = 0;
         editUserPanel.add(editUserAccountTypeLabel, constraints);
 
         constraints.gridx = 1;
