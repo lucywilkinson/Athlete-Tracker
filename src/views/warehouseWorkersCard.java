@@ -43,6 +43,7 @@ public class warehouseWorkersCard extends card {
     JButton newWorkerButton = new JButton("New Worker");
     JButton saveChangesButton = new JButton("Save Changes");
     JTable dataTable = new JTable(data, columnNames);
+    JScrollPane scrollPane = new JScrollPane(dataTable);
     JPanel editDataPanel = new JPanel(new GridBagLayout());
 
     // new user elements
@@ -151,7 +152,8 @@ public class warehouseWorkersCard extends card {
         rightPanel.add(headerPanel, constraints);
 
         constraints.gridy++;
-        rightPanel.add(dataTable, constraints);
+        //rightPanel.add(dataTable, constraints);
+        rightPanel.add(scrollPane, constraints);
 
         constraints.gridy++;
         constraints.fill = GridBagConstraints.NONE;
