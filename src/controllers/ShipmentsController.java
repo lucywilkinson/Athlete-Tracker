@@ -27,8 +27,7 @@ public class ShipmentsController extends BasicController {
     ShipmentsModel shipmentsModel;
     HashMap itemListeners = new HashMap<String, ItemListener>();
 
-    public ShipmentsController(User user) {
-        super();
+    public ShipmentsController() {
 
         actionListeners.put("addShipment", new addShipment());
 

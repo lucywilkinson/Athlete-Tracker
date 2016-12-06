@@ -16,8 +16,7 @@ public class AthletesController extends BasicController {
     UserModel userModel = new UserModel();
     athletesCard view;
 
-    public AthletesController(User user) throws SQLException, IOException, ClassNotFoundException {
-        super(user);
+    public AthletesController() throws SQLException, IOException, ClassNotFoundException {
 
         DefaultTableModel tableData = userModel.buildTableModel(("athlete"));
 
@@ -100,7 +99,6 @@ public class AthletesController extends BasicController {
             String userType  = String.valueOf(view.editUserAccountTypeField.getSelectedItem());
             String password  = String.valueOf(view.editUserPasswordField.getPassword());
 
-            System.out.println(lastName);
             User updatedUser = new User(id, firstName, lastName, username, password, email, userType);
 
             try {

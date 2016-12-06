@@ -19,8 +19,7 @@ public class ProductsController extends BasicController {
     ProductModel productModel;
     productsCard view;
 
-    public ProductsController(User user) throws SQLException, IOException, ClassNotFoundException {
-        super();
+    public ProductsController() throws SQLException, IOException, ClassNotFoundException {
 
         productModel = new ProductModel();
 
