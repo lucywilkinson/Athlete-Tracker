@@ -120,7 +120,7 @@ public class UserModel extends Model {
     }
     
     public ResultSet returnUsersOfType (String type) throws SQLException {
-        String query = "SELECT * FROM users WHERE user_type = ?";
+        String query = "SELECT user_id, first_name, last_name, username, email, active, user_type FROM users WHERE user_type = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
 
         preparedStatement.setString(1, type);
