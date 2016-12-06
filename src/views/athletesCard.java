@@ -115,6 +115,7 @@ public class athletesCard extends card {
         newUserPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
         newUserConfirmPasswordField.getDocument().addDocumentListener(saveButtonEnabler);
 
+        // build table
         dataTable = new JTable(tableData);
         rightPanel.remove(dataTable);
         constraints.gridy = 2;
